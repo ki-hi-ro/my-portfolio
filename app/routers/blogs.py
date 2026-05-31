@@ -7,6 +7,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 import requests
 from bs4 import BeautifulSoup
+from typing import Optional
 
 templates = Jinja2Templates(directory="app/templates")
 
@@ -43,14 +44,20 @@ def read_blogs(
 @router.get("-page")
 def blogs_page(
     request: Request,
+    imported: Optional[int] = None,
     db: Session = Depends(get_db)
 ):
     blogs = db.query(models.Blog).order_by(models.Blog.created_at.desc()).all()
+    is_logged_in = "user_id" in request.session
 
     return templates.TemplateResponse(
         request,
         "blogs.html",
-        {"blogs": blogs}
+        {
+            "blogs": blogs, 
+            "is_logged_in": is_logged_in,
+            "imported": imported
+         }
     )
 
 @router.get("/new")
@@ -91,7 +98,7 @@ def create_blog_from_form(
 def import_wordpress(
     db: Session = Depends(get_db)
 ):
-    url = "https://ki-hi-ro.com/wp-json/wp/v2/posts?tags=650&per_page=100"
+    url = "https://ki-hi-ro.com/wp-json/wp/v2/posts?tags=650,440&per_page=100"
 
     response = requests.get(url)
 
@@ -131,6 +138,7 @@ def import_wordpress(
 
     db.commit()
 
-    return {
-        "imported": imported
-    }
+    return RedirectResponse(
+        url=f"/blogs-page?imported={imported}",
+        status_code=303
+    )

@@ -2,15 +2,26 @@
 
 {% block content %}
 <section class="top-section">
+  {% if imported is not none %}
+  <div class="success-message">
+      WordPress同期完了（{{ imported }}件追加）
+  </div>
+  {% endif %}
+  
   <div class="section-header">
+        
     <h1 class="section-title">
       技術ブログ
     </h1>
 
     <nav>
-      <a href="/blogs/new">
-        記事を追加
-      </a>
+      {% if is_logged_in %}
+      <form action="/blogs/import-wordpress" method="post">
+          <button type="submit" class="primary-button">
+              WordPress同期
+          </button>
+      </form>
+      {% endif %}      
     </nav>
   </div>
 
