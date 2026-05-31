@@ -6,6 +6,7 @@ from fastapi import Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 import requests
+from bs4 import BeautifulSoup
 
 templates = Jinja2Templates(directory="app/templates")
 
@@ -114,10 +115,15 @@ def import_wordpress(
         if exists:
             continue
 
+        summary = BeautifulSoup(
+            post["excerpt"]["rendered"],
+            "html.parser"
+        ).get_text()
+
         blog = models.Blog(
             title=post["title"]["rendered"],
             url=blog_url,
-            summary=post["excerpt"]["rendered"]
+            summary=summary
         )
 
         db.add(blog)
