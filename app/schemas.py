@@ -1,5 +1,5 @@
+from datetime import date, datetime
 from pydantic import BaseModel
-from datetime import datetime
 
 class Post(BaseModel):
     title: str
@@ -33,6 +33,25 @@ class WorkResponse(BaseModel):
     github_url: str | None = None
     app_url: str | None = None
     technologies: list[str]
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class BlogBase(BaseModel):
+    title: str
+    url: str | None = None
+    summary: str | None = None
+    tags: str | None = None
+    published_at: date | None = None
+
+
+class BlogCreate(BlogBase):
+    pass
+
+
+class Blog(BlogBase):
+    id: int
     created_at: datetime
 
     class Config:
