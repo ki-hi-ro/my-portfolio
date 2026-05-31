@@ -5,6 +5,7 @@ from app import models, schemas
 from fastapi import Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
+import requests
 
 templates = Jinja2Templates(directory="app/templates")
 
@@ -83,3 +84,47 @@ def create_blog_from_form(
         "/blogs-page",
         status_code=303
     )
+
+
+@router.post("/import-wordpress")
+def import_wordpress(
+    db: Session = Depends(get_db)
+):
+    url = "https://ki-hi-ro.com/wp-json/wp/v2/posts"
+
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        return {"error": "取得失敗"}
+
+    posts = response.json()
+
+    imported = 0
+
+    for post in posts:
+
+        blog_url = post["link"]
+
+        exists = (
+            db.query(models.Blog)
+            .filter(models.Blog.url == blog_url)
+            .first()
+        )
+
+        if exists:
+            continue
+
+        blog = models.Blog(
+            title=post["title"]["rendered"],
+            url=blog_url,
+            summary=post["excerpt"]["rendered"]
+        )
+
+        db.add(blog)
+        imported += 1
+
+    db.commit()
+
+    return {
+        "imported": imported
+    }
