@@ -91,7 +91,7 @@ def create_blog_from_form(
 def import_wordpress(
     db: Session = Depends(get_db)
 ):
-    url = "https://ki-hi-ro.com/wp-json/wp/v2/posts"
+    url = "https://ki-hi-ro.com/wp-json/wp/v2/posts?tags=650&per_page=100"
 
     response = requests.get(url)
 
