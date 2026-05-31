@@ -41,11 +41,19 @@ def top_page(
         .all()
     )
 
+    blogs = (
+        db.query(models.Blog)
+        .order_by(models.Blog.created_at.desc())
+        .limit(3)
+        .all()
+    )    
+
     return templates.TemplateResponse(
         request,
         "top.html",
         {
             "works": works,
+            "blogs": blogs,
             "user_id": user_id,
             "is_logged_in": is_logged_in
         }

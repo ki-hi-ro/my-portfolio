@@ -85,4 +85,45 @@
   </div>
 </section>
 
+<section class="top-section">
+  <div class="section-header">
+    <h2 class="section-title">
+      最近の技術ブログ
+    </h2>
+
+    <nav>
+      <a href="/blogs-page">
+        すべて見る
+      </a>
+    </nav>
+  </div>
+
+  <div class="work-grid">
+    {% for blog in blogs %}
+      <a
+        href="{{ blog.url }}"
+        target="_blank"
+        class="work-card"
+      >
+        <h2>{{ blog.title }}</h2>
+
+        <p class="work-description">
+          {{ blog.summary }}
+        </p>
+
+        {% if blog.tags %}
+          <div class="tech-tags">
+            {% for tag in blog.tags.split(",") %}
+              <span class="tech-tag">
+                {{ tag.strip() }}
+              </span>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
 {% endblock %}
