@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>技術ブログ登録</h1>
+
+<form method="post" action="/blogs/new">
+
+  <p>
+    <label>タイトル</label><br>
+    <input type="text" name="title">
+  </p>
+
+  <p>
+    <label>URL</label><br>
+    <input type="text" name="url">
+  </p>
+
+  <p>
+    <label>概要</label><br>
+    <textarea name="summary"></textarea>
+  </p>
+
+  <p>
+    <label>タグ</label><br>
+    <input type="text" name="tags">
+  </p>
+
+  <button type="submit">
+    登録
+  </button>
+
+</form>
+{% endblock %}

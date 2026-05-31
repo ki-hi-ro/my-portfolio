@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Form
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app import models, schemas
 from fastapi import Request
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
 
 templates = Jinja2Templates(directory="app/templates")
 
@@ -48,4 +49,37 @@ def blogs_page(
         request,
         "blogs.html",
         {"blogs": blogs}
+    )
+
+@router.get("/new")
+def blog_new_page(
+    request: Request
+):
+    return templates.TemplateResponse(
+        request,
+        "blog_new.html",
+        {}
+    )
+
+@router.post("/new")
+def create_blog_from_form(
+    title: str = Form(...),
+    url: str = Form(""),
+    summary: str = Form(""),
+    tags: str = Form(""),
+    db: Session = Depends(get_db)
+):
+    blog = models.Blog(
+        title=title,
+        url=url,
+        summary=summary,
+        tags=tags
+    )
+
+    db.add(blog)
+    db.commit()
+
+    return RedirectResponse(
+        "/blogs-page",
+        status_code=303
     )
