@@ -54,4 +54,4 @@ class Blog(Base):
     summary = Column(Text)
     tags = Column(String(255))
     published_at = Column(Date)
-    created_at = Column(DateTime)
+    created_at = Column(DateTime, default=datetime.now)

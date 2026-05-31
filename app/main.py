@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from app.routers import posts as posts_router
 from app.routers import works as works_router
 from app.routers import login as login_router
+from app.routers import blogs as blogs_router
 from app.database import engine
 from app import models
 from app.database import get_db
@@ -19,6 +20,7 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.include_router(posts_router.router)
 app.include_router(works_router.router)
 app.include_router(login_router.router)
+app.include_router(blogs_router.router)
 
 templates = Jinja2Templates(directory="app/templates")
 
