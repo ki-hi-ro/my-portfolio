@@ -1,8 +1,11 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-
 from app.database import get_db
 from app import models, schemas
+from fastapi import Request
+from fastapi.templating import Jinja2Templates
+
+templates = Jinja2Templates(directory="app/templates")
 
 router = APIRouter(
     prefix="/blogs",
@@ -32,4 +35,17 @@ def read_blogs(
         db.query(models.Blog)
         .order_by(models.Blog.created_at.desc())
         .all()
+    )
+
+@router.get("-page")
+def blogs_page(
+    request: Request,
+    db: Session = Depends(get_db)
+):
+    blogs = db.query(models.Blog).order_by(models.Blog.created_at.desc()).all()
+
+    return templates.TemplateResponse(
+        request,
+        "blogs.html",
+        {"blogs": blogs}
     )

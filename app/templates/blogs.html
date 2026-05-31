@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+  <div class="section-head">
+    <h1>技術ブログ</h1>
+    <a href="/blogs/new" class="button">記事を追加</a>
+  </div>
+
+  <div class="card-list">
+    {% for blog in blogs %}
+      <article class="card">
+        <h2>{{ blog.title }}</h2>
+
+        {% if blog.published_at %}
+          <p>{{ blog.published_at }}</p>
+        {% endif %}
+
+        {% if blog.summary %}
+          <p>{{ blog.summary }}</p>
+        {% endif %}
+
+        {% if blog.tags %}
+          <p>{{ blog.tags }}</p>
+        {% endif %}
+
+        {% if blog.url %}
+          <a href="{{ blog.url }}" target="_blank">記事を読む</a>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
