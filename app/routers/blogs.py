@@ -8,6 +8,7 @@ from fastapi.responses import RedirectResponse
 import requests
 from bs4 import BeautifulSoup
 from typing import Optional
+from datetime import datetime
 
 templates = Jinja2Templates(directory="app/templates")
 
@@ -37,8 +38,9 @@ def read_blogs(
 ):
     return (
         db.query(models.Blog)
-        .order_by(models.Blog.created_at.desc())
-        .all()
+        .order_by(models.Blog.published_at.desc())
+        .limit(3)
+        .all()        
     )
 
 @router.get("-page")
@@ -47,7 +49,13 @@ def blogs_page(
     imported: Optional[int] = None,
     db: Session = Depends(get_db)
 ):
-    blogs = db.query(models.Blog).order_by(models.Blog.created_at.desc()).all()
+
+    blogs = (
+        db.query(models.Blog)
+        .order_by(models.Blog.published_at.desc())
+        .all()
+    )
+
     is_logged_in = "user_id" in request.session
 
     return templates.TemplateResponse(
@@ -127,10 +135,16 @@ def import_wordpress(
             "html.parser"
         ).get_text()
 
+        published_at = datetime.strptime(
+            post["date"],
+            "%Y-%m-%dT%H:%M:%S"
+        ).date()        
+
         blog = models.Blog(
             title=post["title"]["rendered"],
             url=blog_url,
-            summary=summary
+            summary=summary,
+            published_at=published_at
         )
 
         db.add(blog)
