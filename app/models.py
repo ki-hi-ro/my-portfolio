@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Date
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.database import Base
@@ -44,3 +44,14 @@ class User(Base):
     username = Column(String, unique=True, index=True, nullable=False)
     password_hash = Column(String, nullable=False)
     role = Column(String, nullable=False, default="admin")
+
+class Blog(Base):
+    __tablename__ = "blogs"
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String(255))
+    url = Column(String(500))
+    summary = Column(Text)
+    tags = Column(String(255))
+    published_at = Column(Date)
+    created_at = Column(DateTime)
