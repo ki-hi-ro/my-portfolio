@@ -701,3 +701,9 @@ form {
     color: #0f6b0f;
     font-weight: bold;
 }
+
+.blog-meta {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #777;
+}

@@ -7,7 +7,7 @@
       WordPress同期完了（{{ imported }}件追加）
   </div>
   {% endif %}
-  
+
   <div class="section-header">
         
     <h1 class="section-title">
@@ -36,6 +36,12 @@
           {{ blog.title }}
         </h2>
 
+        <div class="blog-meta">
+            {% if blog.published_at %}
+                <span>{{ blog.published_at }}</span>
+            {% endif %}
+        </div>        
+
         {% if blog.summary %}
           <p class="work-description">
             {{ blog.summary }}
@@ -51,10 +57,6 @@
             {% endfor %}
           </div>
         {% endif %}
-
-        <span class="text-link">
-          記事を読む
-        </span>
       </a>
     {% endfor %}
   </div>

@@ -140,11 +140,25 @@ def import_wordpress(
             "%Y-%m-%dT%H:%M:%S"
         ).date()        
 
+        tag_map = {
+            650: "Python",
+            440: "プログラミング"
+        }
+
+        tag_names = [
+            tag_map[tag_id]
+            for tag_id in post["tags"]
+            if tag_id in tag_map
+        ]
+
+        tags = ", ".join(tag_names)
+
         blog = models.Blog(
             title=post["title"]["rendered"],
             url=blog_url,
             summary=summary,
-            published_at=published_at
+            published_at=published_at,
+            tags=tags
         )
 
         db.add(blog)

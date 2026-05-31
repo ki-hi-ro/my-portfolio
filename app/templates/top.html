@@ -107,6 +107,12 @@
       >
         <h2>{{ blog.title }}</h2>
 
+        <div class="blog-meta">
+            {% if blog.published_at %}
+                <span>{{ blog.published_at }}</span>
+            {% endif %}
+        </div>        
+
         <p class="work-description">
           {{ blog.summary }}
         </p>
@@ -120,9 +126,6 @@
             {% endfor %}
           </div>
         {% endif %}
-        <span class="text-link">
-          記事を読む
-        </span>
       </a>
     {% endfor %}
   </div>
