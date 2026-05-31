@@ -44,7 +44,7 @@ def top_page(
     blogs = (
         db.query(models.Blog)
         .order_by(models.Blog.created_at.desc())
-        .limit(3)
+        .limit(2)
         .all()
     )    
 
