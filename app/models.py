@@ -55,3 +55,18 @@ class Blog(Base):
     tags = Column(String(255))
     published_at = Column(Date)
     created_at = Column(DateTime, default=datetime.now)
+
+class Career(Base):
+    __tablename__ = "careers"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    title = Column(String)
+
+    company = Column(String)
+
+    period = Column(String)
+
+    description = Column(Text)
+
+    technologies = Column(Text)

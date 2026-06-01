@@ -284,18 +284,21 @@ form {
 .log-card,
 .timeline-card,
 .detail-card,
-.work-hero {
+.work-hero,
+.career-card {
   background: var(--color-surface);
   box-shadow: var(--shadow-sm);
 }
 
 .work-card,
 .post-card,
-.log-card {
+.log-card,
+.career-card {
   border-radius: var(--radius-lg);
 }
 
-.work-card {
+.work-card,
+.career-card {
   padding: 24px;
   color: inherit;
   text-decoration: none;
@@ -310,12 +313,14 @@ form {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
-.work-card h2 {
+.work-card h2,
+.career-card h2 {
   margin: 0 0 12px 0;
   font-size: 22px;
 }
 
-.work-card p {
+.work-card p,
+.career-card p {
   line-height: 1.7;
   margin-top: 0;
 }
@@ -364,7 +369,7 @@ form {
    Work List
 ========================================== */
 
-.work-grid {
+.top-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;

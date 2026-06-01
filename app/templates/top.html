@@ -99,7 +99,7 @@
     </nav>
   </div>
 
-  <div class="work-grid">
+  <div class="top-grid">
     {% for blog in blogs %}
       <a
         href="{{ blog.url }}"
@@ -130,6 +130,41 @@
       </a>
     {% endfor %}
   </div>
+</section>
+
+<section class="top-section">
+    <div class="section-header">
+        <h2 class="section-title">最近の職務経歴</h2>
+        <nav>
+          <a href="/careers" class="view-all-btn">
+              すべて見る
+          </a>
+        </nav>
+    </div>
+
+    <div class="top-grid">
+
+        {% for career in recent_careers %}
+
+        <a href="/career/{{ career.id }}"
+           class="career-card">
+
+            <h2>{{ career.title }}</h2>
+
+            <div class="blog-meta">
+                {% if career.period %}
+                    <span>{{ career.period }}</span>
+                {% endif %}
+            </div>
+
+            <p>{{ career.description[:120] }}...</p>
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
 </section>
 
 {% endblock %}
