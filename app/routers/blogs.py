@@ -106,7 +106,8 @@ def create_blog_from_form(
 def import_wordpress(
     db: Session = Depends(get_db)
 ):
-    url = "https://ki-hi-ro.com/wp-json/wp/v2/posts?tags=650,440&per_page=100"
+    
+    url = f"https://ki-hi-ro.com/wp-json/wp/v2/posts?categories=1191&per_page=100"
 
     response = requests.get(url)
 
@@ -142,7 +143,15 @@ def import_wordpress(
 
         tag_map = {
             650: "Python",
-            440: "プログラミング"
+            440: "プログラミング",
+            1192: "デザイン",
+            472: "WordPress",
+            1193: "SEO",
+            766: "Git",
+            1130: "SQL",
+            656: "TypeScript",
+            1128: "JavaScript",
+            1113: "HTML / CSS"
         }
 
         tag_names = [
