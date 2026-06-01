@@ -80,7 +80,7 @@ a {
 }
 
 .section-title {
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 20px;
   font-size: 2rem;
   font-weight: 700;
@@ -648,7 +648,13 @@ form {
 }
 
 .top-section {
-    margin-bottom: 56px;
+    margin-bottom: 26px;
+}
+
+@media (max-width: 768px) {
+  .top-section {
+      margin-bottom: 56px;
+  }
 }
 
 
@@ -898,7 +904,6 @@ form {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
 }
 
 .section-footer {
