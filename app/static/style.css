@@ -308,6 +308,7 @@ form {
 }
 
 .work-card:hover,
+.career-card:hover,
 .clickable-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);

@@ -136,7 +136,7 @@
     <div class="section-header">
         <h2 class="section-title">最近の職務経歴</h2>
         <nav>
-          <a href="/careers" class="view-all-btn">
+          <a href="/careers-page" class="view-all-btn">
               すべて見る
           </a>
         </nav>
@@ -146,7 +146,7 @@
 
         {% for career in recent_careers %}
 
-        <a href="/career/{{ career.id }}"
+        <a href="/careers-page/{{ career.id }}"
            class="career-card">
 
             <h2>{{ career.title }}</h2>

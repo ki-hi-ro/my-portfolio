@@ -3,7 +3,6 @@ from app.schemas import Work, WorkResponse
 from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
-from app import models
 from fastapi.templating import Jinja2Templates
 from app.database import get_db
 

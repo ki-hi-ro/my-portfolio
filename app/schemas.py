@@ -56,3 +56,10 @@ class Blog(BlogBase):
 
     class Config:
         from_attributes = True
+
+class Blog(BlogBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True

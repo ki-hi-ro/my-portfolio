@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="section-header">
+  <h2 class="section-title">
+    職務経歴一覧
+  </h2>
+
+  <nav>
+    {% if is_logged_in %}
+    <a href="/careers-page/new">
+      職務経歴を登録する
+    </a>
+    {% endif %}    
+    
+  </nav>
+</div>
+
+<div class="work-grid">
+  {% for work in works %}
+
+    <a
+      href="/works-page/{{ work.id }}"
+      class="work-card"
+    >
+      {% if work.image_url %}
+        <img
+          src="{{ work.image_url }}"
+          class="work-thumbnail"
+        >
+      {% endif %}
+
+      <h2>
+        {{ work.title }}
+      </h2>
+
+      <p class="work-description">{{ work.description }}</p>
+
+      <div class="tech-tags">
+        {% for tech in work.tech_stack.split(",") %}
+          <span class="tech-tag">
+            {{ tech.strip() }}
+          </span>
+        {% endfor %}
+      </div>
+    </a>
+
+  {% endfor %}
+</div>
+
+{% endblock %}
