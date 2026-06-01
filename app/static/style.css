@@ -99,8 +99,7 @@ a {
 ========================================== */
 
 .primary-button,
-.section-header nav a,
-.section-footer a {
+.section-header nav a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -115,8 +114,7 @@ a {
   cursor: pointer;
 }
 
-.section-header nav a,
-.section-footer a {
+.section-header nav a {
   border-radius: var(--radius-lg);
   font-size: 18px;
 }
@@ -830,10 +828,29 @@ form {
   }
 }
 
+
+/* ==========================================
+   トップページのすべて見るボタン
+========================================== */
 .section-footer {
   display: flex;
   justify-content: flex-start;
   margin-top: 24px;
+}
+
+.section-footer a {
+  border-radius: var(--radius-lg);
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;  
 }
 
 @media (max-width: 768px) {
