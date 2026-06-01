@@ -86,13 +86,6 @@ a {
   font-weight: 700;
 }
 
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-}
-
 
 /* ==========================================
    Buttons
@@ -723,8 +716,7 @@ form {
   }
 
   .site-header-top,
-  .page-header,
-  .section-header {
+  .page-header {
     align-items: flex-start;
     flex-direction: column;
     gap: 16px;
@@ -864,5 +856,75 @@ form {
 
   .section-footer .primary-button {
     width: 100%;
+  }
+}
+
+.section-header a {
+  border-radius: var(--radius-lg);
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;    
+}
+
+.view-all-button {
+  display: inline-block;
+  padding: 14px 36px;
+  border-radius: 18px;
+  background: #5146e8;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* スマホでは今のように下に配置 */
+@media (max-width: 768px) {
+  .view-all-button {
+    display: block;
+    width: 100%;
+    margin-top: 32px;
+    text-align: center;
+  }
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.section-footer {
+  margin-top: 32px;
+}
+
+.section-footer a.view-all-btn-sp {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    display: block;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+  }    
+
+  .section-header a.view-all-btn-pc {
+    display: none;
+  }
+
+  .section-footer a.view-all-btn-sp {
+    display: block;
+    width: 100%;
+    text-align: center;
   }
 }
