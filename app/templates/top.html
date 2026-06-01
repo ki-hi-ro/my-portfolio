@@ -42,12 +42,6 @@
     <h2 class="section-title">
       最近の制作物
     </h2>
-
-    <nav>
-      <a href="/works-page">
-        すべて見る
-      </a>
-    </nav>
   </div>
 
   <div class="top-grid">
@@ -84,6 +78,13 @@
 
     {% endfor %}
   </div>
+
+      <nav class="section-footer">
+        <a href="/careers-page" class="view-all-btn">
+            すべて見る
+        </a>
+    </nav>    
+
 </section>
 
 <section class="top-section">
@@ -91,12 +92,6 @@
     <h2 class="section-title">
       最近の技術ブログ
     </h2>
-
-    <nav>
-      <a href="/blogs-page">
-        すべて見る
-      </a>
-    </nav>
   </div>
 
   <div class="top-grid">
@@ -130,40 +125,40 @@
       </a>
     {% endfor %}
   </div>
+
+    <nav class="section-footer">
+        <a href="/careers-page" class="view-all-btn">
+            すべて見る
+        </a>
+    </nav>    
+
 </section>
 
 <section class="top-section">
     <div class="section-header">
-        <h2 class="section-title">最近の職務経歴</h2>
-        <nav>
-          <a href="/careers-page" class="view-all-btn">
-              すべて見る
-          </a>
-        </nav>
+      <h2 class="section-title">最近の職務経歴</h2>
     </div>
 
     <div class="top-grid">
-
         {% for career in recent_careers %}
-
         <a href="/careers-page/{{ career.id }}"
            class="career-card">
-
             <h2>{{ career.title }}</h2>
-
             <div class="blog-meta">
                 {% if career.period %}
                     <span>{{ career.period }}</span>
                 {% endif %}
             </div>
-
             <p>{{ career.description[:120] }}...</p>
-
         </a>
-
         {% endfor %}
-
     </div>
+
+    <nav class="section-footer">
+        <a href="/careers-page" class="view-all-btn">
+            すべて見る
+        </a>
+    </nav>    
 
 </section>
 
