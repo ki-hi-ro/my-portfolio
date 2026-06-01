@@ -22,7 +22,8 @@
 
     {% if work.image_url %}
       <img
-        src="{{ work.image_url }}"
+        src="{% if work.image_url.startswith('/') %}{{ work.image_url }}{% else %}/{{ work.image_url }}{% endif %}"
+        alt="{{ work.title }}"
         class="work-hero-image"
       >
     {% endif %}
