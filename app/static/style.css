@@ -91,11 +91,6 @@ a {
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.section-header h2 {
-  margin: 0;
 }
 
 
@@ -148,6 +143,12 @@ a {
 .btn-danger {
   height: 44px;
   padding: 0 18px;
+}
+
+.top-actions .primary-button,
+.top-actions .btn-outline {
+  padding: 14px 24px;
+  height: auto;
 }
 
 .btn-outline {
@@ -643,10 +644,6 @@ form {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-}
-
-.top-actions .btn-outline {
-  padding: 25px 18px;
 }
 
 .top-section {
