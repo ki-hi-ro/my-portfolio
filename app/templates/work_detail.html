@@ -71,6 +71,20 @@
       </a>
       {% endif %}
 
+      {% if is_logged_in %}
+      <form
+        action="/works-page/{{ work.id }}/delete"
+        method="post"
+      >
+        <button
+          type="submit"
+          class="btn-danger"
+        >
+          制作物を削除する
+        </button>
+      </form>      
+      {% endif %}
+
     </div>
   </div>
 </section>

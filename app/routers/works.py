@@ -219,3 +219,18 @@ def update_work_from_page(
         url=f"/works-page/{work_id}",
         status_code=303
     )
+
+
+# Delete（処理）
+@router.post("/works-page/{work_id}/delete")
+def delete_work_from_page(work_id: int, db: Session = Depends(get_db)):
+    db_work = db.query(models.Work).filter(models.Work.id == work_id).first()
+
+    if db_work:
+        db.delete(db_work)
+        db.commit()
+
+    return RedirectResponse(
+        url="/",
+        status_code=303
+    )
