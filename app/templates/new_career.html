@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="section-header">
+    <h2 class="section-title">
+        職務経歴の新規登録
+    </h2>
+</div>
+
+<form
+    action="/careers-page"
+    method="post"
+    class="form-card"
+>
+    <div class="form-group">
+        <label>職種・役割</label>
+
+        <input
+            class="form-input"
+            type="text"
+            name="title"
+            placeholder="Python API開発エンジニア"
+        >
+    </div>
+
+    <div class="form-group">
+        <label>会社名・案件名</label>
+
+        <input
+            class="form-input"
+            type="text"
+            name="company"
+            placeholder="物流システム開発"
+        >
+    </div>
+
+    <div class="form-group">
+        <label>期間</label>
+
+        <input
+            class="form-input"
+            type="text"
+            name="period"
+            placeholder="2025.07 - 2026.06"
+        >
+    </div>
+
+    <div class="form-group">
+        <label>職務内容</label>
+
+        <textarea
+            class="form-textarea"
+            name="description"
+            rows="8"
+        ></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>使用技術（カンマ区切り）</label>
+
+        <input
+            class="form-input"
+            type="text"
+            name="technologies"
+            placeholder="Python,FastAPI,PostgreSQL,Linux"
+        >
+    </div>
+
+    <button
+        class="primary-button"
+        type="submit"
+    >
+        登録する
+    </button>
+</form>
+
+<a
+    href="/careers-page"
+    class="btn-back"
+>
+    職務経歴一覧へ戻る
+</a>
+
+{% endblock %}

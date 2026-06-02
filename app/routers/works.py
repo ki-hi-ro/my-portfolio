@@ -66,17 +66,12 @@ def read_works(db: Session = Depends(get_db)):
 @router.get("/works-page/new")
 def new_work_page(
     request: Request,
-    work_id: int | None = None,
-    db: Session = Depends(get_db)
 ):
-    works = db.query(models.Work).all()
 
     return templates.TemplateResponse(
         request,
         "new_work.html",
         {
-            "works": works,
-            "selected_work_id": work_id,
             "is_logged_in": "user_id" in request.session
         }
     )

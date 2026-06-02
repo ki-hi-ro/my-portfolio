@@ -75,13 +75,8 @@ class Career(Base):
     __tablename__ = "careers"
 
     id = Column(Integer, primary_key=True, index=True)
-
     title = Column(String)
-
     company = Column(String)
-
     period = Column(String)
-
     description = Column(Text)
-
     technologies = Column(Text)

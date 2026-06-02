@@ -9,7 +9,7 @@ router = APIRouter()
 
 templates = Jinja2Templates(directory="app/templates")
 
-# Read（一覧）
+# 一覧画面の取得
 @router.get("/careers-page")
 def careers_page(request: Request, db: Session = Depends(get_db)):
     careers = db.query(models.Career).all()
@@ -24,7 +24,21 @@ def careers_page(request: Request, db: Session = Depends(get_db)):
     )
 
 
-# Read（詳細）
+# 新規登録画面の取得
+@router.get("/careers-page/new")
+def new_career_page(
+    request: Request,
+):
+    return templates.TemplateResponse(
+        request,
+        "new_career.html",
+        {
+            "is_logged_in": "user_id" in request.session
+        }
+    )
+
+
+# 詳細画面の取得
 @router.get("/careers-page/{career_id}")
 def career_detail_page(
     career_id: int,
@@ -62,3 +76,27 @@ def career_detail_page(
             "is_logged_in": "user_id" in request.session
         }
     )
+
+
+# 新規登録の処理
+@router.post("/careers-page")
+def create_career(
+    title: str = Form(...),
+    company: str = Form(...),
+    period: str = Form(...),
+    description: str = Form(...),
+    technologies: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    new_career = models.Career(
+        title=title,
+        company=company,
+        period=period,
+        description=description,
+        technologies=technologies
+    )
+
+    db.add(new_career)
+    db.commit()
+
+    return RedirectResponse(url="/careers-page", status_code=303)    
