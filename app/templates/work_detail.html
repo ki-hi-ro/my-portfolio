@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="page-header">
+<div class="section-header">
   <div>
     <h1 class="section-title">
       {{ work.title }}
@@ -11,13 +11,13 @@
 
   <a
     href="/works-page"
-    class="btn-back"
+    class="btn-back view-all-btn-pc"
   >
     ← 制作物一覧へ戻る
   </a>
 </div>
 
-<section class="work-hero">
+<article class="detail-card">
   <div class="work-hero-content">
 
     {% if work.image_url %}
@@ -87,6 +87,15 @@
 
     </div>
   </div>
-</section>
+</article>
+
+<nav class="section-footer">
+  <a
+    href="/works-page"
+    class="btn-back view-all-btn-sp"
+  >
+    ← 制作物一覧へ戻る
+  </a>  
+</nav>
 
 {% endblock %}

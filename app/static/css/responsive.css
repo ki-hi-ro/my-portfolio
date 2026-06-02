@@ -54,10 +54,16 @@
   .primary-button,
   .section-header nav a,
   .btn-outline,
-  .btn-danger,
-  .btn-back {
+  .btn-danger {
     width: 100%;
   }
+
+  .btn-back,
+  .section-footer a.view-all-btn-sp.btn-back {
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    display: flex;
+  }  
 
   .work-links,
   .work-actions,
