@@ -2,7 +2,20 @@
 
 {% block content %}
 
-<a href="/careers-page" class="btn-back">← 職務経歴一覧に戻る</a>
+<div class="page-header">
+  <div>
+    <h1 class="section-title">
+      {{ career.title }}
+    </h1>
+  </div>
+
+  <a
+    href="/careers-page"
+    class="btn-back"
+  >
+    ← 職務経歴一覧へ戻る
+  </a>
+</div>
 
 <article class="detail-card">
   <h1>{{ career.title }}</h1>
@@ -13,11 +26,6 @@
     <p>{{ career.description }}</p>
   </div>
 
-  <div class="work-stats">
-    <p>作業ログ数：{{ career.post_count }}件</p>
-    <p>合計作業時間：{{ career.total_hours }}時間{{ career.remaining_minutes }}分</p>
-  </div>
-
   {% if career.technologies %}
     <div class="tech-tags">
       {% for tech in career.technologies.split(",") %}
@@ -26,19 +34,5 @@
     </div>
   {% endif %}
 </article>
-
-{% if posts %}
-  <section class="logs">
-    <h2 class="section-title">関連する作業ログ</h2>
-
-    {% for post in posts %}
-      <a href="/posts-page/{{ post.id }}" class="log-card clickable-card">
-        <h3>{{ post.title }}</h3>
-        <p class="log-meta">{{ post.work_date }}</p>
-        <p class="log-content">{{ post.content[:100] }}...</p>
-      </a>
-    {% endfor %}
-  </section>
-{% endif %}
 
 {% endblock %}

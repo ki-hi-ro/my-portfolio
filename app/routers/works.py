@@ -149,23 +149,11 @@ def work_detail_page(
         .first()
     )
 
-    posts = (
-        db.query(models.Post)
-        .filter(models.Post.work_id == work_id)
-        .order_by(models.Post.start_time.desc())
-        .all()
-    )
-
-    total_minutes = sum(post.work_time_minutes for post in posts)
-
     return templates.TemplateResponse(
         request,
         "work_detail.html",
         {
             "work": work,
-            "posts": posts,
-            "total_hours": total_minutes // 60,
-            "remaining_minutes": total_minutes % 60,
             "is_logged_in": "user_id" in request.session
         }
     )

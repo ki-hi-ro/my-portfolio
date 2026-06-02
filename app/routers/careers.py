@@ -51,28 +51,11 @@ def career_detail_page(
         .first()
     )
 
-    posts = (
-        db.query(models.Post)
-        .filter(models.Post.career_id == career.id)
-        .all()
-    )
-
-    total_minutes = sum(
-        post.work_time_minutes
-        for post in posts
-    )
-
-    career.post_count = len(posts)
-    career.total_minutes = total_minutes
-    career.total_hours = total_minutes // 60
-    career.remaining_minutes = total_minutes % 60
-
     return templates.TemplateResponse(
         request,
         "career_detail.html",
         {
             "career": career,
-            "posts": posts,
             "is_logged_in": "user_id" in request.session
         }
     )
