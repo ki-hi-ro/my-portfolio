@@ -19,12 +19,14 @@ class PostResponse(BaseModel):
     class Config:
         from_attributes = True
 
+
 class Work(BaseModel):
     title: str
     description: str
     github_url: str | None = None
     app_url: str | None = None
-    technologies: list[str]
+    tech_stack: str
+
 
 class WorkResponse(BaseModel):
     id: int
@@ -32,11 +34,11 @@ class WorkResponse(BaseModel):
     description: str
     github_url: str | None = None
     app_url: str | None = None
-    technologies: list[str]
+    tech_stack: str
     created_at: datetime
 
     class Config:
-        from_attributes = True
+        from_attributes = True        
 
 class BlogBase(BaseModel):
     title: str

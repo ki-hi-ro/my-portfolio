@@ -20,21 +20,36 @@ class Post(Base):
     )
     created_at = Column(DateTime, default=datetime.now)
 
+
 class Work(Base):
     __tablename__ = "works"
 
     id = Column(Integer, primary_key=True, index=True)
+
+    # タイトル
     title = Column(String, nullable=False)
+
+    # 説明
     description = Column(Text, nullable=False)
-    github_url = Column(String)
-    app_url = Column(String)
-    tech_stack = Column(String)
+
+    # 技術タグ
+    tech_stack = Column(String, nullable=False)
+
+    # GitHub
+    github_url = Column(String, nullable=True)
+
+    # 公開URL
+    app_url = Column(String, nullable=True)
+
+    # 画像
+    image_url = Column(String, nullable=True)
+
+    created_at = Column(DateTime, default=datetime.now)
+
     posts = relationship(
         "Post",
         back_populates="work"
     )    
-    image_url = Column(String)
-    created_at = Column(DateTime, default=datetime.now)
 
 
 class User(Base):
