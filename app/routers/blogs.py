@@ -142,8 +142,10 @@ def import_wordpress(
     url = "https://ki-hi-ro.com/wp-json/wp/v2/posts?categories=1191&per_page=100&_embed"
 
     headers = {
-        "User-Agent": "Mozilla/5.0"
-    }
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "application/json,text/html,*/*",
+        "Referer": "https://ki-hi-ro.com/"
+    }    
 
     response = requests.get(url, headers=headers, timeout=10)    
 
