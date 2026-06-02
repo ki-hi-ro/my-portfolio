@@ -1,0 +1,17 @@
+/* ==========================================
+    WordPress同期完了メッセージ
+========================================== */
+.success-message {
+    margin-bottom: 55px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #e8f7e8;
+    color: #0f6b0f;
+    font-weight: bold;
+}
+
+.blog-meta {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #777;
+}

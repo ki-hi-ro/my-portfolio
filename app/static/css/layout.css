@@ -1,0 +1,47 @@
+/* ==========================================
+   Site Header
+========================================== */
+
+.site-header {
+  margin-bottom: 60px;
+}
+
+.site-title {
+  margin: 0;
+}
+
+.site-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-title a:hover {
+  opacity: 0.8;
+}
+
+.site-description {
+  margin-top: 12px;
+  margin-bottom: 35px;
+}
+
+
+/* ==========================================
+   Page Header
+========================================== */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.section-header {
+  margin-bottom: 24px;
+}

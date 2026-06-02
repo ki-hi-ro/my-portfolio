@@ -1,0 +1,46 @@
+/* ==========================================
+   top.html
+========================================== */
+
+.top-hero {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    padding: 56px 48px;
+    margin-bottom: 60px;
+}
+
+.top-label {
+    color: var(--color-primary);
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.top-title {
+    font-size: 36px;
+    line-height: 1.5;
+    margin: 0 0 24px;
+}
+
+.top-description {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.9;
+    margin-bottom: 32px;
+}
+
+.top-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.top-section {
+    margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+  .top-section {
+      margin-bottom: 56px;
+  }
+}

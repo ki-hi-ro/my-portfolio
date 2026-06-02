@@ -1,0 +1,158 @@
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width: 768px) {
+  body {
+    max-width: none;
+    width: 100%;    
+    margin: 24px auto;
+    padding: 0 16px;
+  }
+
+  .site-header-top,
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+    margin-bottom: 0;
+  }
+
+  .top-grid,
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .work-card,
+  .career-card,
+  .post-card,
+  .log-card,
+  .detail-card,
+  .work-hero,
+  .form-card {
+    padding: 24px;
+  }
+
+  .top-hero {
+    padding: 32px 24px;
+  }
+
+  .top-title {
+    font-size: 28px;
+  }
+
+  .top-description {
+    font-size: 16px;
+  }
+
+  .primary-button,
+  .section-header nav a,
+  .btn-outline,
+  .btn-danger,
+  .btn-back {
+    width: 100%;
+  }
+
+  .work-links,
+  .work-actions,
+  .timeline-actions,
+  .post-actions,
+  .top-actions {
+    flex-direction: column;
+  }
+
+  .post-detail-title {
+    font-size: 32px;
+  }
+
+  .section-header {
+    display: block;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+  }    
+
+  .section-header a.view-all-btn-pc {
+    display: none;
+  }
+
+  .section-title {
+    margin-bottom: 23px;
+  }
+
+  .section-footer {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 32px;
+  }  
+
+  .section-footer a.view-all-btn-sp {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .view-all-button {
+    display: block;
+    width: 100%;
+    margin-top: 32px;
+    text-align: center;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }  
+}
+
+@media (max-width: 480px) {
+  body {
+    margin: 16px auto;
+    padding: 0 14px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .work-card h2,
+  .career-card h2 {
+    font-size: 20px;
+  }
+
+  .work-card,
+  .career-card,
+  .post-card,
+  .log-card,
+  .detail-card,
+  .work-hero,
+  .form-card {
+    padding: 20px;
+    border-radius: var(--radius-lg);
+  }
+
+  .top-hero {
+    padding: 28px 20px;
+    border-radius: var(--radius-xl);
+  }
+
+  .top-title {
+    font-size: 24px;
+  }
+
+  .timeline {
+    padding-left: 24px;
+  }
+
+  .timeline-card {
+    padding: 24px;
+  }
+}

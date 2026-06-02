@@ -1,0 +1,46 @@
+/* ==========================================
+   Generic Content / Markdown
+========================================== */
+
+.content {
+  line-height: 1.8;
+}
+
+.content p {
+  margin: 0 0 16px;
+}
+
+.content h1,
+.content h2,
+.content h3 {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+.content pre {
+  overflow-x: auto;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  background: #222;
+}
+
+.content code {
+  color: #fff;
+  font-family: monospace;
+}
+
+.content ul,
+.content ol {
+  margin: 8px 0 24px;
+  padding-left: 1.5em;
+}
+
+.content li {
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+}
+
+.content li + li {
+  margin-top: 4px;
+}

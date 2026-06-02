@@ -1,0 +1,49 @@
+/* ==========================================
+   Base
+========================================== */
+
+:root {
+    --color-bg: #fafafa;
+    --color-surface: #ffffff;
+
+    --color-text: #222;
+    --color-muted: #666;
+
+    --color-border: #e5e5e5;
+
+    --color-primary: #111;
+    --color-primary-hover: #333;
+    --color-primary-light: #f5f5f5;
+    --color-primary-dark: #000000;   
+
+    --color-danger: #ef4444;
+    --color-danger-light: #fee2e2;    
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;    
+
+    --shadow-card: none;
+}
+
+body {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: sans-serif;
+}
+
+h1 {
+  color: #000;
+}
+
+a {
+  color: inherit;
+  box-sizing: border-box;
+}
+
+hr {
+  margin: 0;
+}

@@ -1,0 +1,29 @@
+/* ==========================================
+   ログイン
+========================================== */
+
+.site-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 67px;
+}
+
+.login-link {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    opacity: 0.8;
+}
+
+.error-message {
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #ffe5e5;
+    color: #d32f2f;
+    font-size: 14px;
+}
