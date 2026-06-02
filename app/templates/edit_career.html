@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="section-header">
+  <h2 class="section-title">
+    {{ career.title }} を編集
+  </h2>
+
+  <a
+    href="/careers-page"
+    class="btn-back view-all-btn-pc"
+  >
+    職務経歴一覧へ戻る
+  </a>  
+</div>
+
+<form
+  action="/careers-page/{{ career.id }}/edit"
+  method="post"
+  class="form-card"
+>
+  <div class="form-group">
+    <label>タイトル</label>
+
+    <input
+      class="form-input"
+      type="text"
+      name="title"
+      value="{{ career.title }}"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>会社名</label>
+
+    <input
+      class="form-input"
+      type="text"
+      name="company"
+      value="{{ career.company }}"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>期間</label>
+
+    <input
+      class="form-input"
+      type="text"
+      name="period"
+      value="{{ career.period }}"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>説明</label>
+
+    <textarea
+      class="form-textarea"
+      name="description"
+    >{{ career.description }}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label>使用技術（カンマ区切り）</label>
+
+    <input
+      class="form-input"
+      type="text"
+      name="tech_stack"
+      value="{{ career.tech_stack }}"
+    >
+  </div>
+
+  <button
+    type="submit"
+    class="primary-button"
+  >
+    更新する
+  </button>
+</form>
+
+<nav class="section-footer">
+  <a
+    href="/careers-page/{{ career.id }}"
+    class="btn-back view-all-btn-sp"
+  >
+    職務経歴詳細へ戻る
+  </a>
+</nav>
+
+{% endblock %}

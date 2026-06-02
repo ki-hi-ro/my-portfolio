@@ -98,4 +98,57 @@ def create_career(
     db.add(new_career)
     db.commit()
 
-    return RedirectResponse(url="/careers-page", status_code=303)    
+    return RedirectResponse(url="/careers-page", status_code=303)
+
+
+# 編集画面を取得
+@router.get("/careers-page/{career_id}/edit")
+def career_edit_page(
+    career_id: int,
+    request: Request,
+    db: Session = Depends(get_db)
+):
+    career = (
+        db.query(models.Career)
+        .filter(models.Career.id == career_id)
+        .first()
+    )
+
+    return templates.TemplateResponse(
+        request,
+        "edit_career.html",
+        {
+            "career": career,
+            "is_logged_in": "user_id" in request.session
+        }
+    )
+
+
+@router.post("/careers-page/{career_id}/edit")
+def career_update(
+    career_id: int,
+    title: str = Form(...),
+    company: str = Form(""),
+    period: str = Form(""),
+    description: str = Form(""),
+    tech_stack: str = Form(""),
+    db: Session = Depends(get_db)
+):
+    career = (
+        db.query(models.Career)
+        .filter(models.Career.id == career_id)
+        .first()
+    )
+
+    career.title = title
+    career.company = company
+    career.period = period
+    career.description = description
+    career.tech_stack = tech_stack
+
+    db.commit()
+
+    return RedirectResponse(
+        url=f"/careers-page/{career.id}",
+        status_code=303
+    )

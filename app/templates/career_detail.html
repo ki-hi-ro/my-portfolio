@@ -6,18 +6,21 @@
   <h2 class="section-title">
     {{ career.title }}
   </h2>
+
   <a
     href="/careers-page"
     class="btn-back view-all-btn-pc"
   >
     ← 職務経歴一覧へ戻る
-  </a>  
+  </a>
 </div>
 
 <article class="detail-card">
   <h1>{{ career.title }}</h1>
 
-  <p class="work-meta">{{ career.period }}</p>
+  <p class="work-meta">
+    {{ career.period }}
+  </p>
 
   <div class="content">
     <p>{{ career.description }}</p>
@@ -26,10 +29,37 @@
   {% if career.technologies %}
     <div class="tech-tags">
       {% for tech in career.technologies.split(",") %}
-        <span class="tech-tag">{{ tech.strip() }}</span>
+        <span class="tech-tag">
+          {{ tech.strip() }}
+        </span>
       {% endfor %}
     </div>
   {% endif %}
+
+  <div class="work-actions">
+    {% if is_logged_in %}
+      <a
+        href="/careers-page/{{ career.id }}/edit"
+        class="btn-outline"
+      >
+        職務経歴を編集する
+      </a>
+    {% endif %}
+
+    {% if is_logged_in %}
+      <form
+        action="/careers-page/{{ career.id }}/delete"
+        method="post"
+      >
+        <button
+          type="submit"
+          class="btn-danger"
+        >
+          職務経歴を削除する
+        </button>
+      </form>
+    {% endif %}
+  </div>
 </article>
 
 <nav class="section-footer">
@@ -39,5 +69,6 @@
   >
     ← 職務経歴一覧へ戻る
   </a>
+</nav>
 
 {% endblock %}
