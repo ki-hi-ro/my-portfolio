@@ -3,50 +3,36 @@
 {% block content %}
 
 <div class="section-header">
-  <h2 class="section-title">
-    職務経歴一覧
-  </h2>
+    <h2 class="section-title">
+        職務経歴一覧
+    </h2>
 
-  <nav>
-    {% if is_logged_in %}
-    <a href="/careers-page/new">
-      職務経歴を登録する
-    </a>
-    {% endif %}    
-    
-  </nav>
+    <nav>
+        {% if is_logged_in %}
+        <a href="/careers-page/new">
+            職務経歴を登録する
+        </a>
+        {% endif %}
+    </nav>
 </div>
 
-<div class="work-grid">
-  {% for work in works %}
-
+<div class="top-grid">
+    {% for career in careers %}
     <a
-      href="/works-page/{{ work.id }}"
-      class="work-card"
+        href="/careers-page/{{ career.id }}"
+        class="career-card"
     >
-      {% if work.image_url %}
-        <img
-          src="{{ work.image_url }}"
-          class="work-thumbnail"
-        >
-      {% endif %}
+        <h2>{{ career.title }}</h2>
 
-      <h2>
-        {{ work.title }}
-      </h2>
+        <div class="blog-meta">
+            {% if career.period %}
+            <span>{{ career.period }}</span>
+            {% endif %}
+        </div>
 
-      <p class="work-description">{{ work.description }}</p>
-
-      <div class="tech-tags">
-        {% for tech in work.tech_stack.split(",") %}
-          <span class="tech-tag">
-            {{ tech.strip() }}
-          </span>
-        {% endfor %}
-      </div>
+        <p>{{ career.description[:120] }}...</p>
     </a>
-
-  {% endfor %}
+    {% endfor %}
 </div>
 
 {% endblock %}
