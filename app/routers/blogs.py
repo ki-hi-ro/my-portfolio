@@ -141,10 +141,18 @@ def import_wordpress(
     
     url = "https://ki-hi-ro.com/wp-json/wp/v2/posts?categories=1191&per_page=100&_embed"
 
-    response = requests.get(url)
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
+
+    response = requests.get(url, headers=headers, timeout=10)    
 
     if response.status_code != 200:
-        return {"error": "取得失敗"}
+        return {
+            "error": "取得失敗",
+            "status_code": response.status_code,
+            "text": response.text[:500]
+        }
 
     posts = response.json()
 
