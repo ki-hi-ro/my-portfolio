@@ -230,6 +230,6 @@ def delete_work_from_page(work_id: int, db: Session = Depends(get_db)):
         db.commit()
 
     return RedirectResponse(
-        url="/",
+        url="/works-page",
         status_code=303
     )

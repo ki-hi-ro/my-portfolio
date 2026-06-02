@@ -31,6 +31,16 @@
       {{ blog.content | safe }}
     </div>
 
+    {% if blog.tags %}
+      <div class="tech-tags">
+        {% for tag in blog.tags.split(",") %}
+          <span class="tech-tag">
+            {{ tag.strip() }}
+          </span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
   </div>
 </section>
 

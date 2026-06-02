@@ -3,9 +3,15 @@
 {% block content %}
 
 <div class="section-header">
-    <h2 class="section-title">
-        職務経歴を追加する
-    </h2>
+  <h2 class="section-title">
+    職務経歴を追加する
+  </h2>
+  <a
+    href="/careers-page"
+    class="btn-back view-all-btn-pc"
+  >
+    職務経歴一覧へ戻る
+  </a>  
 </div>
 
 <form
@@ -75,11 +81,14 @@
     </button>
 </form>
 
-<a
-    href="/careers-page"
-    class="btn-back"
->
-    職務経歴一覧へ戻る
-</a>
+
+<nav class="section-footer">
+    <a
+        href="/careers-page"
+        class="btn-back view-all-btn-sp"
+    >
+        職務経歴一覧へ戻る
+    </a>
+</nav>
 
 {% endblock %}

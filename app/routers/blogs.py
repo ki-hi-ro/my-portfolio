@@ -94,7 +94,6 @@ def blog_detail_page(
     request: Request,
     db: Session = Depends(get_db)
 ):
-    print("blog_id:", blog_id)
 
     blog = (
         db.query(models.Blog)
@@ -140,7 +139,7 @@ def import_wordpress(
     db: Session = Depends(get_db)
 ):
     
-    url = f"https://ki-hi-ro.com/wp-json/wp/v2/posts?categories=1191&per_page=100"
+    url = "https://ki-hi-ro.com/wp-json/wp/v2/posts?categories=1191&per_page=100&_embed"
 
     response = requests.get(url)
 
@@ -152,6 +151,8 @@ def import_wordpress(
     imported = 0
 
     for post in posts:
+
+        print(post["title"]["rendered"])
 
         blog_url = post["link"]
 
@@ -171,24 +172,12 @@ def import_wordpress(
             "%Y-%m-%dT%H:%M:%S"
         ).date()        
 
-        tag_map = {
-            650: "Python",
-            440: "プログラミング",
-            1192: "デザイン",
-            472: "WordPress",
-            1193: "SEO",
-            766: "Git",
-            1130: "SQL",
-            656: "TypeScript",
-            1128: "JavaScript",
-            1113: "HTML / CSS"
-        }
+        tag_names = []
 
-        tag_names = [
-            tag_map[tag_id]
-            for tag_id in post["tags"]
-            if tag_id in tag_map
-        ]
+        for term_group in post.get("_embedded", {}).get("wp:term", []):
+            for term in term_group:
+                if term.get("taxonomy") == "post_tag":
+                    tag_names.append(term["name"])
 
         tags = ", ".join(tag_names)
 
