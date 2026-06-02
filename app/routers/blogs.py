@@ -78,6 +78,30 @@ def blog_new_page(
         {}
     )
 
+# 詳細ページを取得する
+@router.get("-page/{blog_id}")
+def blog_detail_page(
+    blog_id: int,
+    request: Request,
+    db: Session = Depends(get_db)
+):
+    print("blog_id:", blog_id)
+
+    blog = (
+        db.query(models.Blog)
+        .filter(models.Blog.id == blog_id)
+        .first()
+    )
+
+    return templates.TemplateResponse(
+        request,
+        "blog_detail.html",
+        {
+            "blog": blog,
+            "is_logged_in": "user_id" in request.session
+        }
+    )
+
 @router.post("/new")
 def create_blog_from_form(
     title: str = Form(...),

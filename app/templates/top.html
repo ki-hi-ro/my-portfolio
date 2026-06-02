@@ -103,8 +103,7 @@
   <div class="top-grid">
     {% for blog in blogs %}
       <a
-        href="{{ blog.url }}"
-        target="_blank"
+        href="/blogs-page/{{ blog.id }}"
         class="work-card"
       >
         <h2>{{ blog.title }}</h2>
