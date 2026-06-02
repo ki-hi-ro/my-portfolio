@@ -105,13 +105,28 @@ def create_work_from_page(
 
 # Read（一覧）
 @router.get("/works-page")
-def works_page(request: Request, db: Session = Depends(get_db)):
-    works = db.query(models.Work).all()
+def works_page(
+    request: Request, 
+    page: int = 1,
+    db: Session = Depends(get_db)
+):
+    per_page = 4
+    total_works = db.query(models.Work).count()
+    total_pages = (total_works + per_page - 1) // per_page
+
+    works = (
+        db.query(models.Work)
+        .offset((page - 1) * per_page)
+        .limit(per_page)
+        .all()
+    )
 
     for work in works:
         posts = (
             db.query(models.Post)
             .filter(models.Post.work_id == work.id)
+            .offset((page - 1) * per_page)
+            .limit(per_page)            
             .all()
         )
 
@@ -130,6 +145,8 @@ def works_page(request: Request, db: Session = Depends(get_db)):
         request,
         "works.html",
         {
+            "page": page,
+            "total_pages": total_pages,
             "works": works,
             "is_logged_in": "user_id" in request.session
         }

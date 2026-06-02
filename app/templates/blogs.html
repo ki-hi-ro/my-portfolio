@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="top-section">
+<section class="page-section">
   {% if imported is not none %}
   <div class="success-message">
       WordPress同期完了（{{ imported }}件追加）
@@ -60,4 +60,32 @@
     {% endfor %}
   </div>
 </section>
+
+{% if total_pages > 1 %}
+  <div class="pagination">
+
+    {% if page > 1 %}
+      <a href="/blogs-page?page={{ page - 1 }}" class="page-link">
+        ←
+      </a>
+    {% endif %}
+
+    {% for p in range(1, total_pages + 1) %}
+      <a
+        href="/blogs-page?page={{ p }}"
+        class="page-link {% if p == page %}active{% endif %}"
+      >
+        {{ p }}
+      </a>
+    {% endfor %}
+
+    {% if page < total_pages %}
+      <a href="/blogs-page?page={{ page + 1 }}" class="page-link">
+        →
+      </a>
+    {% endif %}
+
+  </div>
+{% endif %}
+
 {% endblock %}

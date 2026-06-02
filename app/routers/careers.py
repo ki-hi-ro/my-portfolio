@@ -11,13 +11,29 @@ templates = Jinja2Templates(directory="app/templates")
 
 # 一覧画面の取得
 @router.get("/careers-page")
-def careers_page(request: Request, db: Session = Depends(get_db)):
-    careers = db.query(models.Career).all()
+def careers_page(
+    request: Request, 
+    page: int = 1,
+    db: Session = Depends(get_db)
+):
+    per_page = 4
+    total_careers = db.query(models.Career).count()
+    total_pages = (total_careers + per_page - 1) // per_page    
+
+    careers = (
+        db.query(models.Career)
+        .order_by(models.Career.id.desc())
+        .offset((page - 1) * per_page)
+        .limit(per_page)
+        .all()
+    )
 
     return templates.TemplateResponse(
         request,
         "careers.html",
         {
+            "page": page,
+            "total_pages": total_pages,
             "careers": careers,
             "is_logged_in": "user_id" in request.session
         }

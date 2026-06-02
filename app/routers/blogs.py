@@ -46,13 +46,20 @@ def read_blogs(
 @router.get("-page")
 def blogs_page(
     request: Request,
+    page: int = 1,
     imported: Optional[int] = None,
     db: Session = Depends(get_db)
 ):
+    per_page = 4
 
+    total_blogs = db.query(models.Blog).count()
+    total_pages = (total_blogs + per_page - 1) // per_page    
+    
     blogs = (
         db.query(models.Blog)
         .order_by(models.Blog.published_at.desc())
+        .offset((page - 1) * per_page)
+        .limit(per_page)
         .all()
     )
 
@@ -63,6 +70,8 @@ def blogs_page(
         "blogs.html",
         {
             "blogs": blogs, 
+            "page": page,
+            "total_pages": total_pages,
             "is_logged_in": is_logged_in,
             "imported": imported
          }
