@@ -5,8 +5,6 @@
 .primary-button,
 .btn-primary,
 .section-link,
-.section-header a,
-.section-footer a,
 .view-all-button {
   display: inline-flex;
   align-items: center;
@@ -22,20 +20,21 @@
   cursor: pointer;
 }
 
-.primary-button:hover,
 .btn-primary:hover,
 .section-link:hover,
-.section-header a:hover,
-.section-footer a:hover,
 .view-all-button:hover {
   background: var(--color-primary-hover);
   border-color: var(--color-primary-hover);
 }
 
-.section-header a,
-.section-footer a {
-  border-radius: var(--radius-lg);
-  font-size: 18px;
+.primary-button {
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.primary-button:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);  
 }
 
 .view-all-button {

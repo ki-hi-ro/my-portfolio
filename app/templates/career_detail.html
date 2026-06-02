@@ -2,19 +2,16 @@
 
 {% block content %}
 
-<div class="page-header">
-  <div>
-    <h1 class="section-title">
-      {{ career.title }}
-    </h1>
-  </div>
-
+<div class="section-header">
+  <h2 class="section-title">
+    {{ career.title }}
+  </h2>
   <a
     href="/careers-page"
-    class="btn-back"
+    class="btn-back view-all-btn-pc"
   >
     ← 職務経歴一覧へ戻る
-  </a>
+  </a>  
 </div>
 
 <article class="detail-card">
@@ -34,5 +31,13 @@
     </div>
   {% endif %}
 </article>
+
+<nav class="section-footer">
+  <a
+    href="/careers-page"
+    class="btn-back view-all-btn-sp"
+  >
+    ← 職務経歴一覧へ戻る
+  </a>
 
 {% endblock %}

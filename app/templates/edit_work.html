@@ -2,9 +2,17 @@
 
 {% block content %}
 
-<h1 class="section-title">
-  {{ work.title }} を編集
-</h1>
+<div class="section-header">
+  <h2 class="section-title">
+    {{ work.title }} を編集
+  </h2>
+  <a
+    href="/works-page"
+    class="btn-back view-all-btn-pc"
+  >
+    制作物一覧へ戻る
+  </a>  
+</div>
 
 <form
   action="/works-page/{{ work.id }}/edit"
@@ -83,11 +91,13 @@
   </button>
 </form>
 
-<a
-  href="/works-page/{{ work.id }}"
-  class="btn-back"
->
-  制作物詳細へ戻る
-</a>
+<nav class="section-footer">
+  <a
+    href="/works-page/{{ work.id }}"
+    class="btn-back view-all-btn-sp"
+  >
+    制作物詳細へ戻る
+  </a>
+</nav>
 
 {% endblock %}
