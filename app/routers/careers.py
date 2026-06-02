@@ -152,3 +152,18 @@ def career_update(
         url=f"/careers-page/{career.id}",
         status_code=303
     )
+
+
+# Delete（処理）
+@router.post("/careers-page/{career_id}/delete")
+def delete_career_from_page(career_id: int, db: Session = Depends(get_db)):
+    db_career = db.query(models.Career).filter(models.Career.id == career_id).first()
+
+    if db_career:
+        db.delete(db_career)
+        db.commit()
+
+    return RedirectResponse(
+        url="/careers-page",
+        status_code=303
+    )
