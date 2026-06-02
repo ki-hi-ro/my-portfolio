@@ -161,9 +161,6 @@ def import_wordpress(
             .first()
         )
 
-        if exists:
-            continue
-
         summary = BeautifulSoup(
             post["excerpt"]["rendered"],
             "html.parser"
@@ -195,10 +192,18 @@ def import_wordpress(
 
         tags = ", ".join(tag_names)
 
+        if exists:
+            exists.summary = summary
+            exists.content = post["content"]["rendered"]
+            exists.published_at = published_at
+            exists.tags = tags
+            continue        
+
         blog = models.Blog(
             title=post["title"]["rendered"],
             url=blog_url,
             summary=summary,
+            content=post["content"]["rendered"],
             published_at=published_at,
             tags=tags
         )

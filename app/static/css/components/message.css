@@ -2,12 +2,20 @@
     WordPress同期完了メッセージ
 ========================================== */
 .success-message {
-    margin-bottom: 55px;
+    margin-bottom: 56px;
     padding: 16px;
     border-radius: 8px;
     background: #e8f7e8;
     color: #0f6b0f;
     font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .success-message {
+        margin-bottom: 32px;
+        padding: 12px;
+        font-size: 14px;
+    }
 }
 
 .blog-meta {

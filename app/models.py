@@ -67,6 +67,7 @@ class Blog(Base):
     title = Column(String(255))
     url = Column(String(500))
     summary = Column(Text)
+    content = Column(Text)
     tags = Column(String(255))
     published_at = Column(Date)
     created_at = Column(DateTime, default=datetime.now)
