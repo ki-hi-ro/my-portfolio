@@ -66,6 +66,10 @@
   -webkit-box-orient: unset;
 }
 
+.detail-card .work-description {
+  white-space: pre-line;
+}
+
 .work-meta {
   margin: 16px 0;
   color: var(--color-muted);
@@ -97,7 +101,6 @@
   background: var(--color-primary-light);
   color: var(--color-primary-dark);
   font-size: 14px;
-  font-weight: 600;
 }
 
 .work-stats {

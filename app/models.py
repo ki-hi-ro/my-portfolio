@@ -25,25 +25,12 @@ class Work(Base):
     __tablename__ = "works"
 
     id = Column(Integer, primary_key=True, index=True)
-
-    # タイトル
     title = Column(String, nullable=False)
-
-    # 説明
     description = Column(Text, nullable=False)
-
-    # 技術タグ
     tech_stack = Column(String, nullable=False)
-
-    # GitHub
     github_url = Column(String, nullable=True)
-
-    # 公開URL
     app_url = Column(String, nullable=True)
-
-    # 画像
     image_url = Column(String, nullable=True)
-
     created_at = Column(DateTime, default=datetime.now)
 
     posts = relationship(
