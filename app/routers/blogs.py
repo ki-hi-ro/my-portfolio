@@ -216,24 +216,3 @@ def import_wordpress(
         url=f"/blogs-page?imported={imported}",
         status_code=303
     )
-
-
-@router.get("/test-wordpress")
-def test_wordpress():
-    import requests
-
-    url = "https://ki-hi-ro.com/wp-json/wp/v2/posts?per_page=1"
-
-    response = requests.get(
-        url,
-        timeout=10,
-        headers={
-            "User-Agent": "Mozilla/5.0"
-        }
-    )
-
-    return {
-        "status": response.status_code,
-        "headers": dict(response.headers),
-        "body": response.text[:300]
-    }
