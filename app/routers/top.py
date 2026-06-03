@@ -36,7 +36,10 @@ def top_page(
     request: Request,
     db: Session = Depends(get_db)
 ):
+    
     user_id = request.session.get("user_id")
+    role = request.session.get("role")
+
     is_logged_in = "user_id" in request.session
 
     works = (

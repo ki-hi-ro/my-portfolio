@@ -21,9 +21,20 @@
     {{ career.period }}
   </p>
 
-  <div class="content">
-    <p>{{ career.description }}</p>
-  </div>
+  {% if is_partner %}
+
+    <div class="content">
+      <p>{{ career.description }}</p>
+    </div>
+
+  {% else %}
+
+    <div class="partner-message">
+      詳細な職務経歴は
+      パートナー登録後に閲覧できます。
+    </div>
+
+  {% endif %}
 
   {% if career.technologies %}
     <div class="tech-tags">

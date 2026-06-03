@@ -61,18 +61,27 @@ def career_detail_page(
     request: Request,
     db: Session = Depends(get_db)
 ):
+    
     career = (
         db.query(models.Career)
         .filter(models.Career.id == career_id)
         .first()
     )
 
+    role = request.session.get("role")    
+
+    is_partner = role in [
+        "partner",
+        "admin"
+    ]    
+
     return templates.TemplateResponse(
         request,
         "career_detail.html",
         {
             "career": career,
-            "is_logged_in": "user_id" in request.session
+            "is_logged_in": "user_id" in request.session,
+            "is_partner": is_partner
         }
     )
 
