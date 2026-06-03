@@ -9,6 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 from typing import Optional
 from datetime import datetime
+import os
 
 templates = Jinja2Templates(directory="app/templates")
 
@@ -73,7 +74,8 @@ def blogs_page(
             "page": page,
             "total_pages": total_pages,
             "is_logged_in": is_logged_in,
-            "imported": imported
+            "imported": imported,
+            "is_production": os.getenv("APP_ENV") == "production"
          }
     )
 

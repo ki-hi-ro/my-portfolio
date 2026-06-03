@@ -13,6 +13,7 @@ from app import models
 
 from starlette.middleware.sessions import SessionMiddleware
 
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -31,27 +32,3 @@ app.add_middleware(
     SessionMiddleware,
     secret_key="your-secret-key"
 )
-
-
-@app.get("/test-wordpress")
-def test_wordpress():
-    import requests
-
-    url = "https://ki-hi-ro.com/wp-json/wp/v2/posts?per_page=1"
-
-    response = requests.get(
-        url,
-        timeout=20,
-        headers={
-            "User-Agent": (
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/136.0.0.0 Safari/537.36"
-            )
-        }
-    )
-
-    return {
-        "status": response.status_code,
-        "body": response.text[:300]
-    }
