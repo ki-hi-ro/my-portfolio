@@ -40,15 +40,19 @@ def test_wordpress():
     url = "https://ki-hi-ro.com/wp-json/wp/v2/posts?per_page=1"
 
     response = requests.get(
-        url,
-        timeout=10,
+        "https://ki-hi-ro.com/wp-json/wp/v2/posts?per_page=1",
         headers={
-            "User-Agent": "Mozilla/5.0"
-        }
+            "User-Agent": (
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/136.0.0.0 Safari/537.36"
+            )
+        },
+        timeout=30
     )
 
     return {
         "status": response.status_code,
         "headers": dict(response.headers),
         "body": response.text[:300]
-    }
+    }    
