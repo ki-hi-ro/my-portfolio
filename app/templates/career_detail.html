@@ -2,24 +2,23 @@
 
 {% block content %}
 
-<div class="section-header">
-  <h2 class="section-title">
-    {{ career.title }}
-  </h2>
+<div class="blog-detail-header">
 
-  <a
-    href="/careers-page"
-    class="btn-back view-all-btn-pc"
-  >
-    ← 職務経歴一覧へ戻る
-  </a>
+  {% set breadcrumbs = [
+    {"name": "ホーム", "url": "/"},
+    {"name": "職務経歴", "url": "/careers-page"},
+    {"name": career.title}
+  ] %}
+
+  {% include "components/breadcrumb.html" %}
+
 </div>
 
 <article class="detail-card">
-
-  <p class="work-meta">
-    {{ career.period }}
-  </p>
+  <h1 class="blog-detail-title">
+    {{ career.title }}
+  </h1>  
+  <p class="work-meta">{{ career.period }}</p>
 
   {% if is_partner %}
 

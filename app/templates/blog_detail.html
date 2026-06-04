@@ -2,17 +2,14 @@
 
 {% block content %}
 
-<div class="blog-detail-header">
 
-  {% set breadcrumbs = [
-    {"name": "ホーム", "url": "/"},
-    {"name": "技術ブログ", "url": "/blogs-page"},
-    {"name": blog.title}
-  ] %}
+{% set breadcrumbs = [
+  {"name": "ホーム", "url": "/"},
+  {"name": "技術ブログ", "url": "/blogs-page"},
+  {"name": blog.title}
+] %}
 
-  {% include "components/breadcrumb.html" %}
-
-</div>
+{% include "components/breadcrumb.html" %}
 
 <section class="blog-detail">
   <div class="blog-detail-content">

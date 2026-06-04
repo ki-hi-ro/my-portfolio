@@ -2,14 +2,12 @@
 
 {% block content %}
 
-<div class="blog-detail-header">
+{% set breadcrumbs = [
+  {"name": "ホーム", "url": "/"},
+  {"name": "技術ブログ"}
+] %}
 
-  <nav class="breadcrumb">
-    <a href="/">ホーム</a>
-    <span>›</span><span>技術ブログ</span>
-  </nav>
-
-</div>
+{% include "components/breadcrumb.html" %}
 
 <section class="page-section">
   {% if imported is not none %}

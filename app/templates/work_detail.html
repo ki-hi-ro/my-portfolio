@@ -2,22 +2,23 @@
 
 {% block content %}
 
-<div class="section-header">
-  <div>
-    <h1 class="section-title">
-      {{ work.title }}
-    </h1>
-  </div>
+{% set breadcrumbs = [
+  {"name": "ホーム", "url": "/"},
+  {"name": "制作物一覧", "url": "/works-page"},
+  {"name": work.title}
+] %}
 
-  <a
-    href="/works-page"
-    class="btn-back view-all-btn-pc"
-  >
-    ← 制作物一覧へ戻る
-  </a>
-</div>
+{% include "components/breadcrumb.html" %}
 
 <article class="detail-card">
+  <h1 class="blog-detail-title">
+    {{ work.title }}
+  </h1>
+  <div class="blog-meta">
+  {% if work.created_at %}
+    <span>投稿日：{{ work.created_at.strftime('%Y.%m.%d') }}</span>
+  {% endif %}
+  </div>  
   <div class="work-hero-content">
 
     {% if work.image_url %}

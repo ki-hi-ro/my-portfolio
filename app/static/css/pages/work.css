@@ -62,16 +62,12 @@
   display: block;
   overflow: visible;
   margin-bottom: 18px;
-  -webkit-line-clamp: unset;
+  -webkit-line-clamp: unset;  
   -webkit-box-orient: unset;
 }
 
-.detail-card .work-description {
-  white-space: pre-line;
-}
-
 .work-meta {
-  margin: 16px 0;
+  margin: 0 0 16px 0;
   color: var(--color-muted);
 }
 

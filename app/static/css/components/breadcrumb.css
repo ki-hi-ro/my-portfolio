@@ -1,13 +1,8 @@
 .breadcrumb {
   font-size: 14px;
   color: #777;
-  margin-top: 10px;
-}
-
-@media (max-width: 768px) {
-  .breadcrumb {
-    margin-bottom: 24px;
-  }
+  margin-top: 32px;
+  margin-bottom: 27px;
 }
 
 .breadcrumb a {
@@ -15,10 +10,11 @@
   text-decoration: none;
 }
 
-.breadcrumb span {
-  margin: 0 6px;
+.breadcrumb-separator {
+  margin: 0 5px;
 }
 
 .breadcrumb span:last-child {
   color: #333;
+  margin: 0;
 }

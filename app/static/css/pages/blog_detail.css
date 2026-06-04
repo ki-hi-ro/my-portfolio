@@ -67,15 +67,6 @@
   }
 }
 
-.blog-detail-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-  margin-top: 64px;
-  margin-bottom: 29px;
-}
-
 .blog-detail-title {
   max-width: 900px;
   font-size: 2.2rem ;
@@ -89,11 +80,6 @@
 }
 
 @media (max-width: 768px) {
-  .blog-detail-header {
-    display: block;
-    margin-top: 0;
-  }
-
   .blog-detail-title {
     font-size: 30px;
   }
