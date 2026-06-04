@@ -1,5 +1,6 @@
 @import url("css/base.css");
 
+@import url("css/components/breadcrumb.css");
 @import url("css/components/buttons.css");
 @import url("css/components/cards.css");
 @import url("css/components/content.css");

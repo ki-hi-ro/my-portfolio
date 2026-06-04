@@ -4,23 +4,21 @@
 
 <div class="blog-detail-header">
 
-  <a href="/blogs-page" class="btn-back mobile-only">
-    ← 戻る
-  </a>
+  {% set breadcrumbs = [
+    {"name": "ホーム", "url": "/"},
+    {"name": "技術ブログ", "url": "/blogs-page"},
+    {"name": blog.title}
+  ] %}
 
-  <h1 class="blog-detail-title">
-    {{ blog.title }}
-  </h1>
-
-  <a href="/blogs-page" class="btn-back desktop-only">
-    ← 戻る
-  </a>
+  {% include "components/breadcrumb.html" %}
 
 </div>
 
 <section class="blog-detail">
   <div class="blog-detail-content">
-
+    <h1 class="blog-detail-title">
+      {{ blog.title }}
+    </h1>
     <div class="blog-meta">
       {% if blog.created_at %}
         <span>投稿日：{{ blog.created_at.strftime('%Y.%m.%d') }}</span>
@@ -42,6 +40,7 @@
     {% endif %}
 
   </div>
+  {% include "components/breadcrumb.html" %}  
 </section>
 
 {% endblock %}

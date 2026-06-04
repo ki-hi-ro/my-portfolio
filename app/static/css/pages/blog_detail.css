@@ -80,7 +80,7 @@
   max-width: 900px;
   font-size: 2.2rem ;
   line-height: 1.35;
-  margin: 0;
+  margin: 0 0 10px 0;
 }
 
 .blog-detail-header .btn-back {
@@ -166,4 +166,15 @@
 
 .blog-detail-content .wp-block-image {
   margin: 0;
+}
+
+.blog-content .wp-block-embed {
+  max-width: 100%;
+  margin: 0;
+}
+
+.blog-content .wp-block-embed iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
 }

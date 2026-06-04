@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<div class="blog-detail-header">
+
+  <nav class="breadcrumb">
+    <a href="/">ホーム</a>
+    <span>›</span><span>技術ブログ</span>
+  </nav>
+
+</div>
+
 <section class="page-section">
   {% if imported is not none %}
   <div class="success-message">
