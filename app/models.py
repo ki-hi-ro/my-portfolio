@@ -3,24 +3,6 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.database import Base
 
-class Post(Base):
-    __tablename__ = "posts"
-
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String)
-    content = Column(String)
-    task_type = Column(String)
-    start_time = Column(DateTime)
-    end_time = Column(DateTime)
-    work_time_minutes = Column(Integer)
-    work_id = Column(Integer, ForeignKey("works.id"))
-    work = relationship(
-        "Work",
-        back_populates="posts"
-    )
-    created_at = Column(DateTime, default=datetime.now)
-
-
 class Work(Base):
     __tablename__ = "works"
 
@@ -33,11 +15,6 @@ class Work(Base):
     image_url = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.now)
 
-    posts = relationship(
-        "Post",
-        back_populates="work"
-    )    
-
 
 class User(Base):
     __tablename__ = "users"
@@ -46,6 +23,7 @@ class User(Base):
     username = Column(String, unique=True, index=True, nullable=False)
     password_hash = Column(String, nullable=False)
     role = Column(String, nullable=False, default="admin")
+
 
 class Blog(Base):
     __tablename__ = "blogs"
@@ -58,6 +36,7 @@ class Blog(Base):
     tags = Column(String(255))
     published_at = Column(Date)
     created_at = Column(DateTime, default=datetime.now)
+
 
 class Career(Base):
     __tablename__ = "careers"

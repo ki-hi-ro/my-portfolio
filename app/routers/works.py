@@ -121,26 +121,6 @@ def works_page(
         .all()
     )
 
-    for work in works:
-        posts = (
-            db.query(models.Post)
-            .filter(models.Post.work_id == work.id)
-            .offset((page - 1) * per_page)
-            .limit(per_page)            
-            .all()
-        )
-
-        work.post_count = len(posts)
-
-        total_minutes = sum(
-            post.work_time_minutes
-            for post in posts
-        )
-
-        work.total_minutes = total_minutes
-        work.total_hours = total_minutes // 60
-        work.remaining_minutes = total_minutes % 60        
-
     return templates.TemplateResponse(
         request,
         "works.html",
