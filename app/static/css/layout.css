@@ -6,6 +6,12 @@
   margin-bottom: 60px;
 }
 
+@media (max-width: 768px) {
+  .site-header {
+    margin-bottom: 40px;
+  }
+}
+
 .site-title {
   margin: 0;
 }
