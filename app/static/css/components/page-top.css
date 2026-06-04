@@ -1,0 +1,43 @@
+.page-top {
+  position: fixed;
+  left: calc(50% + 440px);
+  bottom: 32px;
+
+  width: 56px;
+  height: 56px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #111;
+  color: #fff;
+
+  font-size: 24px;
+  cursor: pointer;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: 0.3s;
+}
+
+@media (max-width: 1200px) {
+  .page-top {
+    left: auto;
+    right: 24px;
+  }
+}
+
+.page-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.page-top:hover {
+  opacity: 0.8;
+}
+
+.page-top span {
+  display: inline-block;
+  transform: translateY(-2px);
+}
