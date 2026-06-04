@@ -11,6 +11,10 @@
   font-size: 16px;
 }
 
+.top-grid .blog-meta {
+  margin-bottom: 16px;
+}
+
 .blog-content {
   line-height: 1.9;
   font-size: 17px;
