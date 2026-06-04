@@ -68,3 +68,6 @@ class Career(Base):
     period = Column(String)
     description = Column(Text)
     technologies = Column(Text)
+
+    start_date = Column(Date)
+    end_date = Column(Date)

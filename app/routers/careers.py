@@ -22,7 +22,7 @@ def careers_page(
 
     careers = (
         db.query(models.Career)
-        .order_by(models.Career.id.desc())
+        .order_by(models.Career.end_date.desc())
         .offset((page - 1) * per_page)
         .limit(per_page)
         .all()
