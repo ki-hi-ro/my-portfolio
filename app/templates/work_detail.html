@@ -62,7 +62,7 @@
         </a>
       {% endif %}
 
-      {% if is_logged_in %}
+      {% if is_admin %}
       <a
         href="/works-page/{{ work.id }}/edit"
         class="btn-outline"
@@ -71,7 +71,7 @@
       </a>
       {% endif %}
 
-      {% if is_logged_in %}
+      {% if is_admin %}
       <form
         action="/works-page/{{ work.id }}/delete"
         method="post"

@@ -61,7 +61,7 @@
 .work-hero-content .work-description {
   display: block;
   overflow: visible;
-  margin-bottom: 42px;
+  margin-bottom: 18px;
   -webkit-line-clamp: unset;
   -webkit-box-orient: unset;
 }
