@@ -1,8 +1,19 @@
+/* ==========================================
+   Blog Detail Layout
+========================================== */
+
 .blog-detail-content {
   max-width: 900px;
   margin: 0 auto;
   padding: 48px;
   background: #fff;
+}
+
+.blog-detail-title {
+  max-width: 900px;
+  margin: 0 0 16px;
+  font-size: 2.2rem;
+  line-height: 1.35;
 }
 
 .blog-meta {
@@ -15,13 +26,17 @@
   margin-bottom: 16px;
 }
 
+/* ==========================================
+   Blog Content
+========================================== */
+
 .blog-content {
-  line-height: 1.9;
   font-size: 17px;
+  line-height: 1.9;
 }
 
 .blog-content p {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .blog-content h2 {
@@ -30,14 +45,31 @@
   font-size: 28px;
 }
 
+.blog-content a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
 .blog-content ul {
   margin: 20px 0 28px;
   padding-left: 28px;
 }
 
+.blog-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 38px;
+}
+
+.blog-content code {
+  font-family: monospace;
+}
+
 .blog-content pre {
   overflow-x: auto;
-  margin: 28px 0;
+  margin: 0 0 28px 0;
   padding: 24px;
   border-radius: var(--radius-md);
   background: #f5f5f5;
@@ -45,113 +77,41 @@
   line-height: 1.7;
 }
 
-.blog-content code {
-  font-family: monospace;
-}
-
 .blog-content #ez-toc-container {
   display: none;
 }
 
-@media (max-width: 600px) {
-  .blog-detail-content {
-    padding: 28px 20px;
-  }
+/* ==========================================
+   WordPress Blocks
+========================================== */
 
-  .blog-content {
-    font-size: 16px;
-  }
-
-  .blog-content h2 {
-    font-size: 24px;
-  }
-}
-
-.blog-detail-title {
-  max-width: 900px;
-  font-size: 2.2rem ;
-  line-height: 1.35;
-  margin: 0 0 10px 0;
-}
-
-.blog-detail-header .btn-back {
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  .blog-detail-title {
-    font-size: 30px;
-  }
-}
-
-.blog-content img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-.blog-detail-header .btn-back {
-    width: fit-content;
-    padding: 12px 20px;
-    font-size: 16px;
-}
-
-@media (max-width: 768px) {
-    .blog-detail-header .btn-back {
-        width: auto;
-        display: inline-flex;
-    }
-}
-
-.blog-detail-header .mobile-only {
-    display: none;
-}
-
-.blog-detail-header .desktop-only {
-    display: inline-flex;
-}
-
-@media (max-width: 768px) {
-
-    .blog-detail-header .mobile-only {
-        display: inline-flex;
-        margin-bottom: 24px;
-    }
-
-    .blog-detail-header .desktop-only {
-        display: none;
-    }
-
+.blog-detail-content .wp-block-image {
+  margin: 0;
 }
 
 .wp-block-table {
-    overflow-x: auto;
-    display: block;
-    width: 100%;
-    margin-left: 0;
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  margin-left: 0;
 }
 
 .wp-block-table table {
-    min-width: 600px;
-    border-collapse: collapse;
+  min-width: 600px;
+  border-collapse: collapse;
 }
 
 .blog-detail-content .wp-block-table th,
 .blog-detail-content .wp-block-table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-    vertical-align: top;
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+  vertical-align: top;
 }
 
 .blog-detail-content .wp-block-table th {
-    background: #f5f5f5;
-    font-weight: 700;
-}
-
-.blog-detail-content .wp-block-image {
-  margin: 0;
+  background: #f5f5f5;
+  font-weight: 700;
 }
 
 .blog-content .wp-block-embed {
@@ -163,4 +123,45 @@
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width: 768px) {
+
+  .blog-detail-title {
+    font-size: 30px;
+  }
+
+  .blog-detail-header .mobile-only {
+    display: inline-flex;
+    margin-bottom: 24px;
+  }
+
+  .blog-detail-header .desktop-only {
+    display: none;
+  }
+
+  .blog-detail-header .btn-back {
+    width: auto;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .blog-detail-content {
+    padding: 28px 20px;
+  }
+
+  .blog-content {
+    font-size: 16px;
+  }
+
+  .blog-content h2 {
+    font-size: 24px;
+  }
+
 }

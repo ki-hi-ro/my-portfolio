@@ -2,7 +2,6 @@
 
 {% block content %}
 
-
 {% set breadcrumbs = [
   {"name": "ホーム", "url": "/"},
   {"name": "技術ブログ", "url": "/blogs-page"},
@@ -37,7 +36,9 @@
     {% endif %}
 
   </div>
-  {% include "components/breadcrumb.html" %}  
+  <div class="bottom-bread">
+    {% include "components/breadcrumb.html" %}  
+  </div>
 </section>
 
 {% endblock %}

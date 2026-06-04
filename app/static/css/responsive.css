@@ -16,6 +16,7 @@
     flex-direction: column;
     gap: 16px;
     margin-bottom: 20px;
+    margin-top: 24px;
   }
 
   .section-title {
@@ -89,8 +90,9 @@
     display: none;
   }
 
-  .section-title {
-    margin-bottom: 28px;
+  .section-title,
+  .page-title {
+    margin-bottom: 10px;
   }
 
   .section-footer {
@@ -125,7 +127,8 @@
     padding: 0 14px;
   }
 
-  .section-title {
+  .section-title,
+  .page-title {
     font-size: 1.5rem;
   }
 
