@@ -31,6 +31,16 @@
         </div>
 
         <p>{{ career.description[:120] }}...</p>
+
+        {% if career.technologies %}
+          <div class="tech-tags">
+            {% for tech in career.technologies.split(",") %}
+              <span class="tech-tag">
+                {{ tech.strip() }}
+              </span>
+            {% endfor %}
+          </div>
+        {% endif %}        
     </a>
     {% endfor %}
 </div>
