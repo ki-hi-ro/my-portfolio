@@ -75,13 +75,16 @@ def career_detail_page(
         "admin"
     ]    
 
+    is_admin = role == "admin"
+
     return templates.TemplateResponse(
         request,
         "career_detail.html",
         {
             "career": career,
             "is_logged_in": "user_id" in request.session,
-            "is_partner": is_partner
+            "is_partner": is_partner,
+            "is_admin": is_admin
         }
     )
 

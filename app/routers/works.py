@@ -166,12 +166,16 @@ def work_detail_page(
         .first()
     )
 
+    role = request.session.get("role")
+    is_admin = role == "admin"
+
     return templates.TemplateResponse(
         request,
         "work_detail.html",
         {
             "work": work,
-            "is_logged_in": "user_id" in request.session
+            "is_logged_in": "user_id" in request.session,
+            "is_admin": is_admin
         }
     )
 
