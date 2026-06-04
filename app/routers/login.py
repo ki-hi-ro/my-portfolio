@@ -12,7 +12,6 @@ templates = Jinja2Templates(directory="app/templates")
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-
 @router.get("/login")
 def login_page(request: Request):
     return templates.TemplateResponse(
@@ -29,6 +28,7 @@ def login(
     password: str = Form(...),
     db: Session = Depends(get_db)
 ):
+    
     user = (
         db.query(models.User)
         .filter(models.User.username == username)
@@ -67,4 +67,3 @@ def logout(request: Request):
         "/",
         status_code=303
     )
-

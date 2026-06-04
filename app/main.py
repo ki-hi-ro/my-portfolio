@@ -25,7 +25,7 @@ app.include_router(login_router.router)
 app.include_router(blogs_router.router)
 app.include_router(careers_router.router)
 
-# ログイン
+# FastAPIアプリ全体にセッション機能を追加する設定
 app.add_middleware(
     SessionMiddleware,
     secret_key="your-secret-key"
