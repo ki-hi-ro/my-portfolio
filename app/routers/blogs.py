@@ -164,8 +164,6 @@ def import_wordpress(
 
     for post in posts:
 
-        print(post["title"]["rendered"])
-
         blog_url = post["link"]
 
         exists = (
@@ -194,6 +192,7 @@ def import_wordpress(
         tags = ", ".join(tag_names)
 
         if exists:
+            exists.title = post["title"]["rendered"]
             exists.summary = summary
             exists.content = post["content"]["rendered"]
             exists.published_at = published_at
