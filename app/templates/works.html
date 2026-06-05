@@ -9,78 +9,109 @@
 
 {% include "components/breadcrumb.html" %}
 
-<div class="page-header">
-  <h2 class="page-title">
-    制作物一覧
-  </h2>
+<div class="page-stats">
+  <div class="page-stat-card">
+    <span class="page-stat-label">Works</span>
+    <strong>{{ works_count }}</strong>
+    <span class="page-stat-unit">制作物</span>
+  </div>
 
-  <nav>
-    {% if is_logged_in %}
-    <a href="/works-page/new" class="primary-button">
-      新規制作物を登録する
-    </a>
-    {% endif %}    
-    
-  </nav>
+  <div class="page-stat-card">
+    <span class="page-stat-label">Tech Stack</span>
+    <strong>{{ tech_count }}</strong>
+    <span class="page-stat-unit">使用技術</span>
+  </div>
 </div>
 
-<div class="work-grid">
-  {% for work in works %}
+<section class="works-hero">
+
+  <div class="works-hero-content">
+
+    <p class="works-hero-label">
+      Projects
+    </p>
+
+    <h1 class="works-hero-title">
+      制作物
+    </h1>
+
+    <p class="works-hero-description">
+      Python・FastAPI・WordPressを中心に制作した
+      Webアプリやポートフォリオを掲載しています。
+    </p>
+
+  </div>
+
+  <div class="works-hero-actions">
 
     <a
-      href="/works-page/{{ work.id }}"
-      class="work-card"
+      href="/works-page/new"
+      class="primary-button"
     >
-      {% if work.image_url %}
-        <img
-          src="{{ work.image_url }}"
-          class="work-thumbnail"
-        >
-      {% endif %}
+      新規制作物を登録する
+    </a>
 
-      <h2>
+  </div>
+
+</section>
+
+<div class="project-grid">
+  {% for work in works %}
+  <a href="/works-page/{{ work.id }}" class="project-card">
+    {% if work.image_url %}
+    <div class="project-thumbnail-wrap">
+      <img
+        src="{{ work.image_url }}"
+        alt="{{ work.title }}"
+        class="project-thumbnail"
+      >
+    </div>
+    {% endif %}
+
+    <div class="project-card-body">
+      <h2 class="project-title">
         {{ work.title }}
       </h2>
 
-      <p class="work-description">{{ work.description }}</p>
+      <p class="project-description">
+        {{ work.description }}
+      </p>
 
-      <div class="tech-tags">
-        {% for tech in work.tech_stack.split(",") %}
-          <span class="tech-tag">
-            {{ tech.strip() }}
-          </span>
+      <div class="project-tags">
+        {% for tech in work.tech_stack.split(",")[:3] %}
+        <span class="project-tag">
+          {{ tech.strip() }}
+        </span>
         {% endfor %}
       </div>
-    </a>
-
+    </div>
+  </a>
   {% endfor %}
 </div>
 
 {% if total_pages > 1 %}
-  <div class="pagination">
+<div class="pagination">
+  {% if page > 1 %}
+  <a href="/works-page?page={{ page - 1 }}" class="page-link">
+    ←
+  </a>
+  {% endif %}
 
-    {% if page > 1 %}
-      <a href="/works-page?page={{ page - 1 }}" class="page-link">
-        ←
-      </a>
-    {% endif %}
+  {% for p in range(1, total_pages + 1) %}
+  <a
+    href="/works-page?page={{ p }}"
+    class="page-link {% if p == page %}active{% endif %}"
+  >
+    {{ p }}
+  </a>
+  {% endfor %}
 
-    {% for p in range(1, total_pages + 1) %}
-      <a
-        href="/works-page?page={{ p }}"
-        class="page-link {% if p == page %}active{% endif %}"
-      >
-        {{ p }}
-      </a>
-    {% endfor %}
-
-    {% if page < total_pages %}
-      <a href="/works-page?page={{ page + 1 }}" class="page-link">
-        →
-      </a>
-    {% endif %}
-
-  </div>
+  {% if page < total_pages %}
+  <a href="/works-page?page={{ page + 1 }}" class="page-link">
+    →
+  </a>
+  {% endif %}
+</div>
 {% endif %}
 
 {% endblock %}

@@ -6,6 +6,8 @@ from app.database import get_db
 from fastapi import APIRouter
 from fastapi.templating import Jinja2Templates
 
+from datetime import datetime
+
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
@@ -44,6 +46,12 @@ def top_page(
         .all()
     )    
 
+    works_count = db.query(models.Work).count()
+
+    blogs_count = db.query(models.Blog).count()
+
+    career_years = datetime.now().year - 2017 
+
     return templates.TemplateResponse(
         request,
         "top.html",
@@ -52,6 +60,9 @@ def top_page(
             "blogs": blogs,
             "recent_careers": recent_careers,
             "user_id": user_id,
-            "is_logged_in": is_logged_in
+            "is_logged_in": is_logged_in,
+            "works_count": works_count,
+            "blogs_count": blogs_count,
+            "career_years": career_years
         }
     )

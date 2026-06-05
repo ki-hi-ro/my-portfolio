@@ -3,153 +3,84 @@
 {% block content %}
 
 <section class="top-hero">
-  <p class="top-label">
-    Portfolio
-  </p>
+  <div class="hero-profile">
+    <img
+      src="/static/images/profile.jpg"
+      alt="柴田浩貴"
+      class="profile-image"
+    >
 
-  <h1 class="top-title">
-    制作物・技術ブログ・職務経歴を通して、<br>
-    できることを伝えるポートフォリオです。
-  </h1>
+    <p class="top-label">
+      Python Engineer / Portfolio
+    </p>
 
-  <p class="top-description">
-    Python / FastAPI / WordPress などの技術を使用した制作物、4年以上書いている技術ブログ、2017年3月以降の職務経歴について掲載していきます。
-  </p>
+    <h1 class="top-title">
+      柴田 浩貴
+    </h1>
 
-  <div class="top-actions">
-    <a href="/works-page" class="primary-button">
-      制作物一覧を見る
-    </a>
+    <p class="top-description">
+      Python / FastAPI / WordPress を中心に、制作物・技術ブログ・職務経歴を通して、できることを伝えるポートフォリオです。
+    </p>
 
-    {% if is_logged_in %}
-    <a href="/works-page/new" class="btn-outline">
-      新規制作物を登録する
-    </a>
-    {% endif %}
+    <div class="hero-links">
+      <a
+        href="https://github.com/ki-hi-ro"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-outline"
+      >
+        GitHubを見る
+      </a>
 
-  </div>
-</section>
-
-<section id="works" class="top-section">
-  <div class="section-header">
-    <h2 class="section-title">
-      最近の制作物
-    </h2>
-    <a href="/works-page" class="primary-button view-all-btn view-all-btn-pc">
-      すべて見る
-    </a>
+      <a href="/blogs-page" class="btn-outline">
+        技術ブログを見る
+      </a>
+    </div>
   </div>
 
-  <div class="top-grid">
-    {% for work in works %}
+<div class="hero-summary-grid">
+  <a href="/works-page" class="hero-summary-card">
+    <span class="summary-label">Works</span>
+    <strong>制作物</strong>
 
-    <a href="/works-page/{{ work.id }}" class="work-card">
-      {% if work.image_url %}
-      <img src="{% if work.image_url.startswith('/') %}{{ work.image_url }}{% else %}/{{ work.image_url }}{% endif %}" alt="{{ work.title }}" class="work-thumbnail">
-      {% endif %}
+    <p class="summary-number">
+      {{ works_count }}件
+    </p>
 
-      <h2>
-        {{ work.title }}
-      </h2>
+    <p>
+      Webアプリ・ポートフォリオ制作
+    </p>
+  </a>
 
-      <p class="work-description">
-        {{ work.description }}
-      </p>
+  <a href="/blogs-page" class="hero-summary-card">
+    <span class="summary-label">Blog</span>
+    <strong>技術ブログ</strong>
 
-      <div class="tech-tags">
-        {% for tech in work.tech_stack.split(",") %}
-        <span class="tech-tag">
-          {{ tech.strip() }}
-        </span>
-        {% endfor %}
-      </div>
-    </a>
+    <p class="summary-number">
+      {{ blogs_count }}記事
+    </p>
 
-    {% endfor %}
+    <p>
+      学習・開発記録
+    </p>
+  </a>
+
+  <a href="/careers-page" class="hero-summary-card">
+    <span class="summary-label">Career</span>
+
+    <strong>職務経歴</strong>
+
+    <p class="summary-number">
+      {{ career_years }}年+
+    </p>
+
+    <p>
+      Web制作・Python開発などの実務経験
+    </p>
+  </a>
+</div>
+
   </div>
-
-  <nav class="section-footer">
-    <a href="/works-page" class="primary-button view-all-btn view-all-btn-sp">
-      すべて見る
-    </a>
-  </nav>
-
-</section>
-
-<section id="blogs" class="top-section">
-  <div class="section-header">
-    <h2 class="section-title">
-      最近の技術ブログ
-    </h2>
-    <a href="/blogs-page" class="primary-button view-all-btn view-all-btn-pc">
-      すべて見る
-    </a>
-  </div>
-
-  <div class="top-grid">
-    {% for blog in blogs %}
-    <a href="/blogs-page/{{ blog.id }}" class="work-card">
-      <h2>{{ blog.title }}</h2>
-
-      <div class="detail-meta">
-        {% if blog.published_at %}
-        <span>{{ blog.published_at }}</span>
-        {% endif %}
-      </div>
-
-      <p class="work-description">
-        {{ blog.summary }}
-      </p>
-
-      {% if blog.tags %}
-      <div class="tech-tags">
-        {% for tag in blog.tags.split(",") %}
-        <span class="tech-tag">
-          {{ tag.strip() }}
-        </span>
-        {% endfor %}
-      </div>
-      {% endif %}
-    </a>
-    {% endfor %}
-  </div>
-
-  <nav class="section-footer">
-    <a href="/blogs-page" class="primary-button view-all-btn view-all-btn-sp">
-      すべて見る
-    </a>
-  </nav>
-
-</section>
-
-<section id="careers" class="top-section">
-  <div class="section-header">
-    <h2 class="section-title">最近の職務経歴</h2>
-    <a href="/careers-page" class="primary-button view-all-btn view-all-btn-pc">
-      すべて見る
-    </a>
-  </div>
-
-  <div class="top-grid">
-    {% for career in recent_careers %}
-    <a href="/careers-page/{{ career.id }}" class="career-card">
-      <h2>{{ career.title }}</h2>
-      <div class="detail-meta">
-        {% if career.period %}
-        <span>{{ career.period }}</span>
-        {% endif %}
-      </div>
-      <p>{{ career.description[:120] }}...</p>
-    </a>
-    {% endfor %}
-  </div>
-
-  <nav class="section-footer">
-    <a href="/careers-page" class="primary-button view-all-btn view-all-btn-sp">
-      すべて見る
-    </a>
-  </nav>
-
 </section>
 
 {% endblock %}

@@ -114,12 +114,24 @@ def works_page(
     total_works = db.query(models.Work).count()
     total_pages = (total_works + per_page - 1) // per_page
 
+    works_count = db.query(models.Work).count()
+
+    tech_set = set()
+
     works = (
         db.query(models.Work)
         .offset((page - 1) * per_page)
         .limit(per_page)
         .all()
     )
+    
+    for work in works:
+        if work.tech_stack:
+            for tech in work.tech_stack.split(","):
+                tech_set.add(tech.strip())
+
+    tech_count = len(tech_set)    
+
 
     return templates.TemplateResponse(
         request,
@@ -128,7 +140,9 @@ def works_page(
             "page": page,
             "total_pages": total_pages,
             "works": works,
-            "is_logged_in": "user_id" in request.session
+            "is_logged_in": "user_id" in request.session,
+            "works_count": works_count,
+            "tech_count": tech_count,            
         }
     )
 

@@ -3,8 +3,8 @@
 {% block content %}
 
 {% set breadcrumbs = [
-{"name": "ホーム", "url": "/"},
-{"name": "技術ブログ一覧"}
+  {"name": "ホーム", "url": "/"},
+  {"name": "技術ブログ一覧"}
 ] %}
 
 {% include "components/breadcrumb.html" %}
@@ -16,44 +16,60 @@
   </div>
   {% endif %}
 
-  <div class="page-header">
-    <h1 class="page-title">
+<section class="blog-hero">
+  <div class="blog-hero-content">
+    <p class="blog-hero-label">
+      Technical Blog
+    </p>
+
+    <h1 class="blog-hero-title">
       技術ブログ
     </h1>
 
-    {% if is_logged_in and not is_production %}
+    <p class="blog-hero-description">
+      WordPressで継続して書いてきた技術記事・開発記録をまとめています。
+      学習内容、開発で詰まったこと、実装の理解を言葉に残しています。
+    </p>
+  </div>
+
+  <div class="blog-hero-actions">
     <form action="/blogs/import-wordpress" method="post">
       <button type="submit" class="primary-button">
         WordPress同期
       </button>
     </form>
-    {% endif %}
-
   </div>
+</section>
 
-  <div class="work-grid">
+  <div class="compact-card-grid">
     {% for blog in blogs %}
-    <a href="/blogs-page/{{ blog.id }}" class="work-card">
-      <h2>
-        {{ blog.title }}
-      </h2>
+    <a href="/blogs-page/{{ blog.id }}" class="compact-card blog-compact-card">
+      <div class="compact-card-head">
+        <span class="compact-card-type">
+          Blog
+        </span>
 
-      <div class="detail-meta">
         {% if blog.published_at %}
-        <span>{{ blog.published_at }}</span>
+        <span class="compact-card-date">
+          {{ blog.published_at }}
+        </span>
         {% endif %}
       </div>
 
+      <h2 class="compact-card-title">
+        {{ blog.title }}
+      </h2>
+
       {% if blog.summary %}
-      <p class="work-description">
+      <p class="compact-card-description">
         {{ blog.summary }}
       </p>
       {% endif %}
 
       {% if blog.tags %}
-      <div class="tech-tags">
-        {% for tag in blog.tags.split(",") %}
-        <span class="tech-tag">
+      <div class="compact-tags">
+        {% for tag in blog.tags.split(",")[:3] %}
+        <span class="compact-tag">
           {{ tag.strip() }}
         </span>
         {% endfor %}
@@ -79,10 +95,11 @@
   </a>
   {% endfor %}
 
-  {% if page < total_pages %} <a href="/blogs-page?page={{ page + 1 }}" class="page-link">
+  {% if page < total_pages %}
+  <a href="/blogs-page?page={{ page + 1 }}" class="page-link">
     →
-    </a>
-    {% endif %}
+  </a>
+  {% endif %}
 
 </div>
 {% endif %}
