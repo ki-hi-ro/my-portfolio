@@ -90,6 +90,11 @@ def create_work_from_page(
     image_url: str = Form(""),
     started_at: str = Form(""),
 ):
+
+    started_at = datetime.strptime(
+        started_at,
+        "%Y-%m-%d"
+    ).date()
     
     new_work = models.Work(
         title=title,
@@ -114,7 +119,7 @@ def works_page(
     page: int = 1,
     db: Session = Depends(get_db)
 ):
-    per_page = 4
+    per_page = 6
     total_works = db.query(models.Work).count()
     total_pages = (total_works + per_page - 1) // per_page
 
