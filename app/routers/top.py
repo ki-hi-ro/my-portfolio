@@ -6,28 +6,9 @@ from app.database import get_db
 from fastapi import APIRouter
 from fastapi.templating import Jinja2Templates
 
+
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
-
-
-# Create
-@router.post("/careers")
-def create_career(db: Session = Depends(get_db)):
-    career = models.Career(
-        title="Python API開発エンジニア",
-        company="物流システム開発",
-        period="2025.07 - 2026.06",
-        description="""
-    FastAPIを用いたAPI開発。
-    WCSとAGVの連携システム開発。
-    Linux環境での障害調査や
-    PostgreSQLを利用したデータ管理を担当。
-    """,
-        technologies="Python,FastAPI,PostgreSQL,Linux"
-    )
-
-    db.add(career)
-    db.commit()   
 
 
 # Read
