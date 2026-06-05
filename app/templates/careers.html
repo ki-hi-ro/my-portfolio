@@ -2,74 +2,74 @@
 
 {% block content %}
 
-<div class="section-header">
-    <h2 class="section-title">
-        職務経歴一覧
-    </h2>
+{% set breadcrumbs = [
+{"name": "ホーム", "url": "/"},
+{"name": "職務経歴一覧"}
+] %}
 
-    <nav>
-        {% if is_logged_in %}
-        <a href="/careers-page/new" class="primary-button">
-            職務経歴を登録する
-        </a>
-        {% endif %}
-    </nav>
+{% include "components/breadcrumb.html" %}
+
+<div class="page-header">
+  <h2 class="page-title">
+    職務経歴一覧
+  </h2>
+
+  <nav>
+    {% if is_logged_in %}
+    <a href="/careers-page/new" class="primary-button">
+      職務経歴を登録する
+    </a>
+    {% endif %}
+  </nav>
 </div>
 
 <div class="top-grid">
-    {% for career in careers %}
-    <a
-        href="/careers-page/{{ career.id }}"
-        class="career-card"
-    >
-        <h2>{{ career.title }}</h2>
+  {% for career in careers %}
+  <a href="/careers-page/{{ career.id }}" class="career-card">
+    <h2>{{ career.title }}</h2>
 
-        <div class="blog-meta">
-            {% if career.period %}
-            <span>{{ career.period }}</span>
-            {% endif %}
-        </div>
+    <div class="detail-meta">
+      {% if career.period %}
+      <span>{{ career.period }}</span>
+      {% endif %}
+    </div>
 
-        <p>{{ career.description[:120] }}...</p>
+    <p>{{ career.description[:120] }}...</p>
 
-        {% if career.technologies %}
-          <div class="tech-tags">
-            {% for tech in career.technologies.split(",") %}
-              <span class="tech-tag">
-                {{ tech.strip() }}
-              </span>
-            {% endfor %}
-          </div>
-        {% endif %}        
-    </a>
-    {% endfor %}
+    {% if career.technologies %}
+    <div class="tech-tags">
+      {% for tech in career.technologies.split(",") %}
+      <span class="tech-tag">
+        {{ tech.strip() }}
+      </span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </a>
+  {% endfor %}
 </div>
 
 {% if total_pages > 1 %}
-  <div class="pagination">
+<div class="pagination">
 
-    {% if page > 1 %}
-      <a href="/careers-page?page={{ page - 1 }}" class="page-link">
-        ←
-      </a>
+  {% if page > 1 %}
+  <a href="/careers-page?page={{ page - 1 }}" class="page-link">
+    ←
+  </a>
+  {% endif %}
+
+  {% for p in range(1, total_pages + 1) %}
+  <a href="/careers-page?page={{ p }}" class="page-link {% if p == page %}active{% endif %}">
+    {{ p }}
+  </a>
+  {% endfor %}
+
+  {% if page < total_pages %} <a href="/careers-page?page={{ page + 1 }}" class="page-link">
+    →
+    </a>
     {% endif %}
 
-    {% for p in range(1, total_pages + 1) %}
-      <a
-        href="/careers-page?page={{ p }}"
-        class="page-link {% if p == page %}active{% endif %}"
-      >
-        {{ p }}
-      </a>
-    {% endfor %}
-
-    {% if page < total_pages %}
-      <a href="/careers-page?page={{ page + 1 }}" class="page-link">
-        →
-      </a>
-    {% endif %}
-
-  </div>
+</div>
 {% endif %}
 
 {% endblock %}

@@ -2,101 +2,108 @@
 
 {% block content %}
 
-{% set breadcrumbs = [
-  {"name": "ホーム", "url": "/"},
-  {"name": "制作物一覧", "url": "/works-page"},
-  {"name": work.title}
-] %}
+  {% set breadcrumbs = [
+    {"name": "ホーム", "url": "/"},
+    {"name": "制作物一覧", "url": "/works-page"},
+    {"name": work.title}
+  ] %}
 
-{% include "components/breadcrumb.html" %}
+  {% include "components/breadcrumb.html" %}
 
-<article class="detail-card">
-  <h1 class="blog-detail-title">
-    {{ work.title }}
-  </h1>
-  <div class="blog-meta">
-  {% if work.created_at %}
-    <span>投稿日：{{ work.created_at.strftime('%Y.%m.%d') }}</span>
-  {% endif %}
-  </div>  
-  <div class="work-hero-content">
+  <article class="detail-card">
 
-    {% if work.image_url %}
-      <img
-        src="{% if work.image_url.startswith('/') %}{{ work.image_url }}{% else %}/{{ work.image_url }}{% endif %}"
-        alt="{{ work.title }}"
-        class="work-hero-image"
-      >
-    {% endif %}
+    <h1 class="detail-title">
+      {{ work.title }}
+    </h1>
 
-    <p class="work-description">
-      {{ work.description }}
-    </p>
-
-    <div class="tech-tags">
-      {% for tech in work.tech_stack.split(",") %}
-        <span class="tech-tag">
-          {{ tech.strip() }}
+    <div class="detail-meta">
+      {% if work.created_at %}
+        <span>
+          投稿日：{{ work.created_at.strftime('%Y.%m.%d') }}
         </span>
-      {% endfor %}
+      {% endif %}
     </div>
 
-    <div class="work-actions">
+    <div class="work-hero-content">
 
-      {% if work.github_url %}
-        <a
-          href="{{ work.github_url }}"
-          class="btn-outline"
-          target="_blank"
+      {% if work.image_url %}
+        <img
+          src="{% if work.image_url.startswith('/') %}{{ work.image_url }}{% else %}/{{ work.image_url }}{% endif %}"
+          alt="{{ work.title }}"
+          class="work-hero-image"
         >
-          GitHub
-        </a>
       {% endif %}
 
-      {% if work.app_url %}
-        <a
-          href="{{ work.app_url }}"
-          class="btn-outline"
-          target="_blank"
-        >
-          公開URL
-        </a>
-      {% endif %}
+      <p class="work-description">
+        {{ work.description }}
+      </p>
 
-      {% if is_admin %}
-      <a
-        href="/works-page/{{ work.id }}/edit"
-        class="btn-outline"
-      >
-        制作物を編集する
-      </a>
-      {% endif %}
+      <div class="tech-tags">
+        {% for tech in work.tech_stack.split(",") %}
+          <span class="tech-tag">
+            {{ tech.strip() }}
+          </span>
+        {% endfor %}
+      </div>
 
-      {% if is_admin %}
-      <form
-        action="/works-page/{{ work.id }}/delete"
-        method="post"
-      >
-        <button
-          type="submit"
-          class="btn-danger"
-        >
-          制作物を削除する
-        </button>
-      </form>      
-      {% endif %}
+      <div class="work-actions">
+
+        {% if work.github_url %}
+          <a
+            href="{{ work.github_url }}"
+            class="btn-outline"
+            target="_blank"
+          >
+            GitHub
+          </a>
+        {% endif %}
+
+        {% if work.app_url %}
+          <a
+            href="{{ work.app_url }}"
+            class="btn-outline"
+            target="_blank"
+          >
+            公開URL
+          </a>
+        {% endif %}
+
+        {% if is_admin %}
+          <a
+            href="/works-page/{{ work.id }}/edit"
+            class="btn-outline"
+          >
+            制作物を編集する
+          </a>
+        {% endif %}
+
+        {% if is_admin %}
+          <form
+            action="/works-page/{{ work.id }}/delete"
+            method="post"
+          >
+            <button
+              type="submit"
+              class="btn-danger"
+            >
+              制作物を削除する
+            </button>
+          </form>
+        {% endif %}
+
+      </div>
 
     </div>
-  </div>
-</article>
 
-<nav class="section-footer">
-  <a
-    href="/works-page"
-    class="btn-back view-all-btn-sp"
-  >
-    ← 制作物一覧へ戻る
-  </a>  
-</nav>
+  </article>
+
+  <nav class="section-footer">
+    <a
+      href="/works-page"
+      class="btn-back view-all-btn-sp"
+    >
+      ← 制作物一覧へ戻る
+    </a>
+  </nav>
 
 {% endblock %}

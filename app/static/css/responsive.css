@@ -10,14 +10,21 @@
     padding: 0 16px;
   }
 
-  .site-header-top,
-  .page-header {
+  .site-header-top {
     align-items: flex-start;
     flex-direction: column;
     gap: 16px;
     margin-bottom: 20px;
-    margin-top: 24px;
+    margin-top: 39px;
   }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+    margin-top: 33px;
+  }  
 
   .section-title {
     font-size: 1.7rem;
@@ -90,9 +97,13 @@
     display: none;
   }
 
-  .section-title,
+  .section-title {
+    margin-bottom: 23px;
+  }
+
   .page-title {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-size: 1.5rem;
   }
 
   .section-footer {
@@ -127,8 +138,7 @@
     padding: 0 14px;
   }
 
-  .section-title,
-  .page-title {
+  .section-title {
     font-size: 1.5rem;
   }
 

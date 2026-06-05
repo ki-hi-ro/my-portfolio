@@ -5,9 +5,9 @@
 <div class="blog-detail-header">
 
   {% set breadcrumbs = [
-    {"name": "ホーム", "url": "/"},
-    {"name": "職務経歴", "url": "/careers-page"},
-    {"name": career.title}
+  {"name": "ホーム", "url": "/"},
+  {"name": "職務経歴", "url": "/careers-page"},
+  {"name": career.title}
   ] %}
 
   {% include "components/breadcrumb.html" %}
@@ -15,67 +15,55 @@
 </div>
 
 <article class="detail-card">
-  <h1 class="blog-detail-title">
+  <h1 class="detail-title">
     {{ career.title }}
-  </h1>  
+  </h1>
   <p class="work-meta">{{ career.period }}</p>
 
   {% if is_partner %}
 
-    <div class="content">
-      <p>{{ career.description }}</p>
-    </div>
+  <div class="content">
+    <p>{{ career.description }}</p>
+  </div>
 
   {% else %}
 
-    <div class="partner-message">
-      詳細な職務経歴は
-      パートナー登録後に閲覧できます。
-    </div>
+  <div class="partner-message">
+    詳細な職務経歴は
+    パートナー登録後に閲覧できます。
+  </div>
 
   {% endif %}
 
   {% if career.technologies %}
-    <div class="tech-tags">
-      {% for tech in career.technologies.split(",") %}
-        <span class="tech-tag">
-          {{ tech.strip() }}
-        </span>
-      {% endfor %}
-    </div>
+  <div class="tech-tags">
+    {% for tech in career.technologies.split(",") %}
+    <span class="tech-tag">
+      {{ tech.strip() }}
+    </span>
+    {% endfor %}
+  </div>
   {% endif %}
 
   <div class="work-actions">
     {% if is_admin %}
-      <a
-        href="/careers-page/{{ career.id }}/edit"
-        class="btn-outline"
-      >
-        職務経歴を編集する
-      </a>
+    <a href="/careers-page/{{ career.id }}/edit" class="btn-outline">
+      職務経歴を編集する
+    </a>
     {% endif %}
 
     {% if is_admin %}
-      <form
-        action="/careers-page/{{ career.id }}/delete"
-        method="post"
-      >
-        <button
-          type="submit"
-          class="btn-danger"
-        >
-          職務経歴を削除する
-        </button>
-      </form>
+    <form action="/careers-page/{{ career.id }}/delete" method="post">
+      <button type="submit" class="btn-danger">
+        職務経歴を削除する
+      </button>
+    </form>
     {% endif %}
   </div>
 </article>
 
 <nav class="section-footer">
-  <a
-    href="/careers-page"
-    class="btn-back view-all-btn-sp"
-  >
+  <a href="/careers-page" class="btn-back view-all-btn-sp">
     ← 職務経歴一覧へ戻る
   </a>
 </nav>

@@ -3,7 +3,7 @@
 ========================================== */
 
 .site-header {
-  margin-bottom: 7px;
+  margin-bottom: 40px;
 }
 
 @media (max-width: 768px) {
@@ -39,8 +39,8 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 32px;
-  margin-top: 35px;
+  margin-bottom: 42px;
+  margin-top: 32px;
 }
 
 .section-title {
@@ -54,8 +54,8 @@
 }
 
 .page-title {
-  border-left: 6px solid #222;
-  padding-left: 16px;
+  border-left: 2px solid var(--color-border);
+  padding-left: 24px;
   font-weight: 800;  
   margin: 0;
   font-size: 2.2rem;

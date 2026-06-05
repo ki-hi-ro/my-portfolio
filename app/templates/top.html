@@ -17,20 +17,14 @@
   </p>
 
   <div class="top-actions">
-    <a
-      href="/works-page"
-      class="primary-button"
-    >
+    <a href="/works-page" class="primary-button">
       制作物一覧を見る
     </a>
 
     {% if is_logged_in %}
-      <a
-        href="/works-page/new"
-        class="btn-outline"
-      >
-        新規制作物を登録する
-      </a>
+    <a href="/works-page/new" class="btn-outline">
+      新規制作物を登録する
+    </a>
     {% endif %}
 
   </div>
@@ -43,40 +37,33 @@
     </h2>
     <a href="/works-page" class="primary-button view-all-btn view-all-btn-pc">
       すべて見る
-    </a>    
+    </a>
   </div>
 
   <div class="top-grid">
     {% for work in works %}
 
-      <a
-        href="/works-page/{{ work.id }}"
-        class="work-card"
-      >
-        {% if work.image_url %}
-          <img
-            src="{% if work.image_url.startswith('/') %}{{ work.image_url }}{% else %}/{{ work.image_url }}{% endif %}"
-            alt="{{ work.title }}"            
-            class="work-thumbnail"
-          >
-        {% endif %}
+    <a href="/works-page/{{ work.id }}" class="work-card">
+      {% if work.image_url %}
+      <img src="{% if work.image_url.startswith('/') %}{{ work.image_url }}{% else %}/{{ work.image_url }}{% endif %}" alt="{{ work.title }}" class="work-thumbnail">
+      {% endif %}
 
-        <h2>
-          {{ work.title }}
-        </h2>
+      <h2>
+        {{ work.title }}
+      </h2>
 
-        <p class="work-description">
-          {{ work.description }}
-        </p>
+      <p class="work-description">
+        {{ work.description }}
+      </p>
 
-        <div class="tech-tags">
-          {% for tech in work.tech_stack.split(",") %}
-            <span class="tech-tag">
-              {{ tech.strip() }}
-            </span>
-          {% endfor %}
-        </div>
-      </a>
+      <div class="tech-tags">
+        {% for tech in work.tech_stack.split(",") %}
+        <span class="tech-tag">
+          {{ tech.strip() }}
+        </span>
+        {% endfor %}
+      </div>
+    </a>
 
     {% endfor %}
   </div>
@@ -85,7 +72,7 @@
     <a href="/works-page" class="primary-button view-all-btn view-all-btn-sp">
       すべて見る
     </a>
-  </nav>    
+  </nav>
 
 </section>
 
@@ -96,76 +83,72 @@
     </h2>
     <a href="/blogs-page" class="primary-button view-all-btn view-all-btn-pc">
       すべて見る
-    </a>    
+    </a>
   </div>
 
   <div class="top-grid">
     {% for blog in blogs %}
-      <a
-        href="/blogs-page/{{ blog.id }}"
-        class="work-card"
-      >
-        <h2>{{ blog.title }}</h2>
+    <a href="/blogs-page/{{ blog.id }}" class="work-card">
+      <h2>{{ blog.title }}</h2>
 
-        <div class="blog-meta">
-            {% if blog.published_at %}
-                <span>{{ blog.published_at }}</span>
-            {% endif %}
-        </div>        
-
-        <p class="work-description">
-          {{ blog.summary }}
-        </p>
-
-        {% if blog.tags %}
-          <div class="tech-tags">
-            {% for tag in blog.tags.split(",") %}
-              <span class="tech-tag">
-                {{ tag.strip() }}
-              </span>
-            {% endfor %}
-          </div>
+      <div class="detail-meta">
+        {% if blog.published_at %}
+        <span>{{ blog.published_at }}</span>
         {% endif %}
-      </a>
+      </div>
+
+      <p class="work-description">
+        {{ blog.summary }}
+      </p>
+
+      {% if blog.tags %}
+      <div class="tech-tags">
+        {% for tag in blog.tags.split(",") %}
+        <span class="tech-tag">
+          {{ tag.strip() }}
+        </span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </a>
     {% endfor %}
   </div>
 
-    <nav class="section-footer">
-        <a href="/blogs-page" class="primary-button view-all-btn view-all-btn-sp">
-            すべて見る
-        </a>
-    </nav>    
+  <nav class="section-footer">
+    <a href="/blogs-page" class="primary-button view-all-btn view-all-btn-sp">
+      すべて見る
+    </a>
+  </nav>
 
 </section>
 
 <section class="top-section">
-    <div class="section-header">
-      <h2 class="section-title">最近の職務経歴</h2>
-      <a href="/careers-page" class="primary-button view-all-btn view-all-btn-pc">
-        すべて見る
-      </a>      
-    </div>
+  <div class="section-header">
+    <h2 class="section-title">最近の職務経歴</h2>
+    <a href="/careers-page" class="primary-button view-all-btn view-all-btn-pc">
+      すべて見る
+    </a>
+  </div>
 
-    <div class="top-grid">
-        {% for career in recent_careers %}
-        <a href="/careers-page/{{ career.id }}"
-           class="career-card">
-            <h2>{{ career.title }}</h2>
-            <div class="blog-meta">
-                {% if career.period %}
-                    <span>{{ career.period }}</span>
-                {% endif %}
-            </div>
-            <p>{{ career.description[:120] }}...</p>
-        </a>
-        {% endfor %}
-    </div>
+  <div class="top-grid">
+    {% for career in recent_careers %}
+    <a href="/careers-page/{{ career.id }}" class="career-card">
+      <h2>{{ career.title }}</h2>
+      <div class="detail-meta">
+        {% if career.period %}
+        <span>{{ career.period }}</span>
+        {% endif %}
+      </div>
+      <p>{{ career.description[:120] }}...</p>
+    </a>
+    {% endfor %}
+  </div>
 
-    <nav class="section-footer">
-        <a href="/careers-page" class="primary-button view-all-btn view-all-btn-sp">
-            すべて見る
-        </a>
-    </nav>    
+  <nav class="section-footer">
+    <a href="/careers-page" class="primary-button view-all-btn view-all-btn-sp">
+      すべて見る
+    </a>
+  </nav>
 
 </section>
 
