@@ -29,6 +29,7 @@
 
   </div>
 
+  {% if current_user and current_user.role == "admin" %}
   <div class="career-hero-actions">
     <a
       href="/careers-page/new"
@@ -37,6 +38,7 @@
       職務経歴を登録する
     </a>
   </div>
+  {% endif %}
 
 </section>
 

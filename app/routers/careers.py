@@ -1,13 +1,17 @@
-from app import models
+from sqlalchemy.orm import Session
+
 from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import RedirectResponse
-from sqlalchemy.orm import Session
 from fastapi.templating import Jinja2Templates
+
+from app import models
 from app.database import get_db
+from app.utils.auth import get_current_user
+
 
 router = APIRouter()
-
 templates = Jinja2Templates(directory="app/templates")
+
 
 # 一覧画面の取得
 @router.get("/careers-page")
@@ -16,9 +20,15 @@ def careers_page(
     page: int = 1,
     db: Session = Depends(get_db)
 ):
+    
     per_page = 4
     total_careers = db.query(models.Career).count()
     total_pages = (total_careers + per_page - 1) // per_page    
+
+    current_user = get_current_user(
+        request,
+        db
+    )   
 
     careers = (
         db.query(models.Career)
@@ -35,7 +45,8 @@ def careers_page(
             "page": page,
             "total_pages": total_pages,
             "careers": careers,
-            "is_logged_in": "user_id" in request.session
+            "is_logged_in": "user_id" in request.session,
+            "current_user": current_user
         }
     )
 

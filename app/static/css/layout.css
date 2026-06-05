@@ -43,7 +43,7 @@
 }
 
 .section-title {
-  border-left: 2px solid var(--color-border);
+  border-left: 3px solid #222;
   padding-left: 24px;
   font-weight: 800;  
   margin: 0;

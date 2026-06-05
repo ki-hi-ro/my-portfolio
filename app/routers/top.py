@@ -37,13 +37,6 @@ def top_page(
         .all()
     )    
 
-    recent_careers = (
-        db.query(models.Career)
-        .order_by(models.Career.id.desc())
-        .limit(2)
-        .all()
-    )    
-
     works_count = db.query(models.Work).count()
 
     blogs_count = db.query(models.Blog).count()
@@ -56,7 +49,6 @@ def top_page(
         {
             "works": works,
             "blogs": blogs,
-            "recent_careers": recent_careers,
             "user_id": user_id,
             "is_logged_in": is_logged_in,
             "works_count": works_count,

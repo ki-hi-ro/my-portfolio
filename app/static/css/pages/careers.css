@@ -4,7 +4,7 @@
 
 .career-timeline {
   position: relative;
-  margin-top: 40px;
+  margin-top: 21px;
   padding-left: 36px;
 }
 
@@ -29,7 +29,7 @@
 .career-timeline-marker {
   position: absolute;
   top: 28px;
-  left: -34px;
+  left: -37px;
   width: 18px;
   height: 18px;
   border: 3px solid #111;
@@ -85,7 +85,7 @@
   }
 
   .career-timeline-marker {
-    left: -27px;
+    left: -25px;
     width: 16px;
     height: 16px;
   }
@@ -108,7 +108,6 @@
   justify-content: space-between;
   align-items: flex-end;
   gap: 40px;
-  margin-bottom: 64px;
 }
 
 .career-hero-content {
