@@ -2,17 +2,18 @@
 
 {% block content %}
 
+{% set breadcrumbs = [
+  {"name": "ホーム", "url": "/"},
+  {"name": "職務経歴", "url": "/careers-page"},
+  {"name": ""}
+] %}
+
+{% include "components/breadcrumb.html" %}
+
 <div class="section-header">
   <h2 class="section-title">
-    {{ career.title }} を編集
+    {{ career.title }} を編集 
   </h2>
-
-  <a
-    href="/careers-page"
-    class="btn-back view-all-btn-pc"
-  >
-    職務経歴一覧へ戻る
-  </a>  
 </div>
 
 <form

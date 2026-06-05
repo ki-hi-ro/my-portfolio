@@ -2,10 +2,16 @@
 
 {% block content %}
 
-<div class="section-header">
-  <h1 class="section-title">
+<div class="section-header login-header">
+  <p class="section-label">ACCOUNT</p>
+
+  <h1>
     ログイン
   </h1>
+
+  <p class="section-description">
+    詳細な職務経歴が確認できます。
+  </p>
 </div>
 
 {% if error %}
@@ -19,7 +25,6 @@
   method="post"
   class="form-card"
 >
-
   <div class="form-group">
     <label>
       ユーザー名
@@ -52,7 +57,6 @@
   >
     ログイン
   </button>
-
 </form>
 
 {% endblock %}

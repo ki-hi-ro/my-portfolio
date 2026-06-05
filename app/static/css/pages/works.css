@@ -284,7 +284,7 @@
     flex-direction: column;
     align-items: stretch;
     gap: 24px;
-    padding: 32px 24px;
+    padding: 32px 0;
   }
 
   .works-hero-content,

@@ -27,3 +27,28 @@
     color: #d32f2f;
     font-size: 14px;
 }
+
+.login-header {
+  display: block;
+  margin-bottom: 40px;
+  padding-left: 28px;
+  border-left: 6px solid var(--color-primary);
+}
+
+.section-label {
+  margin-bottom: 8px;
+  color: #777;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.login-header .section-title {
+  margin-bottom: 12px;
+}
+
+.section-description {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.8;
+}

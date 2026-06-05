@@ -43,8 +43,8 @@
 }
 
 .section-title {
-  border-left: 3px solid #222;
-  padding-left: 24px;
+  /* border-left: 3px solid #222;
+  padding-left: 24px; */
   font-weight: 800;  
   margin: 0;
   font-size: 2.2rem;
