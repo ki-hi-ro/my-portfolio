@@ -25,7 +25,7 @@ def top_page(
 
     works = (
         db.query(models.Work)
-        .order_by(models.Work.started_at.asc())
+        .order_by(models.Work.id.asc())
         .limit(2)
         .all()
     )
