@@ -1,0 +1,12 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.site-description a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-description a:hover {
+  text-decoration: underline;
+}
