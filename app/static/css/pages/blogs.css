@@ -44,7 +44,8 @@
 }
 
 .compact-card-title {
-  display: -webkit-box;
+  display: flex;
+  align-items: center;
   min-height: 72px;
   margin: 0 0 14px;
   overflow: hidden;

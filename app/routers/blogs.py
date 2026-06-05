@@ -140,31 +140,47 @@ def create_blog_from_form(
 def import_wordpress(
     db: Session = Depends(get_db)
 ):
-    
-    url = "https://ki-hi-ro.com/wp-json/wp/v2/posts?categories=1191&per_page=100&_embed"
+    base_url = "https://ki-hi-ro.com/wp-json/wp/v2/posts"
 
     headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "User-Agent": "Mozilla/5.0",
         "Accept": "application/json,text/html,*/*",
         "Referer": "https://ki-hi-ro.com/"
-    }    
+    }
 
-    response = requests.get(url, headers=headers, timeout=10)    
+    all_posts = []
+    page = 1
 
-    if response.status_code != 200:
-        return {
-            "error": "取得失敗",
-            "status_code": response.status_code,
-            "text": response.text[:500]
-        }
+    while True:
+        url = f"{base_url}?categories=1191&per_page=100&page={page}&_embed"
 
-    posts = response.json()
+        response = requests.get(url, headers=headers, timeout=10)
+
+        if response.status_code != 200:
+            return {
+                "error": "取得失敗",
+                "status_code": response.status_code,
+                "text": response.text[:500]
+            }
+
+        posts = response.json()
+        all_posts.extend(posts)
+
+        total_pages = int(response.headers.get("X-WP-TotalPages", 1))
+
+        if page >= total_pages:
+            break
+
+        page += 1
 
     imported = 0
+    updated = 0
 
-    for post in posts:
+    wp_urls = []
 
+    for post in all_posts:
         blog_url = post["link"]
+        wp_urls.append(blog_url)
 
         exists = (
             db.query(models.Blog)
@@ -180,7 +196,7 @@ def import_wordpress(
         published_at = datetime.strptime(
             post["date"],
             "%Y-%m-%dT%H:%M:%S"
-        ).date()        
+        ).date()
 
         tag_names = []
 
@@ -197,7 +213,8 @@ def import_wordpress(
             exists.content = post["content"]["rendered"]
             exists.published_at = published_at
             exists.tags = tags
-            continue        
+            updated += 1
+            continue
 
         blog = models.Blog(
             title=post["title"]["rendered"],
@@ -211,9 +228,18 @@ def import_wordpress(
         db.add(blog)
         imported += 1
 
+    deleted = 0
+
+    if wp_urls:
+        deleted = (
+            db.query(models.Blog)
+            .filter(models.Blog.url.notin_(wp_urls))
+            .delete(synchronize_session=False)
+        )
+
     db.commit()
 
     return RedirectResponse(
-        url=f"/blogs-page?imported={imported}",
+        url=f"/blogs-page?imported={imported}&updated={updated}&deleted={deleted}",
         status_code=303
     )
