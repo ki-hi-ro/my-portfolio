@@ -5,6 +5,7 @@ from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from fastapi.templating import Jinja2Templates
 from app.database import get_db
+from datetime import datetime
 
 router = APIRouter()
 
@@ -77,7 +78,7 @@ def new_work_page(
     )
 
 
-#Create（処理）
+# 作成処理
 @router.post("/works-page")
 def create_work_from_page(
     title: str = Form(...),
@@ -87,7 +88,9 @@ def create_work_from_page(
     tech_stack: str = Form(""),
     db: Session = Depends(get_db),
     image_url: str = Form(""),
+    started_at: str = Form(""),
 ):
+    
     new_work = models.Work(
         title=title,
         description=description,
@@ -95,6 +98,7 @@ def create_work_from_page(
         app_url=app_url,
         tech_stack=tech_stack,
         image_url=image_url,
+        started_at=started_at,
     )
 
     db.add(new_work)
@@ -189,7 +193,7 @@ def edit_work_page(work_id: int, request: Request, db: Session = Depends(get_db)
     )
 
 
-# Update（処理）
+# 更新処理
 @router.post("/works-page/{work_id}/edit")
 def update_work_from_page(
     work_id: int,
@@ -200,8 +204,16 @@ def update_work_from_page(
     tech_stack: str = Form(""),
     db: Session = Depends(get_db),
     image_url: str = Form(""),
+    started_at: str = Form(""),
 ):
+    
     work = db.query(models.Work).filter(models.Work.id == work_id).first()
+
+    started_at_date = (
+        datetime.strptime(started_at, "%Y-%m-%d").date()
+        if started_at
+        else None
+    )    
 
     if work:
         work.title = title
@@ -210,6 +222,7 @@ def update_work_from_page(
         work.app_url = app_url
         work.tech_stack = tech_stack
         work.image_url = image_url
+        work.started_at = started_at_date
         db.commit()
 
     return RedirectResponse(

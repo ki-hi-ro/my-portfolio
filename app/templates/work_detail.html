@@ -17,10 +17,10 @@
     </h1>
 
     <div class="detail-meta">
-      {% if work.created_at %}
-        <span>
-          投稿日：{{ work.created_at.strftime('%Y.%m.%d') }}
-        </span>
+      {% if work.started_at %}
+      <span>
+        作成開始日：{{ work.started_at.strftime('%Y.%m.%d') }}
+      </span>
       {% endif %}
     </div>
 

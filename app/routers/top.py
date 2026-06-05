@@ -13,7 +13,7 @@ router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
 
 
-# Read
+# 画面の取得
 @router.get("/")
 def top_page(
     request: Request,
@@ -21,13 +21,11 @@ def top_page(
 ):
     
     user_id = request.session.get("user_id")
-    role = request.session.get("role")
-
     is_logged_in = "user_id" in request.session
 
     works = (
         db.query(models.Work)
-        .order_by(models.Work.id.desc())
+        .order_by(models.Work.started_at.asc())
         .limit(2)
         .all()
     )

@@ -13,6 +13,7 @@ class Work(Base):
     github_url = Column(String, nullable=True)
     app_url = Column(String, nullable=True)
     image_url = Column(String, nullable=True)
+    started_at = Column(Date)
     created_at = Column(DateTime, default=datetime.now)
 
 
