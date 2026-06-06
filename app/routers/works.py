@@ -119,6 +119,7 @@ def works_page(
     page: int = 1,
     db: Session = Depends(get_db)
 ):
+    
     per_page = 6
     total_works = db.query(models.Work).count()
     total_pages = (total_works + per_page - 1) // per_page
@@ -129,6 +130,7 @@ def works_page(
 
     works = (
         db.query(models.Work)
+        .order_by(models.Work.started_at.desc())
         .offset((page - 1) * per_page)
         .limit(per_page)
         .all()
@@ -186,6 +188,7 @@ def work_detail_page(
 # 編集画面
 @router.get("/works-page/{work_id}/edit")
 def edit_work_page(work_id: int, request: Request, db: Session = Depends(get_db)):
+    
     work = db.query(models.Work).filter(models.Work.id == work_id).first()
 
     return templates.TemplateResponse(
