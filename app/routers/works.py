@@ -143,6 +143,7 @@ def works_page(
 
     tech_count = len(tech_set)    
 
+    user_role = request.session.get("role")
 
     return templates.TemplateResponse(
         request,
@@ -154,6 +155,7 @@ def works_page(
             "is_logged_in": "user_id" in request.session,
             "works_count": works_count,
             "tech_count": tech_count,            
+            "user_role": user_role
         }
     )
 
