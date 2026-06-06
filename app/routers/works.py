@@ -183,7 +183,7 @@ def work_detail_page(
     )
 
 
-# Update（画面）
+# 編集画面
 @router.get("/works-page/{work_id}/edit")
 def edit_work_page(work_id: int, request: Request, db: Session = Depends(get_db)):
     work = db.query(models.Work).filter(models.Work.id == work_id).first()
@@ -198,7 +198,7 @@ def edit_work_page(work_id: int, request: Request, db: Session = Depends(get_db)
     )
 
 
-# 更新処理
+# 更新（編集）処理
 @router.post("/works-page/{work_id}/edit")
 def update_work_from_page(
     work_id: int,
@@ -213,6 +213,12 @@ def update_work_from_page(
 ):
     
     work = db.query(models.Work).filter(models.Work.id == work_id).first()
+
+    if not work:
+        return RedirectResponse(
+            url="/works-page",
+            status_code=303
+        )    
 
     started_at_date = (
         datetime.strptime(started_at, "%Y-%m-%d").date()
