@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy.orm import Session
 
 from fastapi import APIRouter, Depends, Request, Form
@@ -108,14 +110,31 @@ def create_career(
     period: str = Form(...),
     description: str = Form(...),
     technologies: str = Form(...),
+    start_date: str = Form(""),
+    end_date: str = Form(""),
     db: Session = Depends(get_db)
 ):
+    
+    start_date_value = (
+        datetime.strptime(start_date, "%Y-%m-%d").date()
+        if start_date
+        else None
+    )
+
+    end_date_value = (
+        datetime.strptime(end_date, "%Y-%m-%d").date()
+        if end_date
+        else None
+    )    
+    
     new_career = models.Career(
         title=title,
         company=company,
         period=period,
         description=description,
-        technologies=technologies
+        technologies=technologies,
+        start_date = start_date_value,
+        end_date = end_date_value        
     )
 
     db.add(new_career)
@@ -147,6 +166,7 @@ def career_edit_page(
     )
 
 
+# 編集処理
 @router.post("/careers-page/{career_id}/edit")
 def career_update(
     career_id: int,
@@ -155,8 +175,23 @@ def career_update(
     period: str = Form(""),
     description: str = Form(""),
     tech_stack: str = Form(""),
+    start_date: str = Form(""),
+    end_date: str = Form(""),
     db: Session = Depends(get_db)
 ):
+    
+    start_date_value = (
+        datetime.strptime(start_date, "%Y-%m-%d").date()
+        if start_date
+        else None
+    )
+
+    end_date_value = (
+        datetime.strptime(end_date, "%Y-%m-%d").date()
+        if end_date
+        else None
+    )
+
     career = (
         db.query(models.Career)
         .filter(models.Career.id == career_id)
@@ -168,6 +203,8 @@ def career_update(
     career.period = period
     career.description = description
     career.tech_stack = tech_stack
+    career.start_date = start_date_value
+    career.end_date = end_date_value    
 
     db.commit()
 

@@ -44,14 +44,25 @@
     </div>
 
     <div class="form-group">
-        <label>期間</label>
+    <label>開始日</label>
 
-        <input
-            class="form-input"
-            type="text"
-            name="period"
-            placeholder="2025.07 - 2026.06"
-        >
+    <input
+        class="form-input"
+        type="date"
+        name="start_date"
+        value="{{ career.start_date.strftime('%Y-%m-%d') if career and career.start_date else '' }}"
+    >
+    </div>
+
+    <div class="form-group">
+    <label>終了日</label>
+
+    <input
+        class="form-input"
+        type="date"
+        name="end_date"
+        value="{{ career.end_date.strftime('%Y-%m-%d') if career and career.end_date else '' }}"
+    >
     </div>
 
     <div class="form-group">

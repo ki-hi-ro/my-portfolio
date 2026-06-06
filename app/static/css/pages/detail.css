@@ -1,3 +1,7 @@
 .detail-card p {
   white-space: pre-line;
 }
+
+.detail-card p.work-meta {
+  white-space: normal;
+}

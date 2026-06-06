@@ -18,7 +18,16 @@
   <h1 class="detail-title">
     {{ career.title }}
   </h1>
-  <p class="work-meta">{{ career.period }}</p>
+
+  <p class="work-meta">
+    {% if career.start_date and career.end_date %}
+      {{ career.start_date.strftime('%Y.%m') }} - {{ career.end_date.strftime('%Y.%m') }}
+    {% elif career.start_date %}
+      {{ career.start_date.strftime('%Y.%m') }} -
+    {% elif career.end_date %}
+      - {{ career.end_date.strftime('%Y.%m') }}
+    {% endif %}
+  </p>
 
   {% if is_partner %}
 
