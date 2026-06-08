@@ -32,7 +32,7 @@
         学習内容、開発で詰まったこと、実装の理解を言葉に残しています。
       </p>
     </div>
-
+    {% if not is_production %}
     <div class="blog-hero-actions">
       <form action="/blogs/import-wordpress" method="post">
         <button type="submit" class="primary-button">
@@ -40,6 +40,7 @@
         </button>
       </form>
     </div>
+    {% endif %}
   </section>
 
   <div class="compact-card-grid">
