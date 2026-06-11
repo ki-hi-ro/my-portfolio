@@ -31,6 +31,9 @@ def blogs_page(
     request: Request,
     page: int = 1,
     imported: Optional[int] = None,
+    updated: Optional[int] = None,
+    deleted: Optional[int] = None,
+    skipped: Optional[int] = None,
     db: Session = Depends(get_db)
 ):
     per_page = 4
@@ -57,6 +60,9 @@ def blogs_page(
             "total_pages": total_pages,
             "is_logged_in": is_logged_in,
             "imported": imported,
+            "updated": updated,
+            "deleted": deleted,
+            "skipped": skipped,
             "is_production": os.getenv("APP_ENV") == "production"
          }
     )
