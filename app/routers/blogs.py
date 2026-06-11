@@ -1,15 +1,21 @@
-from fastapi import APIRouter, Depends, Form
-from sqlalchemy.orm import Session
-from app.database import get_db
-from app import models, schemas
-from fastapi import Request
-from fastapi.templating import Jinja2Templates
-from fastapi.responses import RedirectResponse
-import requests
-from bs4 import BeautifulSoup
 from typing import Optional
 from datetime import datetime
 import os
+from urllib.parse import urlparse
+
+from fastapi import APIRouter, Depends, Form
+from fastapi import Request
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
+
+from sqlalchemy.orm import Session
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+
+from app import models
+from app.database import get_db
+
 
 templates = Jinja2Templates(directory="app/templates")
 
@@ -19,31 +25,7 @@ router = APIRouter(
 )
 
 
-@router.post("/", response_model=schemas.Blog)
-def create_blog(
-    blog: schemas.BlogCreate,
-    db: Session = Depends(get_db)
-):
-    db_blog = models.Blog(**blog.model_dump())
-
-    db.add(db_blog)
-    db.commit()
-    db.refresh(db_blog)
-
-    return db_blog
-
-
-@router.get("/", response_model=list[schemas.Blog])
-def read_blogs(
-    db: Session = Depends(get_db)
-):
-    return (
-        db.query(models.Blog)
-        .order_by(models.Blog.published_at.desc())
-        .limit(3)
-        .all()        
-    )
-
+# 一覧ページ取得
 @router.get("-page")
 def blogs_page(
     request: Request,
@@ -62,7 +44,7 @@ def blogs_page(
         .offset((page - 1) * per_page)
         .limit(per_page)
         .all()
-    )
+    )    
 
     is_logged_in = "user_id" in request.session
 
@@ -79,6 +61,8 @@ def blogs_page(
          }
     )
 
+
+# 新規登録ページを取得する
 @router.get("/new")
 def blog_new_page(
     request: Request
@@ -88,6 +72,7 @@ def blog_new_page(
         "blog_new.html",
         {}
     )
+
 
 # 詳細ページを取得する
 @router.get("-page/{blog_id}")
@@ -112,6 +97,8 @@ def blog_detail_page(
         }
     )
 
+
+# 新規登録の処理
 @router.post("/new")
 def create_blog_from_form(
     title: str = Form(...),
@@ -136,10 +123,34 @@ def create_blog_from_form(
     )
 
 
+# WordPressから取得
+def get_slug_from_url(url: str) -> str:
+    parsed = urlparse(url)
+
+    path = parsed.path.rstrip("/")
+
+    return path.split("/")[-1]
+
+
+def get_tech_blog_urls_from_sheet():
+    sheet_csv_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3wbw1oz179Lc_HXNLo6BKO1P7xyD1xnjxTVF6CwNZ-6DpnYIxcYDnR9oSKpp_p-EOWm1uTfKmq8eC/pub?output=csv"
+
+    df = pd.read_csv(sheet_csv_url)
+
+    tech_blogs = df[
+        df["技術ブログ"] == "◯"
+    ]
+
+    urls = tech_blogs["記事URL"].dropna().tolist()
+
+    return urls
+
+
 @router.post("/import-wordpress")
 def import_wordpress(
     db: Session = Depends(get_db)
 ):
+    
     base_url = "https://ki-hi-ro.com/wp-json/wp/v2/posts"
 
     headers = {
@@ -148,45 +159,37 @@ def import_wordpress(
         "Referer": "https://ki-hi-ro.com/"
     }
 
-    all_posts = []
-    page = 1
-
-    while True:
-        url = f"{base_url}?categories=1191&per_page=100&page={page}&_embed"
-
-        response = requests.get(url, headers=headers, timeout=10)
-
-        if response.status_code != 200:
-            return {
-                "error": "取得失敗",
-                "status_code": response.status_code,
-                "text": response.text[:500]
-            }
-
-        posts = response.json()
-        all_posts.extend(posts)
-
-        total_pages = int(response.headers.get("X-WP-TotalPages", 1))
-
-        if page >= total_pages:
-            break
-
-        page += 1
+    target_urls = get_tech_blog_urls_from_sheet()
 
     imported = 0
     updated = 0
-
+    skipped = 0
     wp_urls = []
 
-    for post in all_posts:
-        blog_url = post["link"]
-        wp_urls.append(blog_url)
+    for target_url in target_urls:
+        slug = get_slug_from_url(target_url)
 
-        exists = (
-            db.query(models.Blog)
-            .filter(models.Blog.url == blog_url)
-            .first()
+        response = requests.get(
+            f"{base_url}?slug={slug}&_embed",
+            headers=headers,
+            timeout=10
         )
+
+        if response.status_code != 200:
+            skipped += 1
+            continue
+
+        posts = response.json()
+
+        if not posts:
+            skipped += 1
+            continue
+
+        post = posts[0]
+
+        title = post["title"]["rendered"]
+        blog_url = post["link"]
+        content = post["content"]["rendered"]
 
         summary = BeautifulSoup(
             post["excerpt"]["rendered"],
@@ -207,20 +210,28 @@ def import_wordpress(
 
         tags = ", ".join(tag_names)
 
+        wp_urls.append(blog_url)
+
+        exists = (
+            db.query(models.Blog)
+            .filter(models.Blog.url == blog_url)
+            .first()
+        )
+
         if exists:
-            exists.title = post["title"]["rendered"]
+            exists.title = title
             exists.summary = summary
-            exists.content = post["content"]["rendered"]
+            exists.content = content
             exists.published_at = published_at
             exists.tags = tags
             updated += 1
             continue
 
         blog = models.Blog(
-            title=post["title"]["rendered"],
+            title=title,
             url=blog_url,
             summary=summary,
-            content=post["content"]["rendered"],
+            content=content,
             published_at=published_at,
             tags=tags
         )
@@ -240,6 +251,12 @@ def import_wordpress(
     db.commit()
 
     return RedirectResponse(
-        url=f"/blogs-page?imported={imported}&updated={updated}&deleted={deleted}",
+        url=(
+            f"/blogs-page"
+            f"?imported={imported}"
+            f"&updated={updated}"
+            f"&deleted={deleted}"
+            f"&skipped={skipped}"
+        ),
         status_code=303
     )
