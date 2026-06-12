@@ -12,6 +12,14 @@
 
   <article class="detail-card">
 
+      <div class="tech-tags">
+        {% for tech in work.tech_stack.split(",") %}
+          <span class="tech-tag">
+            {{ tech.strip() }}
+          </span>
+        {% endfor %}
+      </div>    
+
     <h1 class="detail-title">
       {{ work.title }}
     </h1>
@@ -37,14 +45,6 @@
       <p class="work-description">
         {{ work.description }}
       </p>
-
-      <div class="tech-tags">
-        {% for tech in work.tech_stack.split(",") %}
-          <span class="tech-tag">
-            {{ tech.strip() }}
-          </span>
-        {% endfor %}
-      </div>
 
       <div class="work-actions">
 
@@ -96,14 +96,5 @@
     </div>
 
   </article>
-
-  <nav class="section-footer">
-    <a
-      href="/works-page"
-      class="btn-back view-all-btn-sp"
-    >
-      ← 制作物一覧へ戻る
-    </a>
-  </nav>
 
 {% endblock %}

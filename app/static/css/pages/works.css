@@ -61,7 +61,6 @@
 .work-hero-content .work-description {
   display: block;
   overflow: visible;
-  margin-bottom: 36px;
   -webkit-line-clamp: unset;  
   -webkit-box-orient: unset;
 }
@@ -76,7 +75,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 36px;
 }
 
 .work-links {
@@ -96,6 +95,13 @@
   background: var(--color-primary-light);
   color: var(--color-primary-dark);
   font-size: 14px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 480px) {
+  .tech-tag {
+    margin-bottom: 10px;
+  }
 }
 
 .work-stats {
