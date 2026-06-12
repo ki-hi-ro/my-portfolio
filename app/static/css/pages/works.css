@@ -95,13 +95,6 @@
   background: var(--color-primary-light);
   color: var(--color-primary-dark);
   font-size: 14px;
-  margin-bottom: 14px;
-}
-
-@media (max-width: 480px) {
-  .tech-tag {
-    margin-bottom: 10px;
-  }
 }
 
 .work-stats {

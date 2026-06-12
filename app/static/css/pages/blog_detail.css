@@ -11,14 +11,14 @@
 
 .detail-title {
   max-width: 900px;
-  margin: 0 0 14px;
+  margin: 24px 0;
   font-size: 2.2rem;
   line-height: 1.35;
 }
 
 @media (max-width: 480px) {
   .detail-title {
-    margin: 0 0 10px;
+    margin: 22px 0;
   }
 }
 
