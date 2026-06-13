@@ -2,7 +2,10 @@ from app import models
 from app.schemas import Work, WorkResponse
 from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import RedirectResponse
+
+from sqlalchemy import extract
 from sqlalchemy.orm import Session
+
 from fastapi.templating import Jinja2Templates
 from app.database import get_db
 from datetime import datetime
@@ -117,24 +120,39 @@ def create_work_from_page(
 def works_page(
     request: Request, 
     page: int = 1,
+    year: int | None = None,
     db: Session = Depends(get_db)
 ):
     
     per_page = 6
-    total_works = db.query(models.Work).count()
+
+    query = db.query(models.Work)
+
+    if year:
+        query = query.filter(extract("year", models.Work.started_at) == year)
+
+    total_works = query.count()
+    
     total_pages = (total_works + per_page - 1) // per_page
 
-    works_count = db.query(models.Work).count()
-
-    tech_set = set()
-
     works = (
-        db.query(models.Work)
+        query
         .order_by(models.Work.started_at.desc())
         .offset((page - 1) * per_page)
         .limit(per_page)
         .all()
     )
+
+    years = [
+        int(y[0]) for y in
+        db.query(extract("year", models.Work.started_at))
+        .filter(models.Work.started_at.isnot(None))
+        .distinct()
+        .order_by(extract("year", models.Work.started_at).desc())
+        .all()
+    ]    
+
+    tech_set = set()
     
     for work in works:
         if work.tech_stack:
@@ -152,8 +170,10 @@ def works_page(
             "page": page,
             "total_pages": total_pages,
             "works": works,
+            "years": years,
+            "selected_year": year,
             "is_logged_in": "user_id" in request.session,
-            "works_count": works_count,
+            "works_count": total_works,
             "tech_count": tech_count,            
             "user_role": user_role
         }

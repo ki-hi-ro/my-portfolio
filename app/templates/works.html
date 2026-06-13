@@ -43,6 +43,19 @@
 
 </section>
 
+<div class="year-tags">
+  <a href="/works-page?page=1" class="{% if not selected_year %}active{% endif %}">すべて</a>
+
+  {% for y in years %}
+    <a
+      href="/works-page?page=1&year={{ y }}"
+      class="{% if selected_year == y %}active{% endif %}"
+    >
+      {{ y }}年
+    </a>
+  {% endfor %}
+</div>
+
 <div class="project-grid">
   {% for work in works %}
   <a href="/works-page/{{ work.id }}" class="project-card">
@@ -80,14 +93,14 @@
 {% if total_pages > 1 %}
 <div class="pagination">
   {% if page > 1 %}
-  <a href="/works-page?page={{ page - 1 }}" class="page-link">
+  <a href="/works-page?page={{ page - 1 }}{% if selected_year %}&year={{ selected_year }}{% endif %}" class="page-link">
     ←
   </a>
   {% endif %}
 
   {% for p in range(1, total_pages + 1) %}
   <a
-    href="/works-page?page={{ p }}"
+    href="/works-page?page={{ p }}{% if selected_year %}&year={{ selected_year }}{% endif %}"
     class="page-link {% if p == page %}active{% endif %}"
   >
     {{ p }}
@@ -95,7 +108,7 @@
   {% endfor %}
 
   {% if page < total_pages %}
-  <a href="/works-page?page={{ page + 1 }}" class="page-link">
+  <a href="/works-page?page={{ page + 1 }}{% if selected_year %}&year={{ selected_year }}{% endif %}" class="page-link">
     →
   </a>
   {% endif %}
