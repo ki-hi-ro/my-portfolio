@@ -8,6 +8,7 @@ from fastapi import Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 
+from sqlalchemy import extract
 from sqlalchemy.orm import Session
 import pandas as pd
 import requests
@@ -24,12 +25,25 @@ router = APIRouter(
     tags=["Blogs"]
 )
 
+DISPLAY_TAGS = [
+    "Python",
+    "FastAPI",
+    "WordPress",
+    "JavaScript",
+    "Vue.js",
+    "React",
+    "Git",
+    "Docker",
+    "SQL",
+]
+
 
 # 一覧ページ取得
 @router.get("-page")
 def blogs_page(
     request: Request,
     page: int = 1,
+    tag: str | None = None,
     imported: Optional[int] = None,
     updated: Optional[int] = None,
     deleted: Optional[int] = None,
@@ -38,16 +52,37 @@ def blogs_page(
 ):
     per_page = 4
 
-    total_blogs = db.query(models.Blog).count()
+    query = db.query(models.Blog)
+
+    if tag:
+        query = query.filter(
+            models.Blog.tags.contains(tag)
+        )    
+
+    total_blogs = query.count()
     total_pages = (total_blogs + per_page - 1) // per_page    
     
     blogs = (
-        db.query(models.Blog)
+        query
         .order_by(models.Blog.published_at.desc())
         .offset((page - 1) * per_page)
         .limit(per_page)
         .all()
     )    
+
+    tag_set = set()
+
+    all_blogs = db.query(models.Blog).all()    
+
+    for blog in all_blogs:
+        if blog.tags:
+            for t in blog.tags.split(","):
+                blog_tag = t.strip()                
+
+                if blog_tag in DISPLAY_TAGS:
+                    tag_set.add(blog_tag)
+
+    tags = sorted(tag_set)        
 
     is_logged_in = "user_id" in request.session
 
@@ -58,6 +93,8 @@ def blogs_page(
             "blogs": blogs, 
             "page": page,
             "total_pages": total_pages,
+            "tags": tags,
+            "selected_tag": tag,
             "is_logged_in": is_logged_in,
             "imported": imported,
             "updated": updated,
