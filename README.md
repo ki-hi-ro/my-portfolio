@@ -25,14 +25,14 @@
 
 FastAPIを用いて開発したポートフォリオサイトです。
 
-制作物管理
-技術ブログ管理
-職務経歴管理
+- 制作物管理
+- 技術ブログ管理
+- 職務経歴管理
 
 の3機能を実装しています。
 
-またWordPress上の約1500記事を
-REST API経由で取得し、
+またWordPress上の約1500記事を  
+REST API経由で取得し、  
 ポートフォリオへ自動同期する仕組みを構築しました。
 
 ## 主な機能
@@ -47,11 +47,15 @@ REST API経由で取得し、
 - レスポンシブ対応
 
 ## 画面
-
+### トップ
 ![My Portfolio](images/top.png)
+### 制作物
 ![My Portfolio](images/works.png)
+### 技術ブログ
 ![My Portfolio](images/blogs.png)
+### 職務経歴
 ![My Portfolio](images/career.png)
+### WordPress同期
 ![My Portfolio](images/wordpress-import.png)
 
 ## 開発履歴
