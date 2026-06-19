@@ -38,47 +38,84 @@
     </div>
   </div>
 
-<div class="hero-summary-grid">
-  <a href="/works-page" class="hero-summary-card">
-    <span class="summary-label">Works</span>
-    <strong>制作物</strong>
+  <div class="service-section">
+    <h2 class="service-title">
+      対応可能業務
+    </h2>
 
-    <p class="summary-number">
-      {{ works_count }}件
-    </p>
+    <div class="service-grid">
+      <div class="service-card">
+        <h3>Webアプリ開発</h3>
+        <p>
+          Django・FastAPI・Reactを用いた
+          Webアプリケーション開発
+        </p>
+      </div>
 
-    <p>
-      Webアプリ・ポートフォリオ制作
-    </p>
-  </a>
+      <div class="service-card">
+        <h3>WordPress制作</h3>
+        <p>
+          新規サイト制作・既存サイト改修
+        </p>
+      </div>
 
-  <a href="/blogs-page" class="hero-summary-card">
-    <span class="summary-label">Blog</span>
-    <strong>技術ブログ</strong>
+      <div class="service-card">
+        <h3>業務効率化</h3>
+        <p>
+          Pythonによる自動化ツール開発
+        </p>
+      </div>
 
-    <p class="summary-number">
-      {{ blogs_count }}記事
-    </p>
+      <div class="service-card">
+        <h3>技術発信</h3>
+        <p>
+          技術ブログ389記事以上を執筆
+        </p>
+      </div>
+    </div>
+  </div>  
 
-    <p>
-      学習・開発記録
-    </p>
-  </a>
+  <div class="hero-summary-grid">
+    <a href="/works-page" class="hero-summary-card">
+      <span class="summary-label">Works</span>
+      <strong>制作物</strong>
 
-  <a href="/careers-page" class="hero-summary-card">
-    <span class="summary-label">Career</span>
+      <p class="summary-number">
+        {{ works_count }}件
+      </p>
 
-    <strong>職務経歴</strong>
+      <p>
+        Webアプリ・ポートフォリオ制作
+      </p>
+    </a>
 
-    <p class="summary-number">
-      {{ career_years }}年+
-    </p>
+    <a href="/blogs-page" class="hero-summary-card">
+      <span class="summary-label">Blog</span>
+      <strong>技術ブログ</strong>
 
-    <p>
-      Web制作・Python開発などの実務経験
-    </p>
-  </a>
-</div>
+      <p class="summary-number">
+        {{ blogs_count }}記事
+      </p>
+
+      <p>
+        学習・開発記録
+      </p>
+    </a>
+
+    <a href="/careers-page" class="hero-summary-card">
+      <span class="summary-label">Career</span>
+
+      <strong>職務経歴</strong>
+
+      <p class="summary-number">
+        {{ career_years }}年+
+      </p>
+
+      <p>
+        Web制作・Python開発などの実務経験
+      </p>
+    </a>
+  </div>
 
   </div>
 </section>

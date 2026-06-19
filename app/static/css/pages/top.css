@@ -123,3 +123,41 @@
 .hero-summary-card p:last-child {
   margin-top: 8px;
 }
+
+.service-section {
+  margin: 60px 0;
+}
+
+.service-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.service-card {
+  padding: 24px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.service-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  margin-top: 0;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+}
