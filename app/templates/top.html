@@ -19,27 +19,27 @@
     </h1>
 
     <p class="top-description">
-    Python・Django・FastAPI・WordPressを用いたWebアプリ開発・業務効率化ツール開発・Web制作に対応しています。制作物・技術ブログ・職務経歴を通して、実際に何を作れるのかを確認できるポートフォリオです。
+      Python・Django・FastAPI・React・WordPressを用いたWebアプリ開発、業務効率化ツール開発、Web制作に対応しています。<br class="desktop-break">
+      制作物・技術ブログ・職務経歴を通して、実際に何を作れるのかを確認できるポートフォリオです。
     </p>
 
     <div class="hero-links">
-      <a
-        href="https://github.com/ki-hi-ro"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn-outline"
-      >
-        GitHubを見る
+      <a href="/works-page" class="btn-outline">
+        制作物を見る
       </a>
 
       <a href="/blogs-page" class="btn-outline">
         技術ブログを見る
       </a>
+
+      <a href="/careers-page" class="btn-outline">
+        職務経歴を見る
+      </a>
     </div>
   </div>
 
-  <div class="service-section">
-    <h2 class="service-title">
+  <section class="service-section" aria-labelledby="service-title">
+    <h2 id="service-title" class="service-title">
       対応可能業務
     </h2>
 
@@ -47,28 +47,21 @@
       <div class="service-card">
         <h3>Webアプリ開発</h3>
         <p>
-          Django・FastAPI・Reactを用いた
-          Webアプリケーション開発<br>
-          開発期間目安：<br>
-          2週間〜1ヶ月
+          Django・FastAPI・Reactを用いたWebアプリケーション開発
         </p>
       </div>
 
       <div class="service-card">
         <h3>WordPress制作</h3>
         <p>
-          新規サイト制作・既存サイト改修<br>
-          制作期間目安：<br>
-          3日〜2週間          
+          新規サイト制作・既存サイト改修
         </p>
       </div>
 
       <div class="service-card">
         <h3>業務効率化</h3>
         <p>
-          Pythonによる自動化ツール開発<br>
-          開発期間目安：<br>
-          1日〜2週間          
+          Pythonによる自動化ツール開発
         </p>
       </div>
 
@@ -79,9 +72,13 @@
         </p>
       </div>
     </div>
-  </div>  
 
-  <div class="hero-summary-grid">
+    <p class="service-works-link">
+      具体的な制作物は、<a href="/works-page">制作物ページ</a>から確認できます。
+    </p>
+  </section>
+
+  <section class="hero-summary-grid" aria-label="実績サマリー">
     <a href="/works-page" class="hero-summary-card">
       <span class="summary-label">Works</span>
       <strong>制作物</strong>
@@ -91,7 +88,7 @@
       </p>
 
       <p>
-        Webアプリ・ポートフォリオ制作
+        Webアプリ・ポートフォリオ・業務改善ツール
       </p>
     </a>
 
@@ -104,7 +101,7 @@
       </p>
 
       <p>
-        学習・開発記録
+        学習・開発・エラー解決の記録
       </p>
     </a>
 
@@ -118,12 +115,10 @@
       </p>
 
       <p>
-        Web制作・Python開発などの実務経験
+        Web制作・Python開発・業務システム経験
       </p>
     </a>
-  </div>
-
-  </div>
+  </section>
 </section>
 
 {% endblock %}
