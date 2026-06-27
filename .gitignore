@@ -4,3 +4,4 @@ venv/
 .env
 export_notebooklm.py
 notebooklm_blog_source.md
+.DS_Store

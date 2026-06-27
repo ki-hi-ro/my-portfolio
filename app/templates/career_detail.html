@@ -2,78 +2,75 @@
 
 {% block content %}
 
-<div class="blog-detail-header">
-
+<section class="partner-subpage partner-detail-page career-detail-page">
   {% set breadcrumbs = [
-  {"name": "ホーム", "url": "/"},
-  {"name": "職務経歴", "url": "/careers-page"},
-  {"name": career.title}
+    {"name": "ホーム", "url": "/"},
+    {"name": "職務経歴", "url": "/careers-page"},
+    {"name": career.title}
   ] %}
 
   {% include "components/breadcrumb.html" %}
 
-</div>
+  <article class="partner-detail-card">
+    <header class="partner-detail-hero">
+      <div>
+        <p class="eyebrow"><span></span> CAREER DETAIL</p>
+        <h1 class="detail-title">
+          {{ career.title }}
+        </h1>
 
-<article class="detail-card">
-  <h1 class="detail-title">
-    {{ career.title }}
-  </h1>
+        <p class="work-meta">
+          {% if career.start_date and career.end_date %}
+            {{ career.start_date.strftime('%Y.%m') }} - {{ career.end_date.strftime('%Y.%m') }}
+          {% elif career.start_date %}
+            {{ career.start_date.strftime('%Y.%m') }} -
+          {% elif career.end_date %}
+            - {{ career.end_date.strftime('%Y.%m') }}
+          {% endif %}
+        </p>
+      </div>
 
-  <p class="work-meta">
-    {% if career.start_date and career.end_date %}
-      {{ career.start_date.strftime('%Y.%m') }} - {{ career.end_date.strftime('%Y.%m') }}
-    {% elif career.start_date %}
-      {{ career.start_date.strftime('%Y.%m') }} -
-    {% elif career.end_date %}
-      - {{ career.end_date.strftime('%Y.%m') }}
-    {% endif %}
-  </p>
+      {% if career.technologies %}
+      <div class="tech-tags">
+        {% for tech in career.technologies.split(",") %}
+        <span class="tech-tag">
+          {{ tech.strip() }}
+        </span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </header>
 
-  {% if is_partner %}
-
-  <div class="content">
-    <p>{{ career.description }}</p>
-  </div>
-
-  {% else %}
-
-  <div class="partner-message">
-    詳細な職務経歴は、パートナー様のログイン後に閲覧できます。
-  </div>
-
-  {% endif %}
-
-  {% if career.technologies %}
-  <div class="tech-tags">
-    {% for tech in career.technologies.split(",") %}
-    <span class="tech-tag">
-      {{ tech.strip() }}
-    </span>
-    {% endfor %}
-  </div>
-  {% endif %}
-
-  <div class="work-actions">
-    {% if is_admin %}
-    <a href="/careers-page/{{ career.id }}/edit" class="btn-outline">
-      職務経歴を編集する
-    </a>
+    {% if is_partner %}
+    <div class="content partner-detail-content">
+      <p>{{ career.description }}</p>
+    </div>
+    {% else %}
+    <div class="partner-message">
+      詳細な職務経歴は、パートナー様のログイン後に閲覧できます。
+    </div>
     {% endif %}
 
-    {% if is_admin %}
-    <form action="/careers-page/{{ career.id }}/delete" method="post">
-      <button type="submit" class="btn-danger">
-        職務経歴を削除する
-      </button>
-    </form>
-    {% endif %}
-  </div>
-</article>
+    <div class="work-actions">
+      <a href="/careers-page" class="btn-outline">
+        職務経歴一覧へ戻る
+      </a>
 
-<nav class="section-footer">
-  <a href="/careers-page" class="btn-back view-all-btn-sp">
-    ← 職務経歴一覧へ戻る
-  </a>
-</nav>
+      {% if is_admin %}
+      <a href="/careers-page/{{ career.id }}/edit" class="btn-outline">
+        職務経歴を編集する
+      </a>
+      {% endif %}
+
+      {% if is_admin %}
+      <form action="/careers-page/{{ career.id }}/delete" method="post">
+        <button type="submit" class="btn-danger">
+          職務経歴を削除する
+        </button>
+      </form>
+      {% endif %}
+    </div>
+  </article>
+</section>
 
 {% endblock %}

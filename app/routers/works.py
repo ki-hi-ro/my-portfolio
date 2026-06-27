@@ -8,7 +8,11 @@ from sqlalchemy.orm import Session
 
 from fastapi.templating import Jinja2Templates
 from app.database import get_db
+
 from datetime import datetime
+
+import markdown
+from markupsafe import Markup
 
 router = APIRouter()
 
@@ -181,6 +185,9 @@ def works_page(
 
 
 # Read（詳細）
+def markdown_to_html(text: str):
+    return Markup(markdown.markdown(text, extensions=["extra"]))
+
 @router.get("/works-page/{work_id}")
 def work_detail_page(
     work_id: int,
@@ -202,12 +209,14 @@ def work_detail_page(
         {
             "work": work,
             "is_logged_in": "user_id" in request.session,
-            "is_admin": is_admin
+            "is_admin": is_admin,
+            "description_html": markdown_to_html(work.description),
         }
     )
 
 
 # 編集画面
+
 @router.get("/works-page/{work_id}/edit")
 def edit_work_page(work_id: int, request: Request, db: Session = Depends(get_db)):
     
@@ -218,7 +227,7 @@ def edit_work_page(work_id: int, request: Request, db: Session = Depends(get_db)
         "edit_work.html",
         {
             "work": work,
-            "is_logged_in": "user_id" in request.session
+            "is_logged_in": "user_id" in request.session,
         }
     )
 

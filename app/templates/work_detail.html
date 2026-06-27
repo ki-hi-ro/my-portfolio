@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<section class="partner-subpage partner-detail-page work-detail-page">
   {% set breadcrumbs = [
     {"name": "ホーム", "url": "/"},
     {"name": "制作物一覧", "url": "/works-page"},
@@ -10,7 +11,22 @@
 
   {% include "components/breadcrumb.html" %}
 
-  <article class="detail-card">
+  <article class="partner-detail-card">
+    <header class="partner-detail-hero">
+      <div>
+        <p class="eyebrow"><span></span> PROJECT DETAIL</p>
+        <h1 class="detail-title">
+          {{ work.title }}
+        </h1>
+
+        <div class="detail-meta">
+          {% if work.started_at %}
+          <span>
+            作成開始日：{{ work.started_at.strftime('%Y.%m.%d') }}
+          </span>
+          {% endif %}
+        </div>
+      </div>
 
       <div class="tech-tags">
         {% for tech in work.tech_stack.split(",") %}
@@ -18,83 +34,79 @@
             {{ tech.strip() }}
           </span>
         {% endfor %}
-      </div>    
+      </div>
+    </header>
 
-    <h1 class="detail-title">
-      {{ work.title }}
-    </h1>
-
-    <div class="detail-meta">
-      {% if work.started_at %}
-      <span>
-        作成開始日：{{ work.started_at.strftime('%Y.%m.%d') }}
-      </span>
-      {% endif %}
-    </div>
-
-    <div class="work-hero-content">
-
-      {% if work.image_url %}
-        <img
-          src="{% if work.image_url.startswith('/') %}{{ work.image_url }}{% else %}/{{ work.image_url }}{% endif %}"
-          alt="{{ work.title }}"
-          class="work-hero-image"
-        >
-      {% endif %}
-
-      <p class="work-description">
-        {{ work.description }}
-      </p>
-
-      <div class="work-actions">
-
-        {% if work.github_url %}
-          <a
-            href="{{ work.github_url }}"
-            class="btn-outline"
-            target="_blank"
+    <div class="partner-detail-layout">
+      <div class="partner-detail-media">
+        {% if work.image_url %}
+          <img
+            src="{% if work.image_url.startswith('/') %}{{ work.image_url }}{% else %}/{{ work.image_url }}{% endif %}"
+            alt="{{ work.title }}"
+            class="work-hero-image"
           >
-            GitHub
-          </a>
+        {% else %}
+          <div class="showcase-placeholder detail-placeholder" aria-hidden="true">
+            <div class="placeholder-header"><span></span><span></span><span></span></div>
+            <div class="placeholder-score"><small>PROJECT</small><strong>01</strong></div>
+            <div class="placeholder-track"><i></i></div>
+            <div class="placeholder-grid"><span></span><span></span><span></span><span></span></div>
+          </div>
         {% endif %}
-
-        {% if work.app_url %}
-          <a
-            href="{{ work.app_url }}"
-            class="btn-outline"
-            target="_blank"
-          >
-            公開URL
-          </a>
-        {% endif %}
-
-        {% if is_admin %}
-          <a
-            href="/works-page/{{ work.id }}/edit"
-            class="btn-outline"
-          >
-            制作物を編集する
-          </a>
-        {% endif %}
-
-        {% if is_admin %}
-          <form
-            action="/works-page/{{ work.id }}/delete"
-            method="post"
-          >
-            <button
-              type="submit"
-              class="btn-danger"
-            >
-              制作物を削除する
-            </button>
-          </form>
-        {% endif %}
-
       </div>
 
-    </div>
+      <div class="partner-detail-copy">
+        <p class="work-description">
+           {{ description_html }}
+        </p>
 
+        <div class="work-actions">
+          {% if work.github_url %}
+            <a
+              href="{{ work.github_url }}"
+              class="btn-outline"
+              target="_blank"
+            >
+              GitHub
+            </a>
+          {% endif %}
+
+          {% if work.app_url %}
+            <a
+              href="{{ work.app_url }}"
+              class="btn-outline"
+              target="_blank"
+            >
+              公開URL
+            </a>
+          {% endif %}
+
+          {% if is_admin %}
+            <a
+              href="/works-page/{{ work.id }}/edit"
+              class="btn-outline"
+            >
+              制作物を編集する
+            </a>
+          {% endif %}
+
+          {% if is_admin %}
+            <form
+              action="/works-page/{{ work.id }}/delete"
+              method="post"
+            >
+              <button
+                type="submit"
+                class="btn-danger"
+              >
+                制作物を削除する
+              </button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </article>
+</section>
 
 {% endblock %}

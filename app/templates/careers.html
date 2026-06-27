@@ -2,105 +2,90 @@
 
 {% block content %}
 
-{% set breadcrumbs = [
-{"name": "ホーム", "url": "/"},
-{"name": "職務経歴"}
-] %}
+<section class="partner-subpage partner-list-page careers-list-page">
+  {% set breadcrumbs = [
+    {"name": "ホーム", "url": "/"},
+    {"name": "職務経歴"}
+  ] %}
 
-{% include "components/breadcrumb.html" %}
+  {% include "components/breadcrumb.html" %}
 
-<section class="career-hero">
+  <section class="subpage-hero">
+    <div class="subpage-hero-copy">
+      <p class="eyebrow"><span></span> CAREER JOURNEY</p>
+      <h1>エンジニアとしての歩み</h1>
+      <p>2017年から現在までの職務経歴です。Web制作、ETL移行、Python開発など、実務を通して積み重ねてきた経験を掲載しています。</p>
+    </div>
 
-  <div class="career-hero-content">
-
-    <p class="career-hero-label">
-      Career Journey
-    </p>
-
-    <h1 class="career-hero-title">
-      エンジニアとしての歩み
-    </h1>
-
-    <p class="career-hero-description">
-      2017年から現在までの職務経歴です。
-      Web制作、ETL移行、Python開発など、
-      実務を通して積み重ねてきた経験を掲載しています。
-    </p>
-
-  </div>
-
-  {% if current_user and current_user.role == "admin" %}
-  <div class="career-hero-actions">
-    <a
-      href="/careers-page/new"
-      class="primary-button"
-    >
-      職務経歴を登録する
-    </a>
-  </div>
-  {% endif %}
-
-</section>
-
-<div class="career-timeline">
-  {% for career in careers %}
-  <a href="/careers-page/{{ career.id }}" class="career-timeline-item">
-    <div class="career-timeline-marker"></div>
-
-    <div class="career-timeline-content">
-      <div class="career-timeline-period">
-        {% if career.start_date and career.end_date %}
-          {{ career.start_date.strftime('%Y.%m') }} - {{ career.end_date.strftime('%Y.%m') }}
-        {% elif career.start_date %}
-          {{ career.start_date.strftime('%Y.%m') }} -
-        {% elif career.end_date %}
-          - {{ career.end_date.strftime('%Y.%m') }}
-        {% endif %}
-      </div>
-
-      <h2 class="career-timeline-title">
-        {{ career.title }}
-      </h2>
-
-      <p class="career-timeline-description">
-        {{ career.description[:140] }}...
-      </p>
-
-      {% if career.technologies %}
-      <div class="tech-tags">
-        {% for tech in career.technologies.split(",")[:4] %}
-        <span class="tech-tag">
-          {{ tech.strip() }}
-        </span>
-        {% endfor %}
-      </div>
+    <div class="subpage-hero-panel">
+      <span>CAREER LOGS</span>
+      <strong>{{ careers_count }}</strong>
+      <small>課題、役割、扱った技術を時系列で確認できます。</small>
+      {% if current_user and current_user.role == "admin" %}
+      <a href="/careers-page/new" class="solid-cta">職務経歴を登録する <span>→</span></a>
       {% endif %}
     </div>
-  </a>
-  {% endfor %}
-</div>
+  </section>
 
-{% if total_pages > 1 %}
-<div class="pagination">
+  <div class="career-timeline">
+    {% for career in careers %}
+    <a href="/careers-page/{{ career.id }}" class="career-timeline-item">
+      <div class="career-timeline-marker"></div>
 
-  {% if page > 1 %}
-  <a href="/careers-page?page={{ page - 1 }}" class="page-link">
-    ←
-  </a>
-  {% endif %}
+      <div class="career-timeline-content">
+        <div class="career-timeline-period">
+          {% if career.start_date and career.end_date %}
+            {{ career.start_date.strftime('%Y.%m') }} - {{ career.end_date.strftime('%Y.%m') }}
+          {% elif career.start_date %}
+            {{ career.start_date.strftime('%Y.%m') }} -
+          {% elif career.end_date %}
+            - {{ career.end_date.strftime('%Y.%m') }}
+          {% endif %}
+        </div>
 
-  {% for p in range(1, total_pages + 1) %}
-  <a href="/careers-page?page={{ p }}" class="page-link {% if p == page %}active{% endif %}">
-    {{ p }}
-  </a>
-  {% endfor %}
+        <h2 class="career-timeline-title">
+          {{ career.title }}
+        </h2>
 
-  {% if page < total_pages %} <a href="/careers-page?page={{ page + 1 }}" class="page-link">
-    →
+        <p class="career-timeline-description">
+          {{ career.description[:140] }}...
+        </p>
+
+        {% if career.technologies %}
+        <div class="tech-tags">
+          {% for tech in career.technologies.split(",")[:4] %}
+          <span class="tech-tag">
+            {{ tech.strip() }}
+          </span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  {% if total_pages > 1 %}
+  <div class="pagination">
+    {% if page > 1 %}
+    <a href="/careers-page?page={{ page - 1 }}" class="page-link">
+      ←
     </a>
     {% endif %}
 
-</div>
-{% endif %}
+    {% for p in range(1, total_pages + 1) %}
+    <a href="/careers-page?page={{ p }}" class="page-link {% if p == page %}active{% endif %}">
+      {{ p }}
+    </a>
+    {% endfor %}
+
+    {% if page < total_pages %}
+    <a href="/careers-page?page={{ page + 1 }}" class="page-link">
+      →
+    </a>
+    {% endif %}
+  </div>
+  {% endif %}
+</section>
 
 {% endblock %}

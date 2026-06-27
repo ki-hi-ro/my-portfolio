@@ -36,6 +36,12 @@ textarea {
   min-height: 120px;
 }
 
+.form-textarea[name="description"] {
+  min-height: 320px;
+  line-height: 1.8;
+  resize: vertical;
+}
+
 form {
   margin: 0;
 }

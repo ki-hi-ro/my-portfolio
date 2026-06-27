@@ -1,124 +1,217 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="portfolio-shell">
+  <div class="partner-page">
+    <header class="portfolio-nav partner-nav">
+      <a href="/" class="brand-mark" aria-label="ホーム"><span>H</span> HIROKI SHIBATA</a>
+      <nav aria-label="メインナビゲーション">
+        <a href="#services">できること</a>
+        <a href="#spirit">苦手なこと</a>
+        <a href="#projects">実績</a>
+        <a href="/blogs-page">技術ブログ</a>
+        <a href="/careers-page">経歴</a>
+      </nav>
+      <a href="#contact" class="nav-cta">ご相談について <span>↗</span></a>
+    </header>
 
-<section class="top-hero">
-  <div class="hero-profile">
-    <img
-      src="/static/images/profile.jpg"
-      alt="柴田浩貴"
-      class="profile-image"
-    >
+    <section class="partner-hero">
+      <div class="partner-hero-copy">
+        <p class="eyebrow"><span></span> FREELANCE WEB DEVELOPER / JAPAN</p>
+        <h1>業務を理解し、<br><em>つくって、育てる。</em></h1>
+        <p class="hero-lead">Pythonによる業務システムから、WordPressのWebサイトまで。要件の整理、実装、公開後の改善を一緒に進めるWeb開発パートナーです。</p>
+        <div class="hero-actions">
+          <a href="#projects" class="solid-cta">実績を見る <span>→</span></a>
+          <a href="/blogs-page" class="text-cta">技術ブログを読む <span>↗</span></a>
+          <a href="/careers-page" class="text-cta">職務経歴を確認する <span>↗</span></a>
+        </div>
+        <ul class="trust-list" aria-label="対応方針">
+          <li><span>✓</span> 小さな改善から相談可能</li>
+          <li><span>✓</span> リモート対応</li>
+          <li><span>✓</span> 技術選定から伴走</li>
+        </ul>
+      </div>
 
-    <p class="top-label">
-      Python Engineer / Portfolio
-    </p>
+      <div class="partner-profile-card">
+        <div class="availability"><i></i> PROJECT INQUIRIES OPEN</div>
+        <img src="/static/images/profile/profile.jpg" alt="Web開発者 柴田浩貴">
+        <div class="profile-card-copy">
+          <p>Web Developer</p>
+          <h2>柴田 浩貴 <small>Hiroki Shibata</small></h2>
+          <div class="profile-stack">
+            <span>Python</span><span>FastAPI</span><span>WordPress</span><span>React</span>
+          </div>
+        </div>
+        <div class="profile-orbit orbit-one">API</div>
+        <div class="profile-orbit orbit-two">WP</div>
+      </div>
+    </section>
 
-    <h1 class="top-title">
-      柴田 浩貴
-    </h1>
+    <section class="partner-metrics" aria-label="実績サマリー">
+      <div><strong>{{ career_years }}<sup>+</sup></strong><span>YEARS<br>CAREER</span></div>
+      <div><strong>{{ works_count }}</strong><span>PUBLIC<br>WORKS</span></div>
+      <a href="/blogs-page" class="metric-link"><strong>{{ blogs_count }}</strong><span>TECH<br>ARTICLES</span></a>
+      <p>実装だけでなく、調査・言語化・運用まで。積み重ねを公開しています。</p>
+    </section>
 
-    <p class="top-description">
-      Python・Django・FastAPI・React・WordPressを用いたWebアプリ開発、業務効率化ツール開発、Web制作に対応しています。<br class="desktop-break">
-      制作物・技術ブログ・職務経歴を通して、実際に何を作れるのかを確認できるポートフォリオです。
-    </p>
+    <section id="services" class="partner-section service-block">
+      <div class="section-heading">
+        <p class="eyebrow"><span></span> WHAT I CAN DO</p>
+        <h2>事業の「困った」を、<br>動く仕組みに変えます。</h2>
+      </div>
+      <div class="partner-services">
+        <article>
+          <span class="service-index">01</span>
+          <div class="service-icon">⌘</div>
+          <h3>Webアプリ・API開発</h3>
+          <p>社内ツール、データ連携、管理画面など、業務に沿ったWebシステムを設計・開発します。</p>
+          <ul><li>Python / FastAPI / Django</li><li>SQL / API / Docker</li></ul>
+        </article>
+        <article>
+          <span class="service-index">02</span>
+          <div class="service-icon">↗</div>
+          <h3>業務効率化・自動化</h3>
+          <p>手作業の集計やデータ移行をPythonで仕組み化。時間とミスを減らす流れをつくります。</p>
+          <ul><li>ETL / Pandas / NumPy</li><li>データ加工・定型作業の自動化</li></ul>
+        </article>
+        <article>
+          <span class="service-index">03</span>
+          <div class="service-icon">◇</div>
+          <h3>Webサイト制作・改善</h3>
+          <p>デザインカンプからの実装、WordPressテーマ制作、既存サイトの機能追加に対応します。</p>
+          <ul><li>WordPress / HTML / CSS</li><li>JavaScript / レスポンシブ</li></ul>
+        </article>
+      </div>
+    </section>
 
-    <div class="hero-links">
-      <a href="/works-page" class="btn-outline">
-        制作物を見る
-      </a>
+    <section id="spirit" class="work-spirit" aria-labelledby="spirit-heading">
+      <div class="work-spirit-inner">
+        <div class="spirit-kicker">
+          <p class="eyebrow"><span></span> WORK SPIRIT</p>
+          <span>弱さを隠さず、設計に変える。</span>
+        </div>
 
-      <a href="/blogs-page" class="btn-outline">
-        技術ブログを見る
-      </a>
+        <div class="spirit-layout">
+          <div class="spirit-manifesto">
+            <p class="spirit-overline">MY OPERATING PRINCIPLE</p>
+            <h2 id="spirit-heading">静かな環境で、<br>深く考え、<br><em>約束を言葉にする。</em></h2>
+            <p>刺激の多いオフィス、電話、雑談が常に流れる環境では、すぐに消耗してしまう。納期を意識し続けること、わからない社内の暗黙知を誰かの作業を止めて口頭で聞くことも、正直に言えば簡単ではありませんでした。</p>
+            <p>だからこそ、私は働き方を曖昧にしません。リモートワークを選びます。しかし、コミュニケーションからは逃げません。何を、どのくらいの期間で、いつまでに行うのか。進捗はどうか。そこを言葉にして共有し、静かな集中を成果へ変えます。</p>
+          </div>
 
-      <a href="/careers-page" class="btn-outline">
-        職務経歴を見る
-      </a>
-    </div>
+          <div class="spirit-proof">
+            <div class="spirit-pledge">
+              <span>DECLARATION</span>
+              <strong>リモートを、逃げ場にしない。</strong>
+              <p>弱点を隠して強く見せるのではなく、弱点を前提に仕組みを組む。質問は整理して伝える。時間は測る。進捗は報告する。それが私の仕事への誠実さです。</p>
+            </div>
+            <ul class="spirit-commitments">
+              <li><b>WHAT / WHEN</b><span>作業内容・期限・期間を確認して進めます。</span></li>
+              <li><b>REPORT</b><span>進捗と詰まりを言語化して共有します。</span></li>
+              <li><b>FOCUS</b><span>タイマーで時間を測り、集中力を管理します。</span></li>
+              <li><b>CRAFT</b><span>自分とお客様のために、日々プログラミング技術を磨きます。</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="spirit-grid" aria-label="仕事の土台">
+          <article>
+            <b>1,500+ ARTICLES</b>
+            <h3>深く掘り下げる。</h3>
+            <p>2022年からブログ記事を1,500本以上執筆。考え抜き、調べ、言語化し続ける力があります。</p>
+            <a class="spirit-card-image image-blog" href="/blogs-page" aria-label="技術ブログを見る">
+              <img src="/static/images/ki-hi-ro-blog.png" alt="ki-hi-ro.comのブログ記事一覧" loading="lazy">
+            </a>
+          </article>
+          <article class="spirit-card-proof">
+            <b>S RANK</b>
+            <h3>進め方から設計する。</h3>
+            <p>仕事の進め方そのものを組み立て、過去には会社の賞与評価で5段階中最高のSランクを獲得しました。</p>
+            <a class="spirit-card-image image-proof" href="/static/images/s-rank.jpg" target="_blank" rel="noopener" aria-label="Sランク評価通知書の画像を開く">
+              <img src="/static/images/s-rank.jpg" alt="個人業績評価Sランクが記載された夏季賞与額決定通知書" loading="lazy">
+            </a>
+          </article>
+          <article>
+            <b>PHILOSOPHY</b>
+            <h3>問いの奥へ潜る。</h3>
+            <p>表面的な仕様だけで終わらせず、なぜ必要なのか、何を変えるべきかまで考えます。</p>
+            <a class="spirit-card-image image-philosophy" href="/static/images/profile/myself/3_profile.jpg" target="_blank" rel="noopener" aria-label="思索を表す海辺の写真を開く">
+              <img src="/static/images/profile/myself/3_profile.jpg" alt="海辺の岩場で足元を見つめている写真" loading="lazy">
+            </a>
+          </article>
+          <article>
+            <b>NATURE</b>
+            <h3>心を整えて働く。</h3>
+            <p>自然との触れ合いを大事にし、メンタルを安定させてから仕事に向き合います。</p>
+            <a class="spirit-card-image image-nature" href="/static/images/profile/nature/2_profile.jpg" target="_blank" rel="noopener" aria-label="自然の写真を開く">
+              <img src="/static/images/profile/nature/2_profile.jpg" alt="夕日と緑の景色" loading="lazy">
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="partner-section selected-projects">
+      <div class="section-heading row-heading">
+        <div><p class="eyebrow"><span></span> SELECTED PROJECTS</p><h2>技術を、成果で見る。</h2></div>
+        <a href="/works-page">すべての制作物を見る <span>↗</span></a>
+      </div>
+      <div class="project-showcase">
+        {% for work in works %}
+        <a href="/works-page/{{ work.id }}" class="showcase-card">
+          <div class="showcase-image">
+            {% if work.image_url %}
+            <img src="{% if work.image_url.startswith('/') %}{{ work.image_url }}{% else %}/{{ work.image_url }}{% endif %}" alt="{{ work.title }}">
+            {% else %}
+            <div class="showcase-placeholder" aria-hidden="true">
+              <div class="placeholder-header"><span></span><span></span><span></span></div>
+              <div class="placeholder-score">
+                <small>LIFE OPS</small>
+                <strong>86%</strong>
+              </div>
+              <div class="placeholder-track"><i></i></div>
+              <div class="placeholder-grid">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            {% endif %}
+            <span>0{{ loop.index }}</span>
+          </div>
+          <div class="showcase-copy">
+            <div class="mini-tags">{% for tech in work.tech_stack.split(',')[:3] %}<span>{{ tech.strip() }}</span>{% endfor %}</div>
+            <h3>{{ work.title }}</h3>
+            <p>{{ work.description | replace('\r', ' ') | replace('\n', ' ') | truncate(92) }}</p>
+            <b>CASE STUDY <span>→</span></b>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="partner-section process-section">
+      <div class="section-heading">
+        <p class="eyebrow"><span></span> HOW WE WORK</p>
+        <h2>相談から公開後まで、見通しよく進めます。</h2>
+      </div>
+      <ol class="process-list">
+        <li><span>01</span><div><h3>ヒアリング</h3><p>背景と目的を整理します</p></div></li>
+        <li><span>02</span><div><h3>ご提案</h3><p>優先順位と進め方を共有</p></div></li>
+        <li><span>03</span><div><h3>設計・実装</h3><p>確認しながら形にします</p></div></li>
+        <li><span>04</span><div><h3>公開・改善</h3><p>運用を見据えて伴走します</p></div></li>
+      </ol>
+    </section>
+
+    <section id="contact" class="partner-contact">
+      <p class="eyebrow"><span></span> START A CONVERSATION</p>
+      <h2>まずは、いま困っていることを<br>聞かせてください。</h2>
+      <p>仕様が固まっていない段階でも大丈夫です。制作物・技術ブログ・職務経歴から、対応領域をご確認いただけます。</p>
+      <div class="hero-actions">
+        <a href="/works-page" class="light-cta">制作物を確認する <span>→</span></a>
+        <a href="/blogs-page" class="outline-light-cta">技術ブログを見る</a>
+        <a href="/careers-page" class="outline-light-cta">職務経歴を見る</a>
+      </div>
+    </section>
+    <footer class="partner-footer"><b>HIROKI SHIBATA</b><span>Freelance Web Developer — Python / WordPress / Frontend</span><small>© 2026</small></footer>
   </div>
-
-  <section class="service-section" aria-labelledby="service-title">
-    <h2 id="service-title" class="service-title">
-      対応可能業務
-    </h2>
-
-    <div class="service-grid">
-      <div class="service-card">
-        <h3>Webアプリ開発</h3>
-        <p>
-          Django・FastAPI・Reactを用いたWebアプリケーション開発
-        </p>
-      </div>
-
-      <div class="service-card">
-        <h3>WordPress制作</h3>
-        <p>
-          新規サイト制作・既存サイト改修
-        </p>
-      </div>
-
-      <div class="service-card">
-        <h3>業務効率化</h3>
-        <p>
-          Pythonによる自動化ツール開発
-        </p>
-      </div>
-
-      <div class="service-card">
-        <h3>技術発信</h3>
-        <p>
-          技術ブログ389記事以上を執筆
-        </p>
-      </div>
-    </div>
-
-    <p class="service-works-link">
-      具体的な制作物は、<a href="/works-page">制作物ページ</a>から確認できます。
-    </p>
-  </section>
-
-  <section class="hero-summary-grid" aria-label="実績サマリー">
-    <a href="/works-page" class="hero-summary-card">
-      <span class="summary-label">Works</span>
-      <strong>制作物</strong>
-
-      <p class="summary-number">
-        {{ works_count }}件
-      </p>
-
-      <p>
-        Webアプリ・ポートフォリオ・業務改善ツール
-      </p>
-    </a>
-
-    <a href="/blogs-page" class="hero-summary-card">
-      <span class="summary-label">Blog</span>
-      <strong>技術ブログ</strong>
-
-      <p class="summary-number">
-        {{ blogs_count }}記事
-      </p>
-
-      <p>
-        学習・開発・エラー解決の記録
-      </p>
-    </a>
-
-    <a href="/careers-page" class="hero-summary-card">
-      <span class="summary-label">Career</span>
-
-      <strong>職務経歴</strong>
-
-      <p class="summary-number">
-        {{ career_years }}年+
-      </p>
-
-      <p>
-        Web制作・Python開発・業務システム経験
-      </p>
-    </a>
-  </section>
-</section>
-
+</div>
 {% endblock %}

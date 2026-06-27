@@ -104,3 +104,11 @@ WordPress REST APIを利用した記事同期機能を実装。
 ## ローカル環境の起動方法
 
 ./venv/bin/python -m uvicorn app.main:app --reload
+
+起動後、以下のURLで営業用トップページの3デザインを比較できます。
+
+- [Design 01 / Partner](http://127.0.0.1:8000/?design=1) — 発注者の安心感と課題解決を重視
+- [Design 02 / Proof](http://127.0.0.1:8000/?design=2) — 技術力と実務経験を証拠で提示
+- [Design 03 / Craft](http://127.0.0.1:8000/?design=3) — 人柄と伴走力を重視
+
+画面右側（スマートフォンでは画面下部）の切り替えスイッチからも比較できます。

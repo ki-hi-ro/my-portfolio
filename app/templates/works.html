@@ -2,117 +2,109 @@
 
 {% block content %}
 
-{% set breadcrumbs = [
-  {"name": "ホーム", "url": "/"},
-  {"name": "制作物一覧"}
-] %}
+<section class="partner-subpage partner-list-page works-list-page">
+  {% set breadcrumbs = [
+    {"name": "ホーム", "url": "/"},
+    {"name": "制作物一覧"}
+  ] %}
 
-{% include "components/breadcrumb.html" %}
+  {% include "components/breadcrumb.html" %}
 
-<section class="works-hero">
-
-  <div class="works-hero-content">
-
-    <p class="works-hero-label">
-      Projects
-    </p>
-
-    <h1 class="works-hero-title">
-      制作物
-    </h1>
-
-    <p class="works-hero-description">
-      Python・FastAPI・WordPressを中心に制作した
-      Webアプリやポートフォリオを掲載しています。
-    </p>
-
-  </div>
-
-{% if user_role == "admin" %}
-  <div class="works-hero-actions">
-
-    <a
-      href="/works-page/new"
-      class="primary-button"
-    >
-      新規制作物を登録する
-    </a>
-
-  </div>
-{% endif %}
-
-</section>
-
-<div class="filter-tags">
-  <a href="/works-page?page=1" class="{% if not selected_year %}active{% endif %}">すべて</a>
-
-  {% for y in years %}
-    <a
-      href="/works-page?page=1&year={{ y }}"
-      class="{% if selected_year == y %}active{% endif %}"
-    >
-      {{ y }}年
-    </a>
-  {% endfor %}
-</div>
-
-<div class="project-grid">
-  {% for work in works %}
-  <a href="/works-page/{{ work.id }}" class="project-card">
-    {% if work.image_url %}
-    <div class="project-thumbnail-wrap">
-      <img
-        src="{{ work.image_url }}"
-        alt="{{ work.title }}"
-        class="project-thumbnail"
-      >
+  <section class="subpage-hero">
+    <div class="subpage-hero-copy">
+      <p class="eyebrow"><span></span> PROJECTS</p>
+      <h1>制作物</h1>
+      <p>Python・FastAPI・WordPressを中心に制作したWebアプリやポートフォリオを掲載しています。</p>
     </div>
+
+    <div class="subpage-hero-panel">
+      <span>PUBLIC WORKS</span>
+      <strong>{{ works_count }}</strong>
+      <small>設計、実装、公開まで形にした制作物です。</small>
+      {% if user_role == "admin" %}
+      <a href="/works-page/new" class="solid-cta">新規制作物を登録する <span>→</span></a>
+      {% endif %}
+    </div>
+  </section>
+
+  <div class="filter-tags partner-filter-tags">
+    <a href="/works-page?page=1" class="{% if not selected_year %}active{% endif %}">すべて</a>
+
+    {% for y in years %}
+      <a
+        href="/works-page?page=1&year={{ y }}"
+        class="{% if selected_year == y %}active{% endif %}"
+      >
+        {{ y }}年
+      </a>
+    {% endfor %}
+  </div>
+
+  <div class="project-grid">
+    {% for work in works %}
+    <a href="/works-page/{{ work.id }}" class="project-card">
+      <div class="project-thumbnail-wrap">
+        {% if work.image_url %}
+        <img
+          src="{% if work.image_url.startswith('/') %}{{ work.image_url }}{% else %}/{{ work.image_url }}{% endif %}"
+          alt="{{ work.title }}"
+          class="project-thumbnail"
+        >
+        {% else %}
+        <div class="showcase-placeholder" aria-hidden="true">
+          <div class="placeholder-header"><span></span><span></span><span></span></div>
+          <div class="placeholder-score"><small>PROJECT</small><strong>01</strong></div>
+          <div class="placeholder-track"><i></i></div>
+          <div class="placeholder-grid"><span></span><span></span><span></span><span></span></div>
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="project-card-body">
+        <div class="mini-tags">
+          {% for tech in work.tech_stack.split(",")[:3] %}
+          <span>{{ tech.strip() }}</span>
+          {% endfor %}
+        </div>
+
+        <h2 class="project-title">
+          {{ work.title }}
+        </h2>
+
+        <p class="project-description">
+          {{ work.description | replace('\r', ' ') | replace('\n', ' ') }}
+        </p>
+
+        <b class="card-link-label">CASE STUDY <span>→</span></b>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  {% if total_pages > 1 %}
+  <div class="pagination">
+    {% if page > 1 %}
+    <a href="/works-page?page={{ page - 1 }}{% if selected_year %}&year={{ selected_year }}{% endif %}" class="page-link">
+      ←
+    </a>
     {% endif %}
 
-    <div class="project-card-body">
-      <h2 class="project-title">
-        {{ work.title }}
-      </h2>
+    {% for p in range(1, total_pages + 1) %}
+    <a
+      href="/works-page?page={{ p }}{% if selected_year %}&year={{ selected_year }}{% endif %}"
+      class="page-link {% if p == page %}active{% endif %}"
+    >
+      {{ p }}
+    </a>
+    {% endfor %}
 
-      <p class="project-description">
-        {{ work.description }}
-      </p>
-
-      <div class="project-tags">
-        {% for tech in work.tech_stack.split(",")[:3] %}
-        <span class="project-tag">
-          {{ tech.strip() }}
-        </span>
-        {% endfor %}
-      </div>
-    </div>
-  </a>
-  {% endfor %}
-</div>
-
-{% if total_pages > 1 %}
-<div class="pagination">
-  {% if page > 1 %}
-  <a href="/works-page?page={{ page - 1 }}{% if selected_year %}&year={{ selected_year }}{% endif %}" class="page-link">
-    ←
-  </a>
+    {% if page < total_pages %}
+    <a href="/works-page?page={{ page + 1 }}{% if selected_year %}&year={{ selected_year }}{% endif %}" class="page-link">
+      →
+    </a>
+    {% endif %}
+  </div>
   {% endif %}
-
-  {% for p in range(1, total_pages + 1) %}
-  <a
-    href="/works-page?page={{ p }}{% if selected_year %}&year={{ selected_year }}{% endif %}"
-    class="page-link {% if p == page %}active{% endif %}"
-  >
-    {{ p }}
-  </a>
-  {% endfor %}
-
-  {% if page < total_pages %}
-  <a href="/works-page?page={{ page + 1 }}{% if selected_year %}&year={{ selected_year }}{% endif %}" class="page-link">
-    →
-  </a>
-  {% endif %}
-</div>
-{% endif %}
+</section>
 
 {% endblock %}

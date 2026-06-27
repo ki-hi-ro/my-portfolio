@@ -2,48 +2,40 @@
 
 {% block content %}
 
-{% set breadcrumbs = [
-  {"name": "ホーム", "url": "/"},
-  {"name": "技術ブログ"}
-] %}
+<section class="partner-subpage partner-list-page blogs-list-page">
+  {% set breadcrumbs = [
+    {"name": "ホーム", "url": "/"},
+    {"name": "技術ブログ"}
+  ] %}
 
-{% include "components/breadcrumb.html" %}
-
-<section class="page-section">
+  {% include "components/breadcrumb.html" %}
 
   {% if imported is not none %}
   <div class="success-message">
     WordPress同期完了（{{ imported }}件追加、{{ updated }}件更新、{{ deleted }}件削除、{{ skipped }}件スキップ）
   </div>
-  {% endif %}  
+  {% endif %}
 
-  <section class="blog-hero">
-    <div class="blog-hero-content">
-      <p class="blog-hero-label">
-        Technical Blog
-      </p>
-
-      <h1 class="blog-hero-title">
-        技術ブログ
-      </h1>
-
-      <p class="blog-hero-description">
-        WordPressで継続して書いてきた技術記事・開発記録をまとめています。
-        学習内容、開発で詰まったこと、実装の理解を言葉に残しています。
-      </p>
+  <section class="subpage-hero">
+    <div class="subpage-hero-copy">
+      <p class="eyebrow"><span></span> TECHNICAL BLOG</p>
+      <h1>技術ブログ</h1>
+      <p>WordPressで継続して書いてきた技術記事・開発記録をまとめています。学習内容、開発で詰まったこと、実装の理解を言葉に残しています。</p>
     </div>
-    {% if not is_production %}
-    <div class="blog-hero-actions">
+
+    <div class="subpage-hero-panel">
+      <span>TECH NOTES</span>
+      <strong>{{ blogs_count }}</strong>
+      <small>タグごとに絞り込みながら、日々の実装ログを確認できます。</small>
+      {% if not is_production %}
       <form action="/blogs/import-wordpress" method="post">
-        <button type="submit" class="primary-button">
-          WordPress同期
-        </button>
+        <button type="submit" class="solid-cta">WordPress同期 <span>→</span></button>
       </form>
+      {% endif %}
     </div>
-    {% endif %}
   </section>
 
-  <div class="filter-tags">
+  <div class="filter-tags partner-filter-tags">
     <a href="/blogs-page?page=1" class="{% if not selected_tag %}active{% endif %}">
       すべて
     </a>
@@ -92,6 +84,8 @@
         {% endfor %}
       </div>
       {% endif %}
+
+      <b class="card-link-label">READ NOTE <span>→</span></b>
     </a>
     {% endfor %}
   </div>
@@ -117,7 +111,6 @@
     {% endif %}
   </div>
   {% endif %}
-
 </section>
 
 {% endblock %}

@@ -93,6 +93,7 @@ def blogs_page(
             "blogs": blogs, 
             "page": page,
             "total_pages": total_pages,
+            "blogs_count": total_blogs,
             "tags": tags,
             "selected_tag": tag,
             "is_logged_in": is_logged_in,

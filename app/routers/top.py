@@ -23,12 +23,14 @@ def top_page(
     user_id = request.session.get("user_id")
     is_logged_in = "user_id" in request.session
 
-    works = (
+    selected_work_ids = [1, 13, 3]
+    selected_works = (
         db.query(models.Work)
-        .order_by(models.Work.id.asc())
-        .limit(2)
+        .filter(models.Work.id.in_(selected_work_ids))
         .all()
     )
+    works_by_id = {work.id: work for work in selected_works}
+    works = [works_by_id[work_id] for work_id in selected_work_ids if work_id in works_by_id]
 
     blogs = (
         db.query(models.Blog)
@@ -53,6 +55,7 @@ def top_page(
             "is_logged_in": is_logged_in,
             "works_count": works_count,
             "blogs_count": blogs_count,
-            "career_years": career_years
+            "career_years": career_years,
+            "is_home": True
         }
     )

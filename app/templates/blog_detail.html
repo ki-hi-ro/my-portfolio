@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<section class="partner-subpage partner-detail-page blog-detail-page">
   {% set breadcrumbs = [
     {"name": "ホーム", "url": "/"},
     {"name": "技術ブログ", "url": "/blogs-page"},
@@ -10,25 +11,24 @@
 
   {% include "components/breadcrumb.html" %}
 
-  <article class="detail-article">
+  <article class="detail-article partner-detail-card">
+    <header class="partner-detail-hero">
+      <div>
+        <p class="eyebrow"><span></span> TECH NOTE</p>
+        <h1 class="detail-title">
+          {{ blog.title }}
+        </h1>
 
-    <h1 class="detail-title">
-      {{ blog.title }}
-    </h1>
+        <div class="detail-meta">
+          {% if blog.created_at %}
+            <span>
+              投稿日：{{ blog.created_at.strftime('%Y.%m.%d') }}
+            </span>
+          {% endif %}
+        </div>
+      </div>
 
-    <div class="detail-meta">
-      {% if blog.created_at %}
-        <span>
-          投稿日：{{ blog.created_at.strftime('%Y.%m.%d') }}
-        </span>
-      {% endif %}
-    </div>
-
-    <div class="detail-content">
-      {{ blog.content | safe }}
-    </div>
-
-    {% if blog.tags %}
+      {% if blog.tags %}
       <div class="tech-tags">
         {% for tag in blog.tags.split(",") %}
           <span class="tech-tag">
@@ -36,12 +36,19 @@
           </span>
         {% endfor %}
       </div>
-    {% endif %}
+      {% endif %}
+    </header>
 
+    <div class="detail-content">
+      {{ blog.content | safe }}
+    </div>
+
+    <div class="work-actions">
+      <a href="/blogs-page" class="btn-outline">
+        技術ブログ一覧へ戻る
+      </a>
+    </div>
   </article>
-
-  <div class="bottom-bread">
-    {% include "components/breadcrumb.html" %}
-  </div>
+</section>
 
 {% endblock %}

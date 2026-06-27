@@ -4,7 +4,7 @@
 @import url("css/components/buttons.css");
 @import url("css/components/cards.css");
 @import url("css/components/content.css");
-@import url("css/components/forms.css");
+@import url("css/components/forms.css?v=2.0.1");
 @import url("css/components/message.css");
 @import url("css/components/page-link.css");
 @import url("css/components/page-top.css");
@@ -22,3 +22,4 @@
 @import url("css/layout.css");
 @import url("css/login.css");
 @import url("css/responsive.css");
+@import url("css/pages/portfolio_subpages.css?v=2.0.2");

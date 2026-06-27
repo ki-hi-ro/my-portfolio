@@ -46,6 +46,7 @@ def careers_page(
         {
             "page": page,
             "total_pages": total_pages,
+            "careers_count": total_careers,
             "careers": careers,
             "is_logged_in": "user_id" in request.session,
             "current_user": current_user
