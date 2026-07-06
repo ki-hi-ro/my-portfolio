@@ -18,7 +18,7 @@ users = [
     {
         "username": "partner",
         "password": "qCxeiBn7Bz92",
-        "role": "viewer"
+        "role": "partner"
     }
 ]
 

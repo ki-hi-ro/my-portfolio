@@ -122,6 +122,11 @@
 .partner-nav nav { display: flex; gap: 34px; }
 .partner-nav nav a { color: #53646b; font-size: 13px; font-weight: 700; text-decoration: none; }
 .partner-nav nav a:hover { color: var(--partner-teal); }
+.subpage-nav .nav-actions {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 112px;
+}
 .nav-cta {
   display: inline-flex;
   align-items: center;
@@ -819,7 +824,7 @@
   .portfolio-nav, .partner-section, .partner-hero, .partner-metrics, .partner-footer,
   .proof-nav, .proof-main, .proof-footer, .craft-nav, .craft-page main, .craft-footer, .partner-detail-card, .work-spirit-inner { width: min(100% - 36px, 680px); }
 
-  .partner-nav nav, .partner-nav .nav-cta { display: none; }
+  .partner-nav nav, .partner-nav .nav-cta, .partner-nav .nav-actions { display: none; }
   .portfolio-nav { height: 72px; }
   .partner-hero { grid-template-columns: 1fr; min-height: 0; padding: 55px 0 80px; }
   .partner-hero-copy { text-align: left; }

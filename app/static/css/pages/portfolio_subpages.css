@@ -478,11 +478,42 @@
 
 .partner-detail-page .partner-message {
   margin: 34px 0 0;
+  padding: 24px;
   border: 1px solid #d9e4e6;
   border-radius: 8px;
   background: #f4faf8;
   color: #556a72;
   font-weight: 700;
+}
+
+.partner-detail-page .partner-login-message {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px 20px;
+  text-align: center;
+}
+
+.partner-detail-page .partner-login-message p {
+  margin: 0;
+}
+
+.partner-detail-page .partner-login-button {
+  border-color: var(--partner-navy);
+  background: var(--partner-navy);
+  color: #fff;
+}
+
+.partner-detail-page .partner-login-button:hover {
+  border-color: var(--partner-teal);
+  background: var(--partner-teal);
+  color: #fff;
+}
+
+.partner-detail-page .partner-login-button span {
+  margin-left: 8px;
+  color: inherit;
 }
 
 .career-detail-page .partner-detail-content {

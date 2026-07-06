@@ -46,8 +46,11 @@
       <p>{{ career.description }}</p>
     </div>
     {% else %}
-    <div class="partner-message">
-      詳細な職務経歴は、パートナー様のログイン後に閲覧できます。
+    <div class="partner-message partner-login-message">
+      <p>詳細な職務経歴は、パートナー様のログイン後に閲覧できます。</p>
+      <a href="/login?next=/careers-page/{{ career.id }}" class="btn-outline partner-login-button">
+        ログインして詳細を見る <span>↗</span>
+      </a>
     </div>
     {% endif %}
 
