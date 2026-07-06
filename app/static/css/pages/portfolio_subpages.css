@@ -96,8 +96,7 @@
 .subpage-hero-panel {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  min-height: 230px;
+  justify-content: center;
   padding: 28px;
   border-radius: 9px;
   background: var(--partner-navy);
