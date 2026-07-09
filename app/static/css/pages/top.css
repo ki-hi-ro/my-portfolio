@@ -1473,6 +1473,33 @@
   object-position: 44% 34%;
 }
 
+@media (min-width: 1297px) {
+  .portfolio-database-page:not(.record-detail-page) .portfolio-front-hero {
+    min-height: 300px;
+  }
+
+  .portfolio-database-page:not(.record-detail-page) .portfolio-hero-copy {
+    gap: 30px;
+    padding: 62px 68px;
+  }
+
+  .portfolio-database-page:not(.record-detail-page) .portfolio-hero-copy h1 {
+    font-size: clamp(58px, 5.6vw, 86px);
+  }
+
+  .portfolio-database-page:not(.record-detail-page) .portfolio-hero-description {
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.8;
+  }
+
+  .portfolio-database-page:not(.record-detail-page) .portfolio-hero-media,
+  .portfolio-database-page:not(.record-detail-page) .portfolio-hero-media img {
+    min-height: 300px;
+    height: 300px;
+  }
+}
+
 .portfolio-database-layout {
   grid-template-columns: 288px minmax(0, 1fr);
   gap: 32px;
