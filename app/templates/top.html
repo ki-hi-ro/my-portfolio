@@ -68,7 +68,7 @@
                 公開URL <span aria-hidden="true">↗</span>
               </a>
               {% else %}
-              <a class="record-public-link" href="/records/{{ record.id }}">詳細ページへ</a>
+              <span class="record-public-empty">-</span>
               {% endif %}
             </span>
           </div>
@@ -89,6 +89,8 @@
             <div class="record-card-actions">
               {% if record.source_url %}
               <a href="{{ record.source_url }}" target="_blank" rel="noopener">公開URL <span aria-hidden="true">↗</span></a>
+              {% else %}
+              <span class="record-public-empty">公開URL -</span>
               {% endif %}
             </div>
           </article>

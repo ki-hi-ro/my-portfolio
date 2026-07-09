@@ -624,6 +624,9 @@ def normalize_euphoria_rows(
         category_label = CATEGORY_LABELS.get(category, category_text or "公開記録")
         summary = _pick(row, "コメント", "comment", "概要", "summary", "説明") or f"{category_label}として公開した記録です。"
         detail = _pick(row, "詳細", "detail", "本文", "description") or summary
+        is_registered_csv = source_type == "portfolio"
+        is_published = item_date is not None and (bool(url) or is_registered_csv)
+        needs_review = item_date is None or (not bool(url) and not is_registered_csv)
 
         items.append(
             TimelineItem(
@@ -639,8 +642,8 @@ def normalize_euphoria_rows(
                 detail=detail,
                 source_url=url or None,
                 tags=tuple(tag for tag in (category_label,) if tag),
-                is_published=item_date is not None and bool(url),
-                needs_review=item_date is None or not bool(url),
+                is_published=is_published,
+                needs_review=needs_review,
                 metadata={
                     "時期": period_text,
                     "カテゴリー": category_text,
