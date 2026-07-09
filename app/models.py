@@ -51,3 +51,22 @@ class Career(Base):
 
     start_date = Column(Date)
     end_date = Column(Date)
+
+
+class PortfolioRecord(Base):
+    __tablename__ = "portfolio_records"
+
+    id = Column(Integer, primary_key=True, index=True)
+    period_label = Column(String, nullable=False)
+    period_start = Column(Date, nullable=True)
+    period_end = Column(Date, nullable=True)
+    category = Column(String, nullable=False, index=True)
+    title = Column(String, nullable=False)
+    summary = Column(Text, nullable=False)
+    detail_body = Column(Text, nullable=False)
+    tech_stack = Column(String, nullable=True)
+    source_label = Column(String, nullable=True)
+    external_url = Column(String, nullable=True)
+    sort_order = Column(Integer, nullable=False, default=0)
+    created_at = Column(DateTime, default=datetime.now)
+    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)

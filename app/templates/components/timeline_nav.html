@@ -1,0 +1,42 @@
+<aside class="timeline-sidebar" aria-label="年別タイムライン">
+  {% set selected_category = active_category|default(none) %}
+  {% set filtered_year_counts = timeline.year_counts_for_category(selected_category) %}
+  {% set timeline_total = timeline.category_counts.get(selected_category, timeline.timeline_items|length) if selected_category else timeline.timeline_items|length %}
+  <div class="timeline-sidebar-inner">
+    <div class="timeline-title">
+      <span>Timeline</span>
+      <b>2017 - {{ timeline.current_year }}</b>
+    </div>
+
+    <a
+      class="timeline-all{% if active_year is none %} is-active{% endif %}"
+      href="{% if selected_category %}/?category={{ selected_category }}{% else %}/{% endif %}"
+      {% if active_year is none %}aria-current="page"{% endif %}
+    >
+      <span>すべて</span>
+      <small>{{ timeline_total }}件</small>
+    </a>
+
+    <ol class="timeline-year-list">
+      {% for year in timeline.years|reverse %}
+      {% set count = filtered_year_counts.get(year, 0) %}
+      <li>
+        <a
+          href="/?year={{ year }}{% if selected_category %}&category={{ selected_category }}{% endif %}"
+          class="timeline-year-link{% if active_year == year %} is-active{% endif %}{% if current_item_year == year %} is-current-item{% endif %}"
+          {% if active_year == year %}aria-current="page"{% endif %}
+        >
+          <span class="timeline-year">{{ year }}</span>
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <span class="timeline-count">
+            {{ count }}件
+            {% if current_item_year == year %}
+            <em>閲覧中</em>
+            {% endif %}
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</aside>

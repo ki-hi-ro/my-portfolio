@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="portfolio-front-page portfolio-database-page record-detail-page">
+  <header class="portfolio-front-hero" aria-labelledby="portfolio-title">
+    <div class="portfolio-hero-copy">
+      <h1 id="portfolio-title">My Portfolio</h1>
+      <p class="portfolio-hero-description">
+        学んできたこと・作ってきたもの・取り組んできたことを、<br>時系列で確認できます。
+      </p>
+    </div>
+
+    <div class="portfolio-hero-media" aria-hidden="true">
+      <img src="/static/images/portfolio-hero-workspace.png" alt="" loading="eager">
+    </div>
+  </header>
+
+  <div class="portfolio-database-layout record-detail-database-layout">
+    {% include "components/timeline_nav.html" %}
+
+    <div class="portfolio-database-main" id="record-detail">
+      <div class="record-detail-shell">
+        <nav class="record-detail-breadcrumb" aria-label="パンくずリスト">
+          <a href="/">My Portfolio</a>
+          <span aria-hidden="true">›</span>
+          <a href="/?category={{ record.category }}#records">{{ record.category_label }}</a>
+          {% if record.year %}
+          <span aria-hidden="true">›</span>
+          <a href="/?year={{ record.year }}&category={{ record.category }}#records">{{ record.year }}年</a>
+          {% endif %}
+          <span aria-hidden="true">›</span>
+          <span>{{ record.title }}</span>
+        </nav>
+
+        <article class="record-detail-layout">
+          <div class="record-detail-main">
+            <header class="record-detail-summary">
+              <b class="record-category category-{{ record.category }}">{{ record.category_label }}</b>
+              <h1>{{ record.title }}</h1>
+              <time datetime="{{ record.datetime_value }}">{{ record.period_label }}</time>
+              <p>{{ record.summary }}</p>
+            </header>
+
+            <section class="record-detail-section" aria-labelledby="overview-heading">
+              <h2 id="overview-heading">概要</h2>
+              <p>{{ record.overview_text }}</p>
+            </section>
+
+            {% if record.public_metadata_items %}
+            <section class="record-detail-section" aria-labelledby="detail-heading">
+              <h2 id="detail-heading">詳細</h2>
+              <ul class="record-detail-points">
+                {% for key, value in record.public_metadata_items %}
+                <li>
+                  <span>{{ key }}</span>
+                  <b>{{ value }}</b>
+                </li>
+                {% endfor %}
+              </ul>
+            </section>
+            {% endif %}
+
+            {% if record.tags %}
+            <section class="record-detail-tags" aria-label="タグ">
+              {% for tag in record.tags %}
+              <span>{{ tag }}</span>
+              {% endfor %}
+            </section>
+            {% endif %}
+          </div>
+
+          <aside class="record-detail-aside" aria-label="記録リンク">
+            <section class="record-detail-side-card">
+              <h2>公開URL</h2>
+              {% if record.source_url %}
+              <a class="record-detail-primary-link" href="{{ record.source_url }}" target="_blank" rel="noopener">
+                {{ record.primary_action_label }} <span aria-hidden="true">↗</span>
+              </a>
+              {% else %}
+              <p>公開URLは登録されていません。</p>
+              {% endif %}
+              <a class="record-detail-secondary-link" href="{% if record.year %}/?year={{ record.year }}#records{% else %}/#records{% endif %}">
+                一覧で確認
+              </a>
+            </section>
+
+            {% if related_records %}
+            <section class="record-detail-side-card">
+              <h2>関連記録</h2>
+              <div class="record-detail-related-list">
+                {% for related in related_records %}
+                <a href="/records/{{ related.id }}">
+                  <span>{{ related.title }}</span>
+                  <small>{{ related.period_label }}</small>
+                  <b aria-hidden="true">›</b>
+                </a>
+                {% endfor %}
+              </div>
+            </section>
+            {% endif %}
+
+            <a class="record-detail-back-link" href="{% if record.year %}/?year={{ record.year }}#records{% else %}/#records{% endif %}">
+              <span aria-hidden="true">‹</span> 一覧に戻る
+            </a>
+          </aside>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

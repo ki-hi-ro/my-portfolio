@@ -2,15 +2,15 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>{% if is_home %}柴田浩貴｜フリーランスWeb開発者{% else %}My Portfolio{% endif %}</title>
+  <title>{% if page_title %}{{ page_title }}{% elif is_home %}柴田浩貴｜フリーランスWeb開発者{% else %}My Portfolio{% endif %}</title>
   <meta name="description" content="Python・FastAPI・WordPressを中心に、Webアプリ開発、業務効率化、Web制作に対応するフリーランスWeb開発者・柴田浩貴のポートフォリオです。">
-  <link rel="icon" type="image/jpeg" href="/static/images/profile.jpg">
-  <link rel="stylesheet" href="/static/style.css?v=2.0.7">
+  <link rel="icon" type="image/jpeg" href="/static/images/portfolio-hero-workspace.png">
+  <link rel="stylesheet" href="/static/style.css?v=2.1.2">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body class="{% if is_home %}home-page design-1{% else %}subpage-body design-1{% endif %}">
-  {% if not is_home %}
+<body class="{% if is_home or is_record_detail %}home-page design-1{% else %}subpage-body design-1{% endif %}">
+  {% if not is_home and not is_record_detail %}
   <header class="portfolio-nav partner-nav subpage-nav">
     <a href="/" class="brand-mark" aria-label="ホーム"><span>H</span> HIROKI SHIBATA</a>
     <nav aria-label="メインナビゲーション">
@@ -26,7 +26,7 @@
   </header>
   {% endif %}
 
-  <main{% if not is_home %} class="subpage-main"{% endif %}>
+  <main{% if not is_home and not is_record_detail %} class="subpage-main"{% endif %}>
     {% block content %}
     {% endblock %}
   </main>

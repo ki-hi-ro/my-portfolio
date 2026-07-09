@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="timeline-admin-page">
+  <div class="timeline-content timeline-admin-content">
+    <header class="evidence-hero compact-hero">
+      <p class="blueprint-kicker">Timeline Admin</p>
+      <h1>タイムライン管理</h1>
+      <p>
+        CSV取り込み、公開制御、未整理理由を確認する管理・開発用画面です。
+        フロントには公開条件を満たした記録だけを表示します。
+      </p>
+      <div class="admin-hero-actions">
+        <a href="/#records">フロント表示を見る</a>
+        <a href="/admin/timeline" aria-current="page">管理画面</a>
+      </div>
+    </header>
+
+    <section class="source-section" aria-labelledby="summary-heading">
+      <div class="section-heading-line">
+        <p class="blueprint-kicker">Summary</p>
+        <h2 id="summary-heading">件数サマリー</h2>
+      </div>
+
+      <div class="summary-grid">
+        <div><span>allItems</span><b>{{ timeline.summary_counts["allItems"] }}</b></div>
+        <div><span>publishedItems</span><b>{{ timeline.summary_counts["publishedItems"] }}</b></div>
+        <div><span>timelineItems</span><b>{{ timeline.summary_counts["timelineItems"] }}</b></div>
+        <div><span>draftItems</span><b>{{ timeline.summary_counts["draftItems"] }}</b></div>
+        <div><span>rawItems</span><b>{{ timeline.summary_counts["rawItems"] }}</b></div>
+        <div><span>date あり</span><b>{{ timeline.summary_counts["datePresent"] }}</b></div>
+        <div><span>date なし</span><b>{{ timeline.summary_counts["dateMissing"] }}</b></div>
+        <div><span>needsReview</span><b>{{ timeline.summary_counts["needsReview"] }}</b></div>
+        <div><span>公開候補</span><b>{{ timeline.summary_counts["publicCandidates"] }}</b></div>
+      </div>
+
+      <div class="reason-summary" aria-label="未整理理由サマリー">
+        <h3>未整理理由</h3>
+        {% if timeline.draft_reason_counts %}
+        <ul>
+          {% for reason, count in timeline.draft_reason_counts.items() %}
+          <li><span>{{ reason }}</span><b>{{ count }}</b></li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>未整理理由はありません。</p>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="source-section" aria-labelledby="draft-source-heading">
+      <div class="section-heading-line">
+        <p class="blueprint-kicker">CSV Status</p>
+        <h2 id="draft-source-heading">データソース状態</h2>
+      </div>
+
+      <div class="source-status-table" role="table" aria-label="CSV読み込み状態">
+        <div class="source-status-head" role="row">
+          <span role="columnheader">sourceType</span>
+          <span role="columnheader">sourceFile</span>
+          <span role="columnheader">状態</span>
+          <span role="columnheader">items</span>
+          <span role="columnheader">timeline</span>
+          <span role="columnheader">draft</span>
+          <span role="columnheader">date</span>
+          <span role="columnheader">review</span>
+        </div>
+
+        {% for source in timeline.source_statuses %}
+        <div class="source-status-row" role="row">
+          <span role="cell">{{ source["source_type"] }}</span>
+          <strong role="cell">{{ source["source_file"] }}</strong>
+          <span role="cell">
+            {% if source["exists"] %}
+              {% if source["error"] %}
+                {{ source["error"] }}
+              {% else %}
+                読み込み済み / {{ source["encoding"] }}
+              {% endif %}
+            {% else %}
+              未配置
+            {% endif %}
+          </span>
+          <span role="cell">{{ source["items"] }}</span>
+          <span role="cell">{{ source["timeline_ready"] }}</span>
+          <span role="cell">{{ source["draft"] }}</span>
+          <span role="cell">{{ source["date_present"] }} / {{ source["date_missing"] }}</span>
+          <span role="cell">{{ source["needs_review"] }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="record-section" aria-labelledby="draft-heading">
+      <div class="section-heading-line">
+        <p class="blueprint-kicker">Draft Items</p>
+        <h2 id="draft-heading">公開前・未整理データ</h2>
+        <p>sourceType、公開制御、未整理理由、安全なmetadata概要を確認できます。</p>
+      </div>
+
+      {% if records %}
+      <div class="draft-card-list" aria-label="未整理データ一覧">
+        {% for record in records %}
+        <article class="draft-card">
+          <header>
+            <p>{{ record.source_type }} / {{ record.source_file }}</p>
+            <h3>{{ record.title }}</h3>
+          </header>
+
+          <div class="draft-fields">
+            <div><span>category</span><b>{{ record.category_label }}</b></div>
+            <div><span>date</span><b>{% if record.has_date %}あり{% else %}なし{% endif %}</b></div>
+            <div><span>year</span><b>{% if record.has_year %}{{ record.year }}{% else %}なし{% endif %}</b></div>
+            <div><span>isPublished</span><b>{{ record.is_published }}</b></div>
+            <div><span>needsReview</span><b>{{ record.needs_review }}</b></div>
+            <div><span>公開候補</span><b>{% if record.is_public_candidate %}はい{% else %}いいえ{% endif %}</b></div>
+          </div>
+
+          <div class="draft-reasons">
+            <span>未整理理由</span>
+            <p>{{ record.draft_reason_text }}</p>
+          </div>
+
+          <div class="draft-meta">
+            <span>metadata概要</span>
+            <p>{{ record.metadata_summary }}</p>
+          </div>
+
+          <div class="draft-url">
+            <span>sourceUrl</span>
+            {% if record.source_url %}
+            <a href="{{ record.source_url }}" target="_blank" rel="noopener">{{ record.source_url }}</a>
+            {% else %}
+            <p>-</p>
+            {% endif %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-records">
+        <p>未整理データはありません。現在、公開タイムライン対象外の読み込み済みデータは0件です。</p>
+      </div>
+      {% endif %}
+    </section>
+  </div>
+</section>
+{% endblock %}
