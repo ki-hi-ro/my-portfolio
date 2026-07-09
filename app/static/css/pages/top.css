@@ -2421,7 +2421,7 @@
 
   .portfolio-database-layout .timeline-year-list li::before {
     position: absolute;
-    top: 40px;
+    top: 48px;
     right: -16px;
     left: -16px;
     height: 3px;
@@ -2441,7 +2441,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto 20px auto;
     justify-items: start;
-    gap: 7px;
+    gap: 18px;
     min-height: 82px;
   }
 

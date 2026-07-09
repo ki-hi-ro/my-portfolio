@@ -65,7 +65,7 @@
             <span class="record-public-cell" role="cell">
               {% if record.source_url %}
               <a class="record-public-link" href="{{ record.source_url }}" target="_blank" rel="noopener">
-                公開URL <span aria-hidden="true">↗</span>
+                公開URL
               </a>
               {% else %}
               <span class="record-public-empty">-</span>
@@ -86,7 +86,7 @@
             <p>{{ record.summary }}</p>
             <div class="record-card-actions">
               {% if record.source_url %}
-              <a href="{{ record.source_url }}" target="_blank" rel="noopener">公開URL <span aria-hidden="true">↗</span></a>
+              <a href="{{ record.source_url }}" target="_blank" rel="noopener">公開URL</a>
               {% else %}
               <span class="record-public-empty">公開URL -</span>
               {% endif %}
