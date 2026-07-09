@@ -31,7 +31,7 @@ def top_page(
     category: str | None = None,
 ):
     timeline = load_timeline_dataset()
-    selected_year = year if year in timeline.years else None
+    selected_year = year if year in timeline.years else timeline.current_year
     category_key = normalize_category_key(category)
     selected_category = category_key if category_key in timeline.category_counts else None
     records = timeline.items_for_filters(selected_year, selected_category)
