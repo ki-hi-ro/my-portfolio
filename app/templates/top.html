@@ -82,9 +82,7 @@
               <time datetime="{{ record.datetime_value }}">{{ record.period_label }}</time>
               <b class="record-category category-{{ record.category }}">{{ record.category_label }}</b>
             </header>
-            <h2>
-              <a href="/records/{{ record.id }}">{{ record.title }}</a>
-            </h2>
+            <h2>{{ record.title }}</h2>
             <p>{{ record.summary }}</p>
             <div class="record-card-actions">
               {% if record.source_url %}
