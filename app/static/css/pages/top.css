@@ -1618,24 +1618,37 @@
   }
 
   .portfolio-database-page:not(.record-detail-page) .portfolio-database-layout .timeline-year-list {
-    --timeline-axis-x: 112px;
+    --timeline-year-column: 60px;
+    --timeline-dot-column: 13px;
+    --timeline-dot-radius: 6.5px;
+    --timeline-count-column: 50px;
+    --timeline-column-gap: 31px;
+    --timeline-axis-x: calc(var(--timeline-year-column) + var(--timeline-column-gap) + var(--timeline-dot-radius));
     width: max-content;
     margin-inline: auto;
   }
 
   .portfolio-database-page:not(.record-detail-page) .portfolio-database-layout .timeline-year-link {
-    grid-template-columns: 91px 42px 87px;
+    grid-template-columns: var(--timeline-year-column) var(--timeline-dot-column) var(--timeline-count-column);
+    column-gap: var(--timeline-column-gap);
     min-height: 58px;
   }
 
   .portfolio-database-page:not(.record-detail-page) .portfolio-database-layout .timeline-year {
+    justify-self: end;
     font-size: 22px;
     font-weight: 900;
   }
 
+  .portfolio-database-page:not(.record-detail-page) .portfolio-database-layout .timeline-dot {
+    width: var(--timeline-dot-column);
+    height: var(--timeline-dot-column);
+  }
+
   .portfolio-database-page:not(.record-detail-page) .portfolio-database-layout .timeline-count {
     justify-content: flex-start;
-    padding-left: 16px;
+    width: var(--timeline-count-column);
+    padding-left: 0;
     font-size: 18px;
     font-weight: 900;
   }

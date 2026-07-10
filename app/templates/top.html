@@ -28,7 +28,7 @@
             href="{% if selected_year %}/?year={{ selected_year }}{% else %}/{% endif %}"
             {% if active_category is none %}aria-current="page"{% endif %}
           >
-            すべて <span>{{ timeline.items_for_year(selected_year)|length }}件</span>
+            すべて
           </a>
           {% for category_key, category_label, category_count in timeline.category_options %}
           <a
@@ -37,7 +37,6 @@
             {% if active_category == category_key %}aria-current="page"{% endif %}
           >
             {{ category_label }}
-            <span>{{ timeline.items_for_filters(selected_year, category_key)|length }}件</span>
           </a>
           {% endfor %}
         </nav>
