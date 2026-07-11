@@ -3,11 +3,11 @@
 
 "2025.03.01 〜 2025.03.15","制作物","Django × React ToDoアプリ｜フェーズ1：基盤構築とAPI連携","Django REST FrameworkとReactを使ったToDoアプリ開発の初期フェーズとして、開発環境の構築、ルーティング理解、CORS設定、エラー解決、API連携によるタスク一覧表示までを進めました。","https://ki-hi-ro.com/django-and-react-todo/#phase-1"
 "2026.06.18 〜 2026.06.19","制作物","Django × React ToDoアプリ｜フェーズ2：開発再始動とデータ表示","2025年3月に開発を中断していたDjango × ReactのToDoアプリ開発を再開しました。仮想環境、Vite、Djangoサーバーで発生した問題を解消した後、モデルにカテゴリーと期限を追加し、React側の型定義を修正。タスク名・カテゴリー・完了状態・期限の4項目をReact画面へ表示するマイルストーン①を達成しました。","https://ki-hi-ro.com/django-and-react-todo/#phase-2"
-
 "2026.06.12","技術ブログ","WordPressの記事をREST APIで取得してポートフォリオへ反映","WordPressの記事をAPIで取得し、Googleスプレッドシートで選別してポートフォリオへ同期する仕組みを構築しました。","https://ki-hi-ro.com/wordpress%e3%81%ae%e8%a8%98%e4%ba%8b%e3%82%92rest-api%e3%81%a7%e5%8f%96%e5%be%97%e3%81%97%e3%80%81google%e3%82%b9%e3%83%97%e3%83%ac%e3%83%83%e3%83%89%e3%82%b7%e3%83%bc%e3%83%88%e3%81%a7%e9%81%b8/"
+"2026.05.23 〜 2026.06.04","制作物","Go｜買い物リスト作成アプリ","求人で見かけるGoに触れるため、商品の追加・購入済みチェック・削除ができる買い物リストアプリを制作しました。Goの導入からローカル実行、GitHubでの管理、Renderへのデプロイ、スマホ向けレスポンシブ対応、運用後の機能改善まで一通り行いました。","https://ki-hi-ro.com/go-shopping-list-app/"
+
 "2026.06.04","技術ブログ","FastAPIのトップページのルーティングの仕組み","URLへのアクセスからJinja2テンプレートが表示されるまでのFastAPIの処理を、実際のコードを使って整理しました。","https://ki-hi-ro.com/fastapi%e3%81%ae%e3%83%88%e3%83%83%e3%83%97%e3%83%9a%e3%83%bc%e3%82%b8%e3%81%ae%e3%83%ab%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e3%81%ae%e4%bb%95%e7%b5%84%e3%81%bf/"
 "2026.05.28 - 継続中","制作物","My Portfolio","FastAPI、SQLAlchemy、WordPress REST APIを使い、制作物・技術記事・職務経歴をまとめるポートフォリオを開発しました。","https://freelance-blog.onrender.com/"
-"2026.05.24 - 2026.06.04","制作物","買い物リスト作成アプリ","日常で実際に使える題材を通してGoを学び、商品の追加、チェック、削除ができるアプリをRenderへ公開しました。","https://go-rnnx.onrender.com/"
 "2026.01.01","制作物","CLIで動く就業管理システム","実務で扱った就業管理システムを題材に、従業員登録、出退勤登録、勤怠レポートを備えたCLIアプリを制作しました。","https://github.com/ki-hi-ro/Employment-management-system"
 "2025.12.09","学習記録","Paizaのスキルチェック問題・Dランク｜D348:n色のペン","Python3でDランク問題に挑戦し、1分50秒で正解、100点を取得しました。","https://paiza.jp/challenges/847/page/result"
 "2025.11.15","学習記録","Paizaのスキルチェック問題・Cランク｜C056:テストの採点","Python3でCランク問題に挑戦し、9分46秒で正解、100点を取得しました。","https://paiza.jp/challenges/266/page/result"
