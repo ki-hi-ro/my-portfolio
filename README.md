@@ -159,3 +159,35 @@ My Portfolioのデータベースへ
 
 制作物、技術記事、職務経歴、学習記録を
 一つのタイムラインで確認できる構成へ変更しました。
+
+## ローカル環境の起動方法
+
+リポジトリを取得します。
+
+```bash
+git clone <repository-url>
+cd my-portfolio
+```
+
+Pythonの仮想環境を作成して有効化します。
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+必要なライブラリをインストールします。
+
+```bash
+pip install -r requirements.txt
+```
+
+開発サーバーを起動します。
+
+```bash
+uvicorn app.main:app --reload
+```
+
+起動後、以下のURLへアクセスします。
+
+http://127.0.0.1:8000/
