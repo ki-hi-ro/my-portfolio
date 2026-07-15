@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
-venv/
+.venv/
 .env
 export_notebooklm.py
 notebooklm_blog_source.md
