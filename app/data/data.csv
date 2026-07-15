@@ -1,5 +1,6 @@
 "時期","カテゴリー","タイトル","コメント","公開URL"
 
+"2026.07.15","技術記事","FastAPI起動時に仮想環境のPythonが使われなかった原因と解決策","Finderでフォルダを整理したことでプロジェクトの保存場所が変わり、既存の仮想環境が正しく機能しなくなりました。仮想環境の再作成、使用中のPythonの確認、Uvicornの起動方法を整理しています。","https://ki-hi-ro.com/cause-and-solution-python-from-the-virtual-environment-was-not-used-when-starting-fastapi/"
 "2026.07.15","学習記録","Paizaスキルチェック・Cランク・Python3｜C181:暗号の手がかり","前回から11日後に再挑戦し、100点を6分3秒で取得しました。解答時間中央値13分17秒の半分以下で解きました。","https://ki-hi-ro.com/paiza-skill-check-126-minutes-last-time-6-this-time/"
 "2026.07.04","学習記録","Paizaスキルチェック・Cランク・Python3｜C159:当選通知","約7か月ぶりのスキルチェックで、解答に126分34秒かかりました。忘れていた知識を技術ブログに整理しながら取り組んだ、再開時点の記録です。","https://ki-hi-ro.com/paiza%e3%81%ae%e3%82%b9%e3%82%ad%e3%83%ab%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e5%95%8f%e9%a1%8c/#Paiza%E3%81%AE%E3%82%B9%E3%82%AD%E3%83%AB%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E5%95%8F%E9%A1%8C%E3%83%BBC%E3%83%A9%E3%83%B3%E3%82%AF%EF%BD%9CC159_%E5%BD%93%E9%81%B8%E9%80%9A%E7%9F%A5"
 
