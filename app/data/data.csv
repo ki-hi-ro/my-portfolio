@@ -1,5 +1,6 @@
 "時期","カテゴリー","タイトル","コメント","公開URL"
 
+"2026.07.22","技術記事","Python 3.9でrequirements.txtをインストールできない問題を、Python 3.12で解決","FastAPI製My Portfolioの仮想環境を再構築しました。Python 3.9ではclick==8.2.1をインストールできなかったため、Python 3.12で.venvを作り直し、依存パッケージの導入とUvicornによる開発環境の起動まで確認しました。","https://ki-hi-ro.com/python-3-9%e3%81%a7requirements-txt%e3%82%92%e3%82%a4%e3%83%b3%e3%82%b9%e3%83%88%e3%83%bc%e3%83%ab%e3%81%a7%e3%81%8d%e3%81%aa%e3%81%84%e5%95%8f%e9%a1%8c%e3%82%92%e3%80%81python-3-12%e3%81%a7%e8%a7%a3/"
 "2026.07.15","技術記事","FastAPI起動時に仮想環境のPythonが使われなかった原因と解決策","Finderでフォルダを整理したことでプロジェクトの保存場所が変わり、既存の仮想環境が正しく機能しなくなりました。仮想環境の再作成、使用中のPythonの確認、Uvicornの起動方法を整理しています。","https://ki-hi-ro.com/cause-and-solution-python-from-the-virtual-environment-was-not-used-when-starting-fastapi/"
 "2026.06.19","制作物","My Portfolio｜Renderのスリープを解除","発注者が待ち時間なくサイトを閲覧できるように、RenderのWebサービスをStarterインスタンスへ変更しました。","https://ki-hi-ro.com/my-portfolio/#no-wait"
 "2026.06.18 〜 2026.06.19","制作物","Django × React ToDoアプリ｜フェーズ2：開発再始動とデータ表示","2025年3月に開発を中断していたDjango × ReactのToDoアプリ開発を再開しました。仮想環境、Vite、Djangoサーバーで発生した問題を解消した後、モデルにカテゴリーと期限を追加し、React側の型定義を修正。タスク名・カテゴリー・完了状態・期限の4項目をReact画面へ表示するマイルストーン①を達成しました。","https://ki-hi-ro.com/django-and-react-todo/#phase-2"
