@@ -2264,7 +2264,7 @@
 
   .portfolio-database-layout .timeline-year-list li::before {
     position: absolute;
-    top: 44px;
+    top: 48px;
     right: -18px;
     left: -18px;
     height: 3px;
